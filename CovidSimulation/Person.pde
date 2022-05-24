@@ -48,7 +48,9 @@ public class Person{
    return covidStatus;
  }
  
- //String setCovidStatus(){}
+ void setCovidStatus(){
+   covidStatus = "infected";
+ }
  
  //boolean isBoosted(){}
  boolean catchCovid(){
