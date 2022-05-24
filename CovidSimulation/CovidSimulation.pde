@@ -10,9 +10,12 @@
   final int MODERNA = 2;
   final int ALL = 3;
   int VAX_TYPE = 0;
+  Person[][] POPULATION;
   
 void setup(){
   size(1000,1000);
+  POPULATION = new Person[height / ROWS][width / COLS];
+  
 }
 
 void keyPressed () {
