@@ -19,7 +19,11 @@ public class Person{
     return vax;
   }
   
-  //
+  //if a person is vaccinated, this will return a string containing the vaccine that they received
+  //Possible returns:
+  //"Pfizer"
+  //"Moderna"
+  //"Johnson"
   String getVaxType(){
     String res = "";
     boolean possible = getVaxStatus();
@@ -31,5 +35,21 @@ public class Person{
     }
     return res;
   }
+  
+ // boolean isElderly(){}
+ 
+ //returns:
+ //"negative"
+ //"positive"
+ /*Note: we would like to add a feature where someone is recovered after a certain number of days
+ in that case, another return string, "recovered" would be added.
+ */
+ String getCovidStatus(){
+   return covidStatus;
+ }
+ 
+ //String setCovidStatus(){}
+ //boolean isBoosted(){}
+ //boolean catchCovid(){}
   
 }
