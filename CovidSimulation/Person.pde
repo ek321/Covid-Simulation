@@ -14,4 +14,22 @@ public class Person{
     covidStatus = status_;
   }
   
+  //returns whether or not a person has been vaccinated against COVID-19
+  boolean getVaxStatus(){
+    return vax;
+  }
+  
+  //
+  String getVaxType(){
+    String res = "";
+    boolean possible = getVaxStatus();
+    if(possible){
+      res = vax_type;
+    }
+    else {
+      return null;
+    }
+    return res;
+  }
+  
 }
