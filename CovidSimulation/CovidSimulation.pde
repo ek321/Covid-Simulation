@@ -11,14 +11,32 @@
   final int ALL = 3;
   int VAX_TYPE = 0;
   // array to keep track of people on the board
-  Person[][] POPULATION;
+  Person[][] population;
   // for time
   int ticks;
   
 void setup(){
   size(1000,1000);
-  POPULATION = new Person[height / ROWS][width / COLS];
-  
+  population = new Person[height / ROWS][width / COLS];
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
+      boolean vax = (VAX_MODE == VAX);
+      population[i][j] = new Person(age, vax, vaxTypeString(), "hasCovid");
+    }
+  }
+}
+
+public String vaxTypeString (){
+  if (VAX_TYPE == PFIEZER) {
+    return "PFIEZER";
+  } else if (VAX_TYPE == JOHNSON) {
+    return "JOHNSON";
+  } else if (VAX_TYPE == MODERNA) {
+    return "MODERNA";
+  } else {
+    return "ALL";
+  }
 }
 
 void keyPressed () {
