@@ -49,20 +49,23 @@ public class Person{
  }
  
  //String setCovidStatus(){}
+ 
  //boolean isBoosted(){}
  boolean catchCovid(){
-   return true;
+   float temp = calcCovid();
+   if(temp > 0.5){
+     return true;
+   }
+   return false;
  }
  
  //helper method for catchCovid
  //returns the chance of catching covid
- 
  float calcCovid(){
    float result = 1.0;
    if(getVaxType() != null){
-     result *= getVaxType().getEfficacy();
+     result *= (1.0 - getVaxType().getEfficacy());
    }
-   
    return result;
  }
   
