@@ -10,7 +10,10 @@
   final int MODERNA = 2;
   final int ALL = 3;
   int VAX_TYPE = 0;
+  // array to keep track of people on the board
   Person[][] POPULATION;
+  // for time
+  int ticks;
   
 void setup(){
   size(1000,1000);
@@ -37,3 +40,7 @@ void keyPressed () {
     }
   }
 }
+
+//public void tick() {
+  
+//}
