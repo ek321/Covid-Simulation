@@ -1,13 +1,36 @@
-  int HEIGHT = 100;
-  int WIDTH = 100;
-  //0 = Pre-vax
-  //1 = vax
+  int ROWS = 100;
+  int COLS = 100;
+  // vax mode variables
+  final int PRE_VAX = 0;
+  final int VAX = 1;
   int VAX_MODE = 0;
-  // 0 = Pfizer
-  // 1 = Johnson
-  // 2 = Modenra
-  // 3 = all
+  // different vax types
+  final int PFIEZER = 0;
+  final int JOHNSON = 1;
+  final int MODERNA = 2;
+  final int ALL = 3;
   int VAX_TYPE = 0;
+  
 void setup(){
   size(1000,1000);
+}
+
+void keyPressed () {
+  // circle through vax mode with key 'a'
+  if (key == 'a') {
+    if (VAX_MODE < VAX){
+      VAX_MODE ++;
+    } else {
+      VAX_MODE = PRE_VAX;
+    }
+  }
+  
+  // cycle through vax types with key 'b'
+  if (key == 'b') {
+    if (VAX_TYPE < ALL){
+      VAX_TYPE ++;
+    } else {
+      VAX_TYPE = PFIEZER;
+    }
+  }
 }
