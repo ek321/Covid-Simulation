@@ -1,5 +1,5 @@
-  int HEIGHT = 100;
-  int WIDTH = 100;
+  int ROWS = 100;
+  int COLS = 100;
   //0 = Pre-vax
   //1 = vax
   int VAX_MODE = 0;

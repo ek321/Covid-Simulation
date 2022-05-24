@@ -2,12 +2,12 @@ public class Person{
   int age;
   boolean vax;
   String covidStatus;
-  String vax_type;
+  Vaccine vax_type;
  //to be implemented later: boolean mask;
  // to be implemented later: boolean booster;
   
   //basic constructor for pre-vax, vax modes
-  public Person(int age_,boolean vax_,String vaxType, String status_){
+  public Person(int age_,boolean vax_,Vaccine vaxType, String status_){
     age = age_;
     vax = vax_;
     vax_type = vaxType;
@@ -24,8 +24,8 @@ public class Person{
   //"Pfizer"
   //"Moderna"
   //"Johnson"
-  String getVaxType(){
-    String res = "";
+  Vaccine getVaxType(){
+    Vaccine res = vax_type;
     boolean possible = getVaxStatus();
     if(possible){
       res = vax_type;
@@ -50,6 +50,20 @@ public class Person{
  
  //String setCovidStatus(){}
  //boolean isBoosted(){}
- //boolean catchCovid(){}
+ boolean catchCovid(){
+   return true;
+ }
+ 
+ //helper method for catchCovid
+ //returns the chance of catching covid
+ 
+ float calcCovid(){
+   float result = 1.0;
+   if(getVaxType() != null){
+     result *= getVaxType().getEfficacy();
+   }
+   
+   return result;
+ }
   
 }
