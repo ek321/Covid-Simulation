@@ -5,7 +5,7 @@ public class Person{
   Vaccine vax_type;
  //to be implemented later: boolean mask;
  // to be implemented later: boolean booster;
-  
+
   //basic constructor for pre-vax, vax modes
   public Person(int age_,boolean vax_,Vaccine vaxType, String status_){
     age = age_;
@@ -13,12 +13,12 @@ public class Person{
     vax_type = vaxType;
     covidStatus = status_;
   }
-  
+
   //returns whether or not a person has been vaccinated against COVID-19
   boolean getVaxStatus(){
     return vax;
   }
-  
+
   //if a person is vaccinated, this will return a string containing the vaccine that they received
   //Possible returns:
   //"Pfizer"
@@ -35,9 +35,9 @@ public class Person{
     }
     return res;
   }
-  
+
  // boolean isElderly(){}
- 
+
  //returns:
  //"negative"
  //"positive"
@@ -47,11 +47,11 @@ public class Person{
  String getCovidStatus(){
    return covidStatus;
  }
- 
+
  void setCovidStatus(){
    covidStatus = "infected";
  }
- 
+
  //boolean isBoosted(){}
  boolean catchCovid(){
    float temp = calcCovid();
@@ -60,7 +60,7 @@ public class Person{
    }
    return false;
  }
- 
+
  //helper method for catchCovid
  //returns the chance of catching covid
  float calcCovid(){
@@ -70,5 +70,5 @@ public class Person{
    }
    return result;
  }
-  
+
 }

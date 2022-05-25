@@ -1,7 +1,7 @@
 public class Vaccine{
-  String type;
+   String type;
   float efficacy;
-  
+
   /* Constructor for the Vaccine class
   */
   public Vaccine(String type_){
@@ -16,7 +16,7 @@ public class Vaccine{
       efficacy = 0.748;
     }
   }
-  
+
   /* returns a string of the vaccine name
   */
   //"Pfizer"
@@ -25,12 +25,12 @@ public class Vaccine{
   String getType(){
     return type;
   }
-  
+
   /* returns a decimal value of the efficacy that a given vaccine has against COVID-19
   */
   float getEfficacy(){
     return efficacy;
   }
-  
+
   //float setEfficacy(){}
 }
