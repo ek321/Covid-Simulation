@@ -22,21 +22,31 @@ void setup(){
     for (int j = 0; j < population[0].length; j++) {
       int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
       boolean vax = (VAX_MODE == VAX);
-      population[i][j] = new Person(age, vax, vaxTypeString(), "hasCovid");
+      population[i][j] = new Person(age, vax, vaxTypePerson(), "hasCovid");
     }
   }
 }
 
-public Vaccine vaxTypeString(){
+public Vaccine vaxTypePerson(){
+  boolean temp = (VAX_TYPE == ALL);
+  Vaccine ans = new Vaccine("Pfizer");
+  if (temp) {
+    int rng = (int) (Math.random() * (3));
+    VAX_TYPE = rng;
+  }
   if (VAX_TYPE == PFIEZER) {
-    return new Vaccine("Pfizer");
+    ans = new Vaccine("Pfizer");
   } else if (VAX_TYPE == JOHNSON) {
-    return new Vaccine("Johnson");
-  } else if (VAX_TYPE == MODERNA) {
-    return new Vaccine("Pfizer");
-  } /*else {
-    return "ALL";
-  }*/
+    ans = new Vaccine("Johnson");
+  } else if (VAX_TYPE == MODERNA){
+    ans = new Vaccine("MODERNA");
+  }
+  
+  if (temp) {
+    VAX_TYPE = ALL;
+  }
+  
+  return ans;
   //idk how we create an "all" vaccine
   //maybe we could add a random thing here like
   /* if(VAX_TYPE == ALL)
