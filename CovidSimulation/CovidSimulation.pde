@@ -25,7 +25,7 @@ void setup(){
     for (int j = 0; j < population[0].length; j++) {
       int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
       boolean vax = (VAX_MODE == VAX);
-      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "hasCovid");
+      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative");
     }
   }
   

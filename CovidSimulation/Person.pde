@@ -44,7 +44,7 @@ public class Person{
 
  //returns:
  //"negative"
- //"positive"
+ //"infected"
  /*Note: we would like to add a feature where someone is recovered after a certain number of days
  in that case, another return string, "recovered" would be added.
  */
@@ -57,8 +57,8 @@ public class Person{
  }
 
  //boolean isBoosted(){}
- boolean catchCovid(int neighbors){
-   float temp = calcCovid(neighbors);
+ boolean catchCovid(){
+   float temp = calcCovid();
    if(temp > 0.5){
      return true;
    }
@@ -67,12 +67,22 @@ public class Person{
 
  //helper method for catchCovid
  //returns the chance of catching covid
- float calcCovid(int neighbors){
+ float calcCovid(){
    float result = 1.0;
    if(getVaxType() != null){
      result *= (1.0 - getVaxType().getEfficacy());
    }
+   result *= neighInfect(this) / 4;
    return result;
+ }
+ 
+ //returns the x and y coordinates of a Person
+ //will be used to count the number of infected neighbors
+ int getYCor(){
+   return yCor;
+ }
+ int getXCor(){
+   return xCor;
  }
 
 }
