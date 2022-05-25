@@ -1,5 +1,5 @@
 public class Vaccine{
-   String type;
+  String type;
   float efficacy;
 
   /* Constructor for the Vaccine class

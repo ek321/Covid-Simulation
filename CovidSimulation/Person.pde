@@ -1,5 +1,7 @@
 public class Person{
   int age;
+  int xCor;
+  int yCor;
   boolean vax;
   String covidStatus;
   Vaccine vax_type;
@@ -7,8 +9,10 @@ public class Person{
  // to be implemented later: boolean booster;
 
   //basic constructor for pre-vax, vax modes
-  public Person(int age_,boolean vax_,Vaccine vaxType, String status_){
+  public Person(int age_,int xCor_, int yCor_,boolean vax_,Vaccine vaxType, String status_){
     age = age_;
+    xCor = xCor_;
+    yCor = yCor_;
     vax = vax_;
     vax_type = vaxType;
     covidStatus = status_;
@@ -40,7 +44,7 @@ public class Person{
 
  //returns:
  //"negative"
- //"positive"
+ //"infected"
  /*Note: we would like to add a feature where someone is recovered after a certain number of days
  in that case, another return string, "recovered" would be added.
  */
@@ -53,8 +57,12 @@ public class Person{
  }
 
  //boolean isBoosted(){}
- boolean catchCovid(int neighbors){
-   float temp = calcCovid(neighbors);
+ 
+ /*returns true if the chance of catching covid is >50%
+ returns false if it is <=50%
+ */
+ boolean catchCovid(){
+   float temp = calcCovid();
    if(temp > 0.5){
      return true;
    }
@@ -62,13 +70,28 @@ public class Person{
  }
 
  //helper method for catchCovid
- //returns the chance of catching covid
- float calcCovid(int neighbors){
+ //returns the chance of catching covid for one Person
+ //takes into account vaccine status, type, and number of infected neighbors
+ float calcCovid(){
    float result = 1.0;
    if(getVaxType() != null){
      result *= (1.0 - getVaxType().getEfficacy());
    }
+   else if((getVaxType() == null) && (neighInfect(this) == 0)){
+     //if a Person is unvaccinated but not in contact with anyone they will remain negative
+     return 0;
+   }
+   result *= neighInfect(this) / 4.0; //percent positive of neighbors
    return result;
+ }
+ 
+ //returns the x and y coordinates of a Person
+ //will be used to count the number of infected neighbors
+ int getYCor(){
+   return yCor;
+ }
+ int getXCor(){
+   return xCor;
  }
 
 }
