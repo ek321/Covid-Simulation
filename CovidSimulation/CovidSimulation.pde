@@ -27,6 +27,23 @@ void setup(){
   }
 }
 
+void draw() {
+  
+}
+
+public void spread (Person[][] pop) {
+  
+}
+
+public color col(Person pep) {
+  if (pep.getCovidStatus().equals("infected")) {
+    return color(252, 158, 69);
+  } else {
+    return color(69, 119, 252);
+  }
+  // return color(0, 0, 0);
+}
+
 public Vaccine vaxTypePerson(){
   boolean temp = (VAX_TYPE == ALL);
   Vaccine ans = new Vaccine("Pfizer");
