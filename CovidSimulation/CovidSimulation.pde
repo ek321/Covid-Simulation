@@ -28,14 +28,25 @@ void setup(){
 }
 
 void draw() {
+  int countdown = 60 * 5;
+  spread(population);
+  while (countdown != 0) {
+    countdown --;
+  }
   
 }
 
 public void spread (Person[][] pop) {
-  
+  for (int i = 0; i < pop.length; i++) {
+    for (int j = 0; j < pop[0].length; j++) {
+      color temp = colPer(pop[i][j]);
+      fill (temp);
+      rect(j * pop[0].length, i * pop.length,  pop[0].length, pop.length);
+    }
+  }
 }
 
-public color col(Person pep) {
+public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
     return color(252, 158, 69);
   } else {
