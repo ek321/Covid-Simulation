@@ -53,8 +53,8 @@ public class Person{
  }
 
  //boolean isBoosted(){}
- boolean catchCovid(){
-   float temp = calcCovid();
+ boolean catchCovid(int neighbors){
+   float temp = calcCovid(neighbors);
    if(temp > 0.5){
      return true;
    }
@@ -63,7 +63,7 @@ public class Person{
 
  //helper method for catchCovid
  //returns the chance of catching covid
- float calcCovid(){
+ float calcCovid(int neighbors){
    float result = 1.0;
    if(getVaxType() != null){
      result *= (1.0 - getVaxType().getEfficacy());

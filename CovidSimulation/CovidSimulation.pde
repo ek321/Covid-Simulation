@@ -27,16 +27,24 @@ void setup(){
   }
 }
 
-public String vaxTypeString (){
+public Vaccine vaxTypeString(){
   if (VAX_TYPE == PFIEZER) {
-    return "PFIEZER";
+    return new Vaccine("Pfizer");
   } else if (VAX_TYPE == JOHNSON) {
-    return "JOHNSON";
+    return new Vaccine("Johnson");
   } else if (VAX_TYPE == MODERNA) {
-    return "MODERNA";
-  } else {
+    return new Vaccine("Pfizer");
+  } /*else {
     return "ALL";
-  }
+  }*/
+  //idk how we create an "all" vaccine
+  //maybe we could add a random thing here like
+  /* if(VAX_TYPE == ALL)
+  Random rng = new Random();
+    int chance = rng.nextInt(3);
+    and then we assign the vaccine
+    based on the numbers above
+  */
 }
 
 void keyPressed () {
