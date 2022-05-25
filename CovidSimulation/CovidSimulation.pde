@@ -14,7 +14,7 @@
   Person[][] population;
   // for time
   int ticks;
-  
+
 void setup(){
   size(1000,1000);
   population = new Person[height / ROWS][width / COLS];
@@ -48,7 +48,7 @@ void keyPressed () {
       VAX_MODE = PRE_VAX;
     }
   }
-  
+
   // cycle through vax types with key 'b'
   if (key == 'b') {
     if (VAX_TYPE < ALL){
@@ -60,5 +60,5 @@ void keyPressed () {
 }
 
 //public void tick() {
-  
+
 //}
