@@ -1,5 +1,7 @@
 public class Person{
   int age;
+  int xCor;
+  int yCor;
   boolean vax;
   String covidStatus;
   Vaccine vax_type;
@@ -7,8 +9,10 @@ public class Person{
  // to be implemented later: boolean booster;
 
   //basic constructor for pre-vax, vax modes
-  public Person(int age_,boolean vax_,Vaccine vaxType, String status_){
+  public Person(int age_,int xCor_, int yCor_,boolean vax_,Vaccine vaxType, String status_){
     age = age_;
+    xCor = xCor_;
+    yCor = yCor_;
     vax = vax_;
     vax_type = vaxType;
     covidStatus = status_;
