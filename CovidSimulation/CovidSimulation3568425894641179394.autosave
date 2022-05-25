@@ -14,13 +14,10 @@
   Person[][] population;
   // for time
   int ticks;
-  // for coloring pixels
-  int pixelH;
-  int pixelW;
 
 void setup(){
   size(1000,1000);
-  population = new Person[ROWS][COLS];
+  population = new Person[height / ROWS][width / COLS];
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
       int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
@@ -28,45 +25,6 @@ void setup(){
       population[i][j] = new Person(age, vax, vaxTypePerson(), "hasCovid");
     }
   }
-  
-  pixelH = height / ROWS;
-  pixelW = width / COLS;
-  
-  int infectNum = 5;
-  for (int i = 0; i < infectNum; i++) {
-    int a = (int) (Math.random() * (ROWS));
-    int b = (int) (Math.random() * (COLS));
-    population[a][b].setCovidStatus();
-  }
-}
-
-void draw() {
-  int countdown = 60 * 5;
-  spread(population);
-  while (countdown != 0) {
-    countdown --;
-  }
-  
-}
-
-public void spread (Person[][] pop) {
-  for (int i = 0; i < pop.length; i++) {
-    for (int j = 0; j < pop[0].length; j++) {
-      color temp = colPer(pop[i][j]);
-      // use pixelH and pixelW
-      fill (temp);
-      rect(j * pop[0].length, i * pop.length,  pop[0].length, pop.length);
-    }
-  }
-}
-
-public color colPer(Person pep) {
-  if (pep.getCovidStatus().equals("infected")) {
-    return color(252, 158, 69);
-  } else {
-    return color(69, 119, 252);
-  }
-  // return color(0, 0, 0);
 }
 
 public Vaccine vaxTypePerson(){
@@ -117,6 +75,10 @@ void keyPressed () {
       VAX_TYPE = PFIEZER;
     }
   }
+}
+
+public void spread() {
+  
 }
 
 //public void tick() {
