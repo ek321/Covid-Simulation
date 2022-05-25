@@ -57,6 +57,10 @@ public class Person{
  }
 
  //boolean isBoosted(){}
+ 
+ /*returns true if the chance of catching covid is >50%
+ returns false if it is <=50%
+ */
  boolean catchCovid(){
    float temp = calcCovid();
    if(temp > 0.5){
@@ -66,13 +70,18 @@ public class Person{
  }
 
  //helper method for catchCovid
- //returns the chance of catching covid
+ //returns the chance of catching covid for one Person
+ //takes into account vaccine status, type, and number of infected neighbors
  float calcCovid(){
    float result = 1.0;
    if(getVaxType() != null){
      result *= (1.0 - getVaxType().getEfficacy());
    }
-   result *= neighInfect(this) / 4;
+   else if((getVaxType() == null) && (neighInfect(this) == 0)){
+     //if a Person is unvaccinated but not in contact with anyone they will remain negative
+     return 0;
+   }
+   result *= neighInfect(this) / 4.0; //percent positive of neighbors
    return result;
  }
  

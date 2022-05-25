@@ -121,19 +121,19 @@ void keyPressed () {
 
 public int neighInfect(Person pep) {
   int counter = 0;
-  Person temp = population[pep.xCor - 1][pep.yCor];
+  Person temp = population[pep.getXCor() - 1][pep.getYCor()];
   if (temp.getCovidStatus().equals("infected")){
     counter ++;
   }
-  temp = population[pep.xCor + 1][pep.yCor];
+  temp = population[pep.getXCor() + 1][pep.getYCor()];
   if (temp.getCovidStatus().equals("infected")){
     counter ++;
   }
-  temp = population[pep.xCor][pep.yCor - 1];
+  temp = population[pep.getXCor()][pep.getYCor() - 1];
   if (temp.getCovidStatus().equals("infected")){
     counter ++;
   }
-  temp = population[pep.xCor][pep.yCor + 1];
+  temp = population[pep.getXCor()][pep.getYCor() + 1];
   if (temp.getCovidStatus().equals("infected")){
     counter ++;
   }
