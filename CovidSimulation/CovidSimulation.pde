@@ -25,7 +25,7 @@ void setup(){
     for (int j = 0; j < population[0].length; j++) {
       int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
       boolean vax = (VAX_MODE == VAX);
-      population[i][j] = new Person(age, vax, vaxTypePerson(), "hasCovid");
+      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "hasCovid");
     }
   }
   
@@ -117,6 +117,28 @@ void keyPressed () {
       VAX_TYPE = PFIEZER;
     }
   }
+}
+
+public int neighInfect(Person pep) {
+  int counter = 0;
+  Person temp = population[pep.xCor - 1][pep.yCor];
+  if (temp.getCovidStatus().equals("infected")){
+    counter ++;
+  }
+  temp = population[pep.xCor + 1][pep.yCor];
+  if (temp.getCovidStatus().equals("infected")){
+    counter ++;
+  }
+  temp = population[pep.xCor][pep.yCor - 1];
+  if (temp.getCovidStatus().equals("infected")){
+    counter ++;
+  }
+  temp = population[pep.xCor][pep.yCor + 1];
+  if (temp.getCovidStatus().equals("infected")){
+    counter ++;
+  }
+  
+  return counter;
 }
 
 //public void tick() {
