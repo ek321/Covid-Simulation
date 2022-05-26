@@ -38,12 +38,13 @@ void setup() {
   for (int i = 0; i < infectNum; i++) {
     int a = (int) (Math.random() * (ROWS));
     int b = (int) (Math.random() * (COLS));
-    population[a][b].setCovidStatus();
+    // change later when covidstatus method is done
+    population[a][b].covidStatus = "infected";
   }
 }
 
 void draw() {
-  int countdown = 60;
+  int countdown = 60 * 100;
   spread(population);
   while (countdown > 0) {
     countdown --;
@@ -74,10 +75,10 @@ public void spread (Person[][] pop) {
 public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
     return color(252, 158, 69);
-  } else {
+  } else if (pep.getCovidStatus().equals("negative")){
     return color(69, 119, 252);
   }
-  // return color(0, 0, 0);
+  return color(0, 0, 0);
 }
 
 public Vaccine vaxTypePerson() {
