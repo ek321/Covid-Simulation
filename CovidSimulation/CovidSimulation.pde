@@ -84,10 +84,14 @@ void draw() {
       for (int j = 0; j < population[0].length; j++) {
         // use pixelH and pixelW
         population[i][j].catchCovid();
+        if(i == population.length / 2){
+          if(population[i][j].isBoosted()){
+          
+          }
+        }
       }
     }
   }
-}
 
 public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
@@ -152,12 +156,12 @@ public int neighInfect(Person pep) {
   }
 
   // check for out of bounds on right
-  if (pep.getXCor() != population[0].length - 1) {
+ /* if (pep.getXCor() != population[0].length - 1) {
     temp = population[pep.getXCor() + 1][pep.getYCor()];
     if (temp.getCovidStatus().equals("infected")) {
       counter ++;
     }
-  }
+  }*/
 
   // check for out of bounds on top
   if (pep.getYCor() != 0) {

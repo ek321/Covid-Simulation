@@ -61,14 +61,17 @@ public class Person{
    covidStatus = "infected";
  }
 
- //boolean isBoosted(){}
+ boolean isBoosted(){
+ 
+ }
  
  /*returns true if the chance of catching covid is >50%
  returns false if it is <=50%
  */
  boolean catchCovid(){
    double temp = calcCovid();
-   double chance = Math.random() * 3;
+   Random rng = new Random();
+   double chance = rng.nextInt(3);
    if (chance < temp) {
      setCovidStatus();
      return true;
