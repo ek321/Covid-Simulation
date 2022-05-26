@@ -49,7 +49,8 @@ void draw() {
     countdown --;
   }
   time++;
-  text(20, 20, time);
+  fill(255);
+  text(time, 20, 20);
   
 }
 
