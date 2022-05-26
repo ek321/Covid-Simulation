@@ -16,3 +16,4 @@ Link to Prototype and Documentation: https://docs.google.com/document/d/1wrRULui
 Marie's Work Log:
 05/23/22--I worked on a skeleton of the Person class. I added all the instance vvraibles that we plan on using and just commented out the ones for future development phases.
 05/24/22--I worked on the catchCovid method and its helper method calcCovid. This calculates the chance of someone getting covid based on the number of positive neighbors that they have and their vaccine status (so far, more contingencies will be added later). I also added a parameter to it so that when it is called, I can incorporate the number of covid-posiitve neighbors.
+05/25/22--I made accessor methods for the x and y coordinates of the Persons on the screen. I also implemented age into the catchCovid methods, nso if a person is elderly then, their chance of getting covid increases by 50%. Lastly, I updated the prototype document to reflect new changes we made.
