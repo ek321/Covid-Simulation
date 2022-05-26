@@ -67,12 +67,22 @@ public class Person{
  returns false if it is <=50%
  */
  boolean catchCovid(){
+   double temp = calcCovid();
+   double chance = Math.random() * 3;
+   if (chance < temp) {
+     setCovidStatus();
+     return true;
+   }
+   return false;
+   
+   /*
    float temp = calcCovid();
    if(temp > 0.5){
      setCovidStatus();
      return true;
    }
    return false;
+   */
  }
 
  //helper method for catchCovid
