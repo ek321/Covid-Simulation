@@ -5,7 +5,7 @@ int COLS = 100;
 // vax mode variables
 final int PRE_VAX = 0;
 final int VAX = 1;
-int VAX_MODE = 1;
+int VAX_MODE = 0;
 // different vax types
 final int PFIZER = 0;
 final int JOHNSON = 1;
@@ -21,7 +21,9 @@ int pixelH;
 int pixelW;
 // for testing purposes
 //int tick;
-int countdown = 60;
+int countdown;
+//boosted modes
+boolean canBoost;
 
 void setup() {
   size(1000, 1000);
@@ -38,7 +40,11 @@ void setup() {
         vax = true;
       }
       //boolean vax = (VAX_MODE == VAX);
-      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative");
+      boolean booster = false;
+      if(canBoost){
+        booster = true;
+      }
+      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster);
     }
   }
 
@@ -86,12 +92,13 @@ void draw() {
         population[i][j].catchCovid();
         if(i == population.length / 2){
           if(population[i][j].isBoosted()){
-          
+
           }
         }
       }
     }
   }
+
 
 public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
@@ -140,6 +147,13 @@ void keyPressed () {
       VAX_TYPE ++;
     } else {
       VAX_TYPE = PFIZER;
+    }
+  }
+
+  //adds booster shot in after a while
+  if(key == 'c'){
+    if(VAX_MODE == VAX){
+      canBoost = true;
     }
   }
 }

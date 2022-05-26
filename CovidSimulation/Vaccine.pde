@@ -32,5 +32,7 @@ public class Vaccine{
     return efficacy;
   }
 
-  //float setEfficacy(){}
+  float setEfficacy(){
+    return 1.0; //temp value;
+  }
 }
