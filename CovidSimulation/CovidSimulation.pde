@@ -68,24 +68,6 @@ void draw() {
   text(time, 20, 20);
 }
 
-/*public void spread (Person[][] pop) {
-  for (int i = 0; i < pop.length; i++) {
-    for (int j = 0; j < pop[0].length; j++) {
-      color temp = colPer(pop[i][j]);
-      // use pixelH and pixelW
-      fill (temp);
-      rect(j * pixelH, i * pixelW, pixelH, pixelW);
-    }
-  }
-
-  for (int i = 0; i < pop.length; i++) {
-    for (int j = 0; j < pop[0].length; j++) {
-      // use pixelH and pixelW
-      pop[i][j].setCovidStatus();
-    }
-  }
-}*/
-
   public void spread () {
     for (int i = 0; i < population.length; i++) {
       for (int j = 0; j < population[0].length; j++) {
@@ -133,14 +115,6 @@ public Vaccine vaxTypePerson() {
   }
 
   return ans;
-  //idk how we create an "all" vaccine
-  //maybe we could add a random thing here like
-  /* if(VAX_TYPE == ALL)
-   Random rng = new Random();
-   int chance = rng.nextInt(3);
-   and then we assign the vaccine
-   based on the numbers above
-   */
 }
 
 void keyPressed () {
@@ -197,7 +171,6 @@ public int neighInfect(Person pep) {
       counter ++;
     }
   }
-
 
   return counter;
 }
