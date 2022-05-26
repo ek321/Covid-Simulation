@@ -7,7 +7,7 @@ final int PRE_VAX = 0;
 final int VAX = 1;
 int VAX_MODE = 1;
 // different vax types
-final int PFIEZER = 0;
+final int PFIZER = 0;
 final int JOHNSON = 1;
 final int MODERNA = 2;
 final int ALL = 3;
@@ -51,7 +51,7 @@ void setup() {
     int b = rng.nextInt(30);
     // change later when covidstatus method is done
     if(b < 13){
-      population[i][0].covidStatus = "infected";
+      population[i][0].setCovidStatus();
     }
   }
   
@@ -99,7 +99,7 @@ void draw() {
     for (int i = 0; i < population.length; i++) {
       for (int j = 0; j < population[0].length; j++) {
         // use pixelH and pixelW
-        population[i][j].setCovidStatus();
+        population[i][j].catchCovid();
       }
     }
   }
@@ -120,7 +120,7 @@ public Vaccine vaxTypePerson() {
     int rng = (int) (Math.random() * (3));
     VAX_TYPE = rng;
   }
-  if (VAX_TYPE == PFIEZER) {
+  if (VAX_TYPE == PFIZER) {
     ans = new Vaccine("Pfizer");
   } else if (VAX_TYPE == JOHNSON) {
     ans = new Vaccine("Johnson");
@@ -158,7 +158,7 @@ void keyPressed () {
     if (VAX_TYPE < ALL) {
       VAX_TYPE ++;
     } else {
-      VAX_TYPE = PFIEZER;
+      VAX_TYPE = PFIZER;
     }
   }
 }

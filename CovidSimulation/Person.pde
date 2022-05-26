@@ -58,17 +58,7 @@ public class Person{
  }
 
  void setCovidStatus(){
-   if (catchCovid()){
-     covidStatus = "infected";
-   } else {
-     covidStatus = "negative";
-   }
-   
-   //testing if catch covid is ever true
-   if (catchCovid() == true) {
-     fill(255);
-     text("YESSS", 20, 40);
-   }
+   covidStatus = "infected";
  }
 
  //boolean isBoosted(){}
@@ -79,6 +69,7 @@ public class Person{
  boolean catchCovid(){
    float temp = calcCovid();
    if(temp > 0.5){
+     setCovidStatus();
      return true;
    }
    return false;
