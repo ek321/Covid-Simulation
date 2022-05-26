@@ -1,25 +1,27 @@
-  int ROWS = 100;
-  int COLS = 100;
-  // vax mode variables
-  final int PRE_VAX = 0;
-  final int VAX = 1;
-  int VAX_MODE = 0;
-  // different vax types
-  final int PFIEZER = 0;
-  final int JOHNSON = 1;
-  final int MODERNA = 2;
-  final int ALL = 3;
-  int VAX_TYPE = 0;
-  // array to keep track of people on the board
-  Person[][] population;
-  // for time
-  int ticks;
-  // for coloring pixels
-  int pixelH;
-  int pixelW;
+int ROWS = 100;
+int COLS = 100;
+// vax mode variables
+final int PRE_VAX = 0;
+final int VAX = 1;
+int VAX_MODE = 0;
+// different vax types
+final int PFIEZER = 0;
+final int JOHNSON = 1;
+final int MODERNA = 2;
+final int ALL = 3;
+int VAX_TYPE = 0;
+// array to keep track of people on the board
+Person[][] population;
+// for time
+int ticks;
+// for coloring pixels
+int pixelH;
+int pixelW;
+// for testing purposes
+int time;
 
-void setup(){
-  size(1000,1000);
+void setup() {
+  size(1000, 1000);
   population = new Person[ROWS][COLS];
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
@@ -28,25 +30,28 @@ void setup(){
       population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative");
     }
   }
-  
+
   pixelH = height / ROWS;
   pixelW = width / COLS;
-  
+
   int infectNum = 5;
   for (int i = 0; i < infectNum; i++) {
     int a = (int) (Math.random() * (ROWS));
     int b = (int) (Math.random() * (COLS));
-    population[a][b].setCovidStatus();
+    // change later when covidstatus method is done
+    population[a][b].covidStatus = "infected";
   }
 }
 
 void draw() {
-  int countdown = 60 * 5;
+  int countdown = 60 * 100;
   spread(population);
-  while (countdown != 0) {
+  while (countdown > 0) {
     countdown --;
   }
-  
+  time++;
+  fill(255);
+  text(time, 20, 20);
 }
 
 public void spread (Person[][] pop) {
@@ -55,7 +60,14 @@ public void spread (Person[][] pop) {
       color temp = colPer(pop[i][j]);
       // use pixelH and pixelW
       fill (temp);
-      rect(j * pop[0].length, i * pop.length,  pop[0].length, pop.length);
+      rect(j * pixelH, i * pixelW, pixelH, pixelW);
+    }
+  }
+
+  for (int i = 0; i < pop.length; i++) {
+    for (int j = 0; j < pop[0].length; j++) {
+      // use pixelH and pixelW
+      pop[i][j].setCovidStatus();
     }
   }
 }
@@ -63,13 +75,13 @@ public void spread (Person[][] pop) {
 public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
     return color(252, 158, 69);
-  } else {
+  } else if (pep.getCovidStatus().equals("negative")){
     return color(69, 119, 252);
   }
-  // return color(0, 0, 0);
+  return color(0, 0, 0);
 }
 
-public Vaccine vaxTypePerson(){
+public Vaccine vaxTypePerson() {
   boolean temp = (VAX_TYPE == ALL);
   Vaccine ans = new Vaccine("Pfizer");
   if (temp) {
@@ -80,29 +92,29 @@ public Vaccine vaxTypePerson(){
     ans = new Vaccine("Pfizer");
   } else if (VAX_TYPE == JOHNSON) {
     ans = new Vaccine("Johnson");
-  } else if (VAX_TYPE == MODERNA){
+  } else if (VAX_TYPE == MODERNA) {
     ans = new Vaccine("MODERNA");
   }
-  
+
   if (temp) {
     VAX_TYPE = ALL;
   }
-  
+
   return ans;
   //idk how we create an "all" vaccine
   //maybe we could add a random thing here like
   /* if(VAX_TYPE == ALL)
-  Random rng = new Random();
-    int chance = rng.nextInt(3);
-    and then we assign the vaccine
-    based on the numbers above
-  */
+   Random rng = new Random();
+   int chance = rng.nextInt(3);
+   and then we assign the vaccine
+   based on the numbers above
+   */
 }
 
 void keyPressed () {
   // circle through vax mode with key 'a'
   if (key == 'a') {
-    if (VAX_MODE < VAX){
+    if (VAX_MODE < VAX) {
       VAX_MODE ++;
     } else {
       VAX_MODE = PRE_VAX;
@@ -111,7 +123,7 @@ void keyPressed () {
 
   // cycle through vax types with key 'b'
   if (key == 'b') {
-    if (VAX_TYPE < ALL){
+    if (VAX_TYPE < ALL) {
       VAX_TYPE ++;
     } else {
       VAX_TYPE = PFIEZER;
@@ -121,23 +133,40 @@ void keyPressed () {
 
 public int neighInfect(Person pep) {
   int counter = 0;
-  Person temp = population[pep.getXCor() - 1][pep.getYCor()];
-  if (temp.getCovidStatus().equals("infected")){
-    counter ++;
+  Person temp;
+  // check for out of bounds on left
+  if (pep.getXCor() != 0) {
+    temp = population[pep.getXCor() - 1][pep.getYCor()];
+    if (temp.getCovidStatus().equals("infected")) {
+      counter ++;
+    }
   }
-  temp = population[pep.getXCor() + 1][pep.getYCor()];
-  if (temp.getCovidStatus().equals("infected")){
-    counter ++;
+
+  // check for out of bounds on right
+  if (pep.getXCor() != population[0].length - 1) {
+    temp = population[pep.getXCor() + 1][pep.getYCor()];
+    if (temp.getCovidStatus().equals("infected")) {
+      counter ++;
+    }
   }
-  temp = population[pep.getXCor()][pep.getYCor() - 1];
-  if (temp.getCovidStatus().equals("infected")){
-    counter ++;
+
+  // check for out of bounds on top
+  if (pep.getYCor() != 0) {
+    temp = population[pep.getXCor()][pep.getYCor() - 1];
+    if (temp.getCovidStatus().equals("infected")) {
+      counter ++;
+    }
   }
-  temp = population[pep.getXCor()][pep.getYCor() + 1];
-  if (temp.getCovidStatus().equals("infected")){
-    counter ++;
+
+  // check for out of bounds on bottom
+  if (pep.getYCor() != population.length - 1) {
+    temp = population[pep.getXCor()][pep.getYCor() + 1];
+    if (temp.getCovidStatus().equals("infected")) {
+      counter ++;
+    }
   }
-  
+
+
   return counter;
 }
 
