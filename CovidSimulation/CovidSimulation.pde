@@ -5,7 +5,7 @@ int COLS = 100;
 // vax mode variables
 final int PRE_VAX = 0;
 final int VAX = 1;
-int VAX_MODE = 1;
+int VAX_MODE = 0;
 // different vax types
 final int PFIZER = 0;
 final int JOHNSON = 1;
@@ -21,6 +21,8 @@ int pixelH;
 int pixelW;
 // for testing purposes
 int time;
+//boosted modes
+boolean canBoost;
 
 void setup() {
   size(1000, 1000);
@@ -38,7 +40,11 @@ void setup() {
         vax = true;
       }
       //boolean vax = (VAX_MODE == VAX);
-      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative");
+      boolean booster = false;
+      if(canBoost){
+        booster = true;
+      }
+      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster);
     }
   }
 
@@ -67,24 +73,6 @@ void draw() {
   fill(255);
   text(time, 20, 20);
 }
-
-/*public void spread (Person[][] pop) {
-  for (int i = 0; i < pop.length; i++) {
-    for (int j = 0; j < pop[0].length; j++) {
-      color temp = colPer(pop[i][j]);
-      // use pixelH and pixelW
-      fill (temp);
-      rect(j * pixelH, i * pixelW, pixelH, pixelW);
-    }
-  }
-
-  for (int i = 0; i < pop.length; i++) {
-    for (int j = 0; j < pop[0].length; j++) {
-      // use pixelH and pixelW
-      pop[i][j].setCovidStatus();
-    }
-  }
-}*/
 
   public void spread () {
     for (int i = 0; i < population.length; i++) {
@@ -159,6 +147,13 @@ void keyPressed () {
       VAX_TYPE ++;
     } else {
       VAX_TYPE = PFIZER;
+    }
+  }
+  
+  //adds booster shot in after a while
+  if(key == 'c'){
+    if(VAX_MODE == VAX){
+      canBoost = true;
     }
   }
 }

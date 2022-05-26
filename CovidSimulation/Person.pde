@@ -6,16 +6,17 @@ public class Person{
   String covidStatus;
   Vaccine vax_type;
  //to be implemented later: boolean mask;
- // to be implemented later: boolean booster;
+  boolean booster;
 
   //basic constructor for pre-vax, vax modes
-  public Person(int age_,int xCor_, int yCor_,boolean vax_,Vaccine vaxType, String status_){
+  public Person(int age_,int xCor_, int yCor_,boolean vax_,Vaccine vaxType, String status_, boolean boosted_){
     age = age_;
     xCor = xCor_;
     yCor = yCor_;
     vax = vax_;
     vax_type = vaxType;
     covidStatus = status_;
+    booster = boosted_;
   }
 
   //returns whether or not a person has been vaccinated against COVID-19
@@ -68,7 +69,7 @@ public class Person{
  */
  boolean catchCovid(){
    float temp = calcCovid();
-   if(temp > 0.5){
+   if(temp > 0.6){
      setCovidStatus();
      return true;
    }
