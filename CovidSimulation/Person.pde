@@ -53,7 +53,10 @@ public class Person{
  }
 
  void setCovidStatus(){
-   covidStatus = "infected";
+   if (catchCovid()){
+     covidStatus = "infected";
+   }
+   covidStatus = "not";
  }
 
  //boolean isBoosted(){}
