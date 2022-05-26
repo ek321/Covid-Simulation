@@ -69,7 +69,7 @@ public class Person{
  */
  boolean catchCovid(){
    float temp = calcCovid();
-   if(temp > 0.6){
+   if(temp > 0.5){
      setCovidStatus();
      return true;
    }

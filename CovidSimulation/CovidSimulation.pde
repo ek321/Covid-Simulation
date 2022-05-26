@@ -121,14 +121,6 @@ public Vaccine vaxTypePerson() {
   }
 
   return ans;
-  //idk how we create an "all" vaccine
-  //maybe we could add a random thing here like
-  /* if(VAX_TYPE == ALL)
-   Random rng = new Random();
-   int chance = rng.nextInt(3);
-   and then we assign the vaccine
-   based on the numbers above
-   */
 }
 
 void keyPressed () {
