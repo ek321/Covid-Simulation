@@ -40,7 +40,12 @@ public class Person{
     return res;
   }
 
- // boolean isElderly(){}
+ boolean isElderly(){
+   if(age >= 65){
+     return true;
+   }
+   return false;
+ }
 
  //returns:
  //"negative"
@@ -64,6 +69,7 @@ public class Person{
  boolean catchCovid(){
    float temp = calcCovid();
    if(temp > 0.5){
+     setCovidStatus();
      return true;
    }
    return false;
@@ -77,11 +83,10 @@ public class Person{
    if(getVaxType() != null){
      result *= (1.0 - getVaxType().getEfficacy());
    }
-   else if((getVaxType() == null) && (neighInfect(this) == 0)){
-     //if a Person is unvaccinated but not in contact with anyone they will remain negative
-     return 0;
+   result *= neighInfect(this); //percent positive of neighbors
+   if(isElderly()){
+     result *= 1.5; //increases chance if the person is elderly
    }
-   result *= neighInfect(this) / 4.0; //percent positive of neighbors
    return result;
  }
  
