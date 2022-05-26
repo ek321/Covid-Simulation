@@ -15,12 +15,13 @@ int VAX_TYPE = 1;
 // array to keep track of people on the board
 Person[][] population;
 // for time
-int ticks;
+int time;
 // for coloring pixels
 int pixelH;
 int pixelW;
 // for testing purposes
-int time;
+//int tick;
+int countdown;
 //boosted modes
 boolean canBoost;
 
@@ -33,10 +34,9 @@ void setup() {
       boolean vax;
       Random rand = new Random();
       int chance = rand.nextInt(10);
-      if(chance > 6){
+      if (chance > 6) {
         vax = false;
-      }
-      else {
+      } else {
         vax = true;
       }
       //boolean vax = (VAX_MODE == VAX);
@@ -52,26 +52,28 @@ void setup() {
   pixelW = width / COLS;
 
   Random rng = new Random();
-  
+
   for (int i = 0; i < ROWS; i++) {
     int b = rng.nextInt(30);
     // change later when covidstatus method is done
-    if(b < 13){
+    if (b < 13) {
       population[i][0].setCovidStatus();
     }
   }
-  
 }
 
 void draw() {
-  int countdown = 60 * 100;
-  spread();
-  while (countdown > 0) {
+  if (countdown > 0) {
     countdown --;
   }
-  time++;
-  fill(255);
-  text(time, 20, 20);
+
+  if (countdown == 0) {
+    countdown = 60;
+    spread();
+    time++;
+    fill(255);
+    text(time, 20, 20);
+  }
 }
 
   public void spread () {
@@ -83,19 +85,25 @@ void draw() {
         rect(j * pixelH, i * pixelW, pixelH, pixelW);
       }
     }
-  
+
     for (int i = 0; i < population.length; i++) {
       for (int j = 0; j < population[0].length; j++) {
         // use pixelH and pixelW
         population[i][j].catchCovid();
+        if(i == population.length / 2){
+          if(population[i][j].isBoosted()){
+            
+          }
+        }
       }
     }
   }
 
+
 public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
     return color(252, 158, 69);
-  } else if (pep.getCovidStatus().equals("negative")){
+  } else if (pep.getCovidStatus().equals("negative")) {
     return color(69, 119, 252);
   }
   return color(0, 0, 0);
@@ -141,7 +149,7 @@ void keyPressed () {
       VAX_TYPE = PFIZER;
     }
   }
-  
+
   //adds booster shot in after a while
   if(key == 'c'){
     if(VAX_MODE == VAX){
