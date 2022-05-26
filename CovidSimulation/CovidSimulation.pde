@@ -92,7 +92,7 @@ void draw() {
         population[i][j].catchCovid();
         if(i == population.length / 2){
           if(population[i][j].isBoosted()){
-
+            population[i][j].getVaxType().setEfficacy();
           }
         }
       }
