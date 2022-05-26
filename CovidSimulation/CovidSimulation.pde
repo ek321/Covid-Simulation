@@ -1,16 +1,17 @@
 import java.util.*;
+
 int ROWS = 100;
 int COLS = 100;
 // vax mode variables
 final int PRE_VAX = 0;
 final int VAX = 1;
-int VAX_MODE = 0;
+int VAX_MODE = 1;
 // different vax types
 final int PFIEZER = 0;
 final int JOHNSON = 1;
 final int MODERNA = 2;
 final int ALL = 3;
-int VAX_TYPE = 0;
+int VAX_TYPE = 1;
 // array to keep track of people on the board
 Person[][] population;
 // for time
@@ -27,7 +28,16 @@ void setup() {
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
       int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
-      boolean vax = (VAX_MODE == VAX);
+      boolean vax;
+      Random rand = new Random();
+      int chance = rand.nextInt(10);
+      if(chance > 6){
+        vax = false;
+      }
+      else {
+        vax = true;
+      }
+      //boolean vax = (VAX_MODE == VAX);
       population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative");
     }
   }
