@@ -17,6 +17,8 @@
   // for coloring pixels
   int pixelH;
   int pixelW;
+  // for testing purposes
+  int time;
 
 void setup(){
   size(1000,1000);
@@ -41,11 +43,13 @@ void setup(){
 }
 
 void draw() {
-  int countdown = 60 * 5;
+  int countdown = 60;
   spread(population);
-  while (countdown != 0) {
+  while (countdown > 0) {
     countdown --;
   }
+  time++;
+  text(20, 20, time);
   
 }
 
@@ -55,7 +59,7 @@ public void spread (Person[][] pop) {
       color temp = colPer(pop[i][j]);
       // use pixelH and pixelW
       fill (temp);
-      rect(j * pop[0].length, i * pop.length,  pop[0].length, pop.length);
+      rect(j * pixelH, i * pixelW,  pixelH, pixelW);
     }
   }
 }
