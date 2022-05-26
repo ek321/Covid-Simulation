@@ -1,3 +1,4 @@
+import java.util.*;
 int ROWS = 100;
 int COLS = 100;
 // vax mode variables
@@ -34,18 +35,20 @@ void setup() {
   pixelH = height / ROWS;
   pixelW = width / COLS;
 
-  int infectNum = 5;
+  int infectNum = 100;
+  Random rng = new Random();
+  
   for (int i = 0; i < infectNum; i++) {
-    int a = (int) (Math.random() * (ROWS));
-    int b = (int) (Math.random() * (COLS));
+    int b = rng.nextInt(ROWS);
     // change later when covidstatus method is done
-    population[a][b].covidStatus = "infected";
+    population[b][0].covidStatus = "infected";
   }
+  
 }
 
 void draw() {
   int countdown = 60 * 100;
-  spread(population);
+  spread();
   while (countdown > 0) {
     countdown --;
   }
@@ -54,7 +57,7 @@ void draw() {
   text(time, 20, 20);
 }
 
-public void spread (Person[][] pop) {
+/*public void spread (Person[][] pop) {
   for (int i = 0; i < pop.length; i++) {
     for (int j = 0; j < pop[0].length; j++) {
       color temp = colPer(pop[i][j]);
@@ -70,7 +73,25 @@ public void spread (Person[][] pop) {
       pop[i][j].setCovidStatus();
     }
   }
-}
+}*/
+
+  public void spread () {
+    for (int i = 0; i < population.length; i++) {
+      for (int j = 0; j < population[0].length; j++) {
+        color temp = colPer(population[i][j]);
+        // use pixelH and pixelW
+        fill (temp);
+        rect(j * pixelH, i * pixelW, pixelH, pixelW);
+      }
+    }
+  
+    for (int i = 0; i < population.length; i++) {
+      for (int j = 0; j < population[0].length; j++) {
+        // use pixelH and pixelW
+        population[i][j].setCovidStatus();
+      }
+    }
+  }
 
 public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
