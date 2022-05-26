@@ -92,7 +92,7 @@ public class Person{
    if(getVaxType() != null){
      result *= (1.0 - getVaxType().getEfficacy());
    }
-   result *= neighInfect(this) / 2; //percent positive of neighbors
+   result *= neighInfect(this); //percent positive of neighbors
    if(isElderly()){
      result *= 1.5; //increases chance if the person is elderly
    }

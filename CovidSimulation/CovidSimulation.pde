@@ -45,13 +45,14 @@ void setup() {
   pixelH = height / ROWS;
   pixelW = width / COLS;
 
-  int infectNum = 100;
   Random rng = new Random();
   
-  for (int i = 0; i < infectNum; i++) {
-    int b = rng.nextInt(ROWS);
+  for (int i = 0; i < ROWS; i++) {
+    int b = rng.nextInt(30);
     // change later when covidstatus method is done
-    population[b][0].covidStatus = "infected";
+    if(b < 13){
+      population[i][0].covidStatus = "infected";
+    }
   }
   
 }
