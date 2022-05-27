@@ -5,11 +5,11 @@ public class Person{
   boolean vax;
   String covidStatus;
   Vaccine vax_type;
- //to be implemented later: boolean mask;
+  boolean mask;
   boolean booster;
 
   //basic constructor for pre-vax, vax modes
-  public Person(int age_,int xCor_, int yCor_,boolean vax_,Vaccine vaxType, String status_, boolean boosted_){
+  public Person(int age_,int xCor_, int yCor_,boolean vax_,Vaccine vaxType, String status_, boolean boosted_, boolean mask_){
     age = age_;
     xCor = xCor_;
     yCor = yCor_;
@@ -17,11 +17,17 @@ public class Person{
     vax_type = vaxType;
     covidStatus = status_;
     booster = boosted_;
+    mask = mask_;
   }
 
   //returns whether or not a person has been vaccinated against COVID-19
   boolean getVaxStatus(){
     return vax;
+  }
+  
+  //returns whether or not a Person is wearing a mask
+  boolean getMaskStatus(){
+    return mask;
   }
 
   //if a person is vaccinated, this will return a string containing the vaccine that they received
@@ -88,7 +94,7 @@ public class Person{
    if(getVaxType() != null){
      result *= (1.0 - getVaxType().getEfficacy());
    }
-   result *= neighInfect(this); //percent positive of neighbors
+   result *= neighInfect(this) / 1.5; //percent positive of neighbors
    if(isElderly()){
      result *= 1.5; //increases chance if the person is elderly
    }

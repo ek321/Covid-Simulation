@@ -44,7 +44,7 @@ void setup() {
       if(canBoost){
         booster = true;
       }
-      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster);
+      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster, true);
     }
   }
 
@@ -86,17 +86,17 @@ void draw() {
       }
     }
 
-    for (int i = 0; i < population.length; i++) {
-      for (int j = 0; j < population[0].length; j++) {
+    for (int i = 0; i < population[0].length; i++) {
+      for (int j = 0; j < population.length; j++) {
         // use pixelH and pixelW
-        population[i][j].catchCovid();
+        population[j][i].catchCovid();
         if(i == population.length / 2){
-          if(population[i][j].isBoosted()){
-            population[i][j].getVaxType().boost();
+          if(population[j][i].isBoosted()){
+            population[j][i].getVaxType().boost();
           }
         }
-        if(population[i][j].getVaxStatus()){
-          population[i][j].getVaxType().setEfficacy();
+        if(population[j][i].getVaxStatus()){
+          population[j][i].getVaxType().setEfficacy();
         }
       }
     }
@@ -173,12 +173,12 @@ public int neighInfect(Person pep) {
   }
 
   // check for out of bounds on right
- /* if (pep.getXCor() != population[0].length - 1) {
+  if (pep.getXCor() != population[0].length - 1) {
     temp = population[pep.getXCor() + 1][pep.getYCor()];
     if (temp.getCovidStatus().equals("infected")) {
       counter ++;
     }
-  }*/
+  }
 
   // check for out of bounds on top
   if (pep.getYCor() != 0) {
