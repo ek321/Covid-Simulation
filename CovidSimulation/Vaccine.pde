@@ -32,7 +32,19 @@ public class Vaccine{
     return efficacy;
   }
 
-  float setEfficacy(){
-    return 1.0; //temp value;
+  void setEfficacy(){
+    if(getType().equals("Pfizer")){
+      efficacy -= 0.00131037;
+    }
+    if(getType().equals("Johnson")){
+      efficacy -= 0.00073268;
+    }
+    if(getType().equals("Moderna")){
+      efficacy -= 0.0010126;
+    }
   }
+  
+  /*void boost(){
+  
+  }*/
 }
