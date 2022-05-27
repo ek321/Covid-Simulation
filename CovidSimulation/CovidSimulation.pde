@@ -63,17 +63,7 @@ void setup() {
 }
 
 void draw() {
-  if (countdown > 0) {
-    countdown --;
-  }
-
-  if (countdown == 0) {
-    countdown = 60;
-    spread();
-    time++;
-    fill(255);
-    text(time, 20, 20);
-  }
+  ticks();
 }
 
   public void spread () {
@@ -196,6 +186,16 @@ public int neighInfect(Person pep) {
   return counter;
 }
 
-//public void tick() {
+public void ticks() {
+if (countdown > 0) {
+    countdown --;
+  }
 
-//}
+  if (countdown == 0) {
+    countdown = 60;
+    spread();
+    time++;
+    fill(255);
+    text(time, 20, 20);
+  }
+}
