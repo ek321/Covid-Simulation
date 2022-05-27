@@ -1,7 +1,7 @@
 import java.util.*;
 
-int ROWS = 100;
-int COLS = 100;
+int ROWS = 10;
+int COLS = 10;
 // vax mode variables
 final int PRE_VAX = 0;
 final int VAX = 1;
@@ -41,7 +41,7 @@ void setup() {
       }
       //boolean vax = (VAX_MODE == VAX);
       boolean booster = false;
-      if(canBoost){
+      if (canBoost) {
         booster = true;
       }
       population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster);
@@ -66,28 +66,28 @@ void draw() {
   ticks();
 }
 
-  public void spread () {
-    for (int i = 0; i < population.length; i++) {
-      for (int j = 0; j < population[0].length; j++) {
-        color temp = colPer(population[i][j]);
-        // use pixelH and pixelW
-        fill (temp);
-        rect(j * pixelH, i * pixelW, pixelH, pixelW);
-      }
+public void spread () {
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      color temp = colPer(population[i][j]);
+      // use pixelH and pixelW
+      fill (temp);
+      rect(j * pixelH, i * pixelW, pixelH, pixelW);
     }
+  }
 
-    for (int i = 0; i < population.length; i++) {
-      for (int j = 0; j < population[0].length; j++) {
-        // use pixelH and pixelW
-        population[i][j].catchCovid();
-        if(i == population.length / 2){
-          if(population[i][j].isBoosted()){
-            population[i][j].getVaxType().setEfficacy();
-          }
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      // use pixelH and pixelW
+      population[i][j].catchCovid();
+      if (i == population.length / 2) {
+        if (population[i][j].isBoosted()) {
+          population[i][j].getVaxType().setEfficacy();
         }
       }
     }
   }
+}
 
 
 public color colPer(Person pep) {
@@ -141,8 +141,8 @@ void keyPressed () {
   }
 
   //adds booster shot in after a while
-  if(key == 'c'){
-    if(VAX_MODE == VAX){
+  if (key == 'c') {
+    if (VAX_MODE == VAX) {
       canBoost = true;
     }
   }
@@ -160,12 +160,12 @@ public int neighInfect(Person pep) {
   }
 
   // check for out of bounds on right
- /* if (pep.getXCor() != population[0].length - 1) {
-    temp = population[pep.getXCor() + 1][pep.getYCor()];
-    if (temp.getCovidStatus().equals("infected")) {
-      counter ++;
-    }
-  }*/
+  /* if (pep.getXCor() != population[0].length - 1) {
+   temp = population[pep.getXCor() + 1][pep.getYCor()];
+   if (temp.getCovidStatus().equals("infected")) {
+   counter ++;
+   }
+   }*/
 
   // check for out of bounds on top
   if (pep.getYCor() != 0) {
@@ -187,7 +187,7 @@ public int neighInfect(Person pep) {
 }
 
 public void ticks() {
-if (countdown > 0) {
+  if (countdown > 0) {
     countdown --;
   }
 
@@ -197,5 +197,18 @@ if (countdown > 0) {
     time++;
     fill(255);
     text(time, 20, 20);
+    text(covidCasesPop(), 20, 40);
   }
+}
+
+public int covidCasesPop(){
+  int counter = 0;
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      if (population[i][j].getCovidStatus().equals("infected")) {
+        counter++;
+      }
+    }
+  }
+  return counter;
 }
