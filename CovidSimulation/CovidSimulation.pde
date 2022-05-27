@@ -16,12 +16,13 @@ int VAX_TYPE = 1;
 Person[][] population;
 // for time
 int time;
+int countdown;
 // for coloring pixels
 int pixelH;
 int pixelW;
 // for testing purposes
 //int tick;
-int countdown;
+
 //boosted modes
 boolean canBoost;
 
@@ -197,7 +198,8 @@ public void ticks() {
     time++;
     fill(255);
     text(time, 20, 20);
-    text(covidCasesPop(), 20, 40);
+    text("Total # of Covid Cases: " + covidCasesPop(), 20, 40);
+    text("Percentage of People Vaccinated: " + vaxStatusPop(), 20, 60);
   }
 }
 
@@ -211,4 +213,17 @@ public int covidCasesPop(){
     }
   }
   return counter;
+}
+
+public float vaxStatusPop() {
+  float counter = 0;
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      if (population[i][j].getVaxStatus()) {
+        counter ++;
+      }
+    }
+  }
+  counter = counter / (population.length * population[0].length);
+  return Math.round(counter * 100.0) / 100.0;
 }
