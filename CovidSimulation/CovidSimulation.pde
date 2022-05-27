@@ -1,7 +1,7 @@
 import java.util.*;
 
-int ROWS = 100;
-int COLS = 100;
+int ROWS = 10;
+int COLS = 10;
 // vax mode variables
 final int PRE_VAX = 0;
 final int VAX = 1;
@@ -16,12 +16,13 @@ int VAX_TYPE = 1;
 Person[][] population;
 // for time
 int time;
+int countdown;
 // for coloring pixels
 int pixelH;
 int pixelW;
 // for testing purposes
 //int tick;
-int countdown;
+
 //boosted modes
 boolean canBoost;
 
@@ -41,7 +42,7 @@ void setup() {
       }
       //boolean vax = (VAX_MODE == VAX);
       boolean booster = false;
-      if(canBoost){
+      if (canBoost) {
         booster = true;
       }
       population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster, true);
@@ -63,28 +64,18 @@ void setup() {
 }
 
 void draw() {
-  if (countdown > 0) {
-    countdown --;
-  }
-
-  if (countdown == 0) {
-    countdown = 60;
-    spread();
-    time++;
-    fill(255);
-    text(time, 20, 20);
-  }
+  ticks();
 }
 
-  public void spread () {
-    for (int i = 0; i < population.length; i++) {
-      for (int j = 0; j < population[0].length; j++) {
-        color temp = colPer(population[i][j]);
-        // use pixelH and pixelW
-        fill (temp);
-        rect(j * pixelH, i * pixelW, pixelH, pixelW);
-      }
+public void spread () {
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      color temp = colPer(population[i][j]);
+      // use pixelH and pixelW
+      fill (temp);
+      rect(j * pixelH, i * pixelW, pixelH, pixelW);
     }
+  }
 
     for (int i = 0; i < population[0].length; i++) {
       for (int j = 0; j < population.length; j++) {
@@ -101,6 +92,7 @@ void draw() {
       }
     }
   }
+}
 
 
 public color colPer(Person pep) {
@@ -154,8 +146,8 @@ void keyPressed () {
   }
 
   //adds booster shot in after a while
-  if(key == 'c'){
-    if(VAX_MODE == VAX){
+  if (key == 'c') {
+    if (VAX_MODE == VAX) {
       canBoost = true;
     }
   }
@@ -199,6 +191,43 @@ public int neighInfect(Person pep) {
   return counter;
 }
 
-//public void tick() {
+public void ticks() {
+  if (countdown > 0) {
+    countdown --;
+  }
 
-//}
+  if (countdown == 0) {
+    countdown = 60;
+    spread();
+    time++;
+    fill(255);
+    text(time, 20, 20);
+    text("Total # of Covid Cases: " + covidCasesPop(), 20, 40);
+    text("Percentage of People Vaccinated: " + vaxStatusPop(), 20, 60);
+  }
+}
+
+public int covidCasesPop(){
+  int counter = 0;
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      if (population[i][j].getCovidStatus().equals("infected")) {
+        counter++;
+      }
+    }
+  }
+  return counter;
+}
+
+public float vaxStatusPop() {
+  float counter = 0;
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      if (population[i][j].getVaxStatus()) {
+        counter ++;
+      }
+    }
+  }
+  counter = counter / (population.length * population[0].length);
+  return Math.round(counter * 100.0) / 100.0;
+}
