@@ -98,6 +98,9 @@ public class Person{
    if(isElderly()){
      result *= 1.5; //increases chance if the person is elderly
    }
+   if(getMaskStatus()){
+     result *= 0.5;
+   }
    return result;
  }
 
