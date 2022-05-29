@@ -17,6 +17,7 @@ Marie's Work Log:
 05/23/22--I worked on a skeleton of the Person class. I added all the instance vvraibles that we plan on using and just commented out the ones for future development phases.
 05/24/22--I worked on the catchCovid method and its helper method calcCovid. This calculates the chance of someone getting covid based on the number of positive neighbors that they have and their vaccine status (so far, more contingencies will be added later). I also added a parameter to it so that when it is called, I can incorporate the number of covid-posiitve neighbors.
 05/25/22--I made accessor methods for the x and y coordinates of the Persons on the screen. I also implemented age into the catchCovid methods, so if a person is elderly then, their chance of getting covid increases by 50%. Lastly, I updated the prototype document to reflect new changes we made.
+05/25/22--I added boosted and mask modes to the simulation. This included updating the constructors for the Person class and added methods to determine the impact that wearing a mask or being boosted would have on a Peron's chance of catching covid.
 
 Esther's Work Log:
 5/24/22--I worked on set up, color, key pressed, and vaxType to create the array of Person. This will visualize the data that is being processed and allow the user to change settings. This will set the color for each person and fill in the corresponding pixel box based on the covid status. vaxType is used to set the vaccination status for each person in the 2D array.
