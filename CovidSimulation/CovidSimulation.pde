@@ -77,22 +77,26 @@ public void spread () {
     }
   }
 
-    for (int i = 0; i < population[0].length; i++) {
-      for (int j = 0; j < population.length; j++) {
-        // use pixelH and pixelW
-        population[j][i].catchCovid();
-        if(i == population.length / 2){
-          if(population[j][i].isBoosted()){
-            population[j][i].getVaxType().boost();
-          }
-        }
-        if(population[j][i].getVaxStatus()){
-          population[j][i].getVaxType().setEfficacy();
+  
+}
+
+public void setNext(){
+ for (int i = 0; i < population[0].length; i++) {
+    for (int j = 0; j < population.length; j++) {
+      // use pixelH and pixelW
+      population[j][i].catchCovid();
+      if (i == population.length / 2) {
+        if (population[j][i].isBoosted()) {
+          population[j][i].getVaxType().boost();
         }
       }
+      if (population[j][i].getVaxStatus()) {
+        population[j][i].getVaxType().setEfficacy();
+      }
     }
-  }
+  } 
 }
+
 
 
 public color colPer(Person pep) {
@@ -204,10 +208,11 @@ public void ticks() {
     text(time, 20, 20);
     text("Total # of Covid Cases: " + covidCasesPop(), 20, 40);
     text("Percentage of People Vaccinated: " + vaxStatusPop(), 20, 60);
+    setNext();
   }
 }
 
-public int covidCasesPop(){
+public int covidCasesPop() {
   int counter = 0;
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
