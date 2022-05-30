@@ -76,12 +76,10 @@ public void spread () {
       rect(j * pixelH, i * pixelW, pixelH, pixelW);
     }
   }
-
-  
 }
 
-public void setNext(){
- for (int i = 0; i < population[0].length; i++) {
+public void setNext() {
+  for (int i = 0; i < population[0].length; i++) {
     for (int j = 0; j < population.length; j++) {
       // use pixelH and pixelW
       population[j][i].catchCovid();
@@ -94,7 +92,7 @@ public void setNext(){
         population[j][i].getVaxType().setEfficacy();
       }
     }
-  } 
+  }
 }
 
 
