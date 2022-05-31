@@ -7,6 +7,7 @@ public class Person{
   Vaccine vax_type;
   boolean mask;
   boolean booster;
+  int covidDuration;
 
   //basic constructor for pre-vax, vax modes
   public Person(int age_,int xCor_, int yCor_,boolean vax_,Vaccine vaxType, String status_, boolean boosted_, boolean mask_){
@@ -18,6 +19,7 @@ public class Person{
     covidStatus = status_;
     booster = boosted_;
     mask = mask_;
+    covidDuration = 5;
   }
 
   //returns whether or not a person has been vaccinated against COVID-19
@@ -64,8 +66,18 @@ public class Person{
    return covidStatus;
  }
 
- void setCovidStatus(){
-   covidStatus = "infected";
+ void setCovidStatus(String stat){
+   //String prev = covidStatus;
+   //covidStatus = prev;
+   if (covidStatus.equals("negative")){
+     covidStatus = stat;
+     covidDuration = 5;
+   } else if (covidStatus.equals("infected")) {
+     if (covidDuration != 0) {
+       covidDuration --;
+     }
+   }
+   
  }
 
  boolean isBoosted(){
@@ -80,10 +92,12 @@ public class Person{
    Random rng = new Random();
    double chance = rng.nextInt(3);
    if (chance < temp) {
-     setCovidStatus();
+     setCovidStatus("infected");
      return true;
+   } else {
+     setCovidStatus("negative");
+     return false;
    }
-   return false;
  }
 
  //helper method for catchCovid
