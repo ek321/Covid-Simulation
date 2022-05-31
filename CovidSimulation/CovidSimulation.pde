@@ -28,7 +28,11 @@ boolean canBoost;
 
 void setup() {
   size(1000, 1000);
-  population = new Person[ROWS][COLS];
+  background(0);
+  text("instructions",20,20);
+}
+
+void runSim(){
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
       int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
