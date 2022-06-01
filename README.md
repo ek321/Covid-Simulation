@@ -24,3 +24,4 @@ Esther's Work Log:
 5/25/22--I worked on setting up an initial infected portion of the population (randomly chosen). I added a countdown in draw (will probably move it later) to test out the simulation/visualization. I wrote spread in order to push the simulation forward, but it is bugged right now. I worked on neighbors infected for the person class to calculate covid status.
 5/26/22--I fixed the broken timer in draw so that we can slow it down and speed it up. I also added the random element in the person class for catching covid.
 5/30/22--I fixed the covid counter in the corner so that I stops going ahead of what is on the screen.
+5/31/22--I worked on incorporating a recovery period in the setCovidStatus method. There will be a set amount of time for being infected (and contagious) and recovery (not contagious?) where being infected again will not affect the recovery period.
