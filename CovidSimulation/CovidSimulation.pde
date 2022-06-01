@@ -22,6 +22,11 @@ int pixelH;
 int pixelW;
 // for testing purposes
 //int tick;
+//new dimensions
+int screenHeight = 1000;
+int screenWidth = 1000;
+int textHeight = 1000;
+int textWidth = 1000;
 
 //boosted modes
 boolean canBoost;
