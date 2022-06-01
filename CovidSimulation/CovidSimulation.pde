@@ -1,7 +1,7 @@
 import java.util.*;
 
-int ROWS = 10;
-int COLS = 10;
+int ROWS = 20;
+int COLS = 20;
 // vax mode variables
 final int PRE_VAX = 0;
 final int VAX = 1;
