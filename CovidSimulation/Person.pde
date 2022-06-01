@@ -7,7 +7,8 @@ public class Person{
   Vaccine vax_type;
   boolean mask;
   boolean booster;
-  int covidDuration;
+  int covidDuration = 5;
+  int recoveryDuration = 5;
 
   //basic constructor for pre-vax, vax modes
   public Person(int age_,int xCor_, int yCor_,boolean vax_,Vaccine vaxType, String status_, boolean boosted_, boolean mask_){
@@ -75,9 +76,18 @@ public class Person{
    } else if (covidStatus.equals("infected")) {
      if (covidDuration != 0) {
        covidDuration --;
+     } else if (covidDuration == 0) {
+       covidDuration = 5;
+       covidStatus = "recovery";
+     }
+   } else if (covidStatus.equals("recovery")) {
+     if (recoveryDuration != 0) {
+       recoveryDuration --;
+     } else if (recoveryDuration == 0) {
+       recoveryDuration = 5;
+       catchCovid();
      }
    }
-   
  }
 
  boolean isBoosted(){

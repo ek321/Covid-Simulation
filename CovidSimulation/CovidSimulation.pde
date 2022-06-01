@@ -58,7 +58,7 @@ void setup() {
     int b = rng.nextInt(30);
     // change later when covidstatus method is done
     if (b < 13) {
-      population[i][0].setCovidStatus();
+      population[i][0].setCovidStatus("infected");
     }
   }
 }
