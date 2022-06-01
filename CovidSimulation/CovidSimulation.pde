@@ -25,14 +25,14 @@ int pixelW;
 //new dimensions
 int screenHeight = 1000;
 int screenWidth = 1000;
-int textHeight = 1000;
-int textWidth = 1000;
+int textHeight = 400;
+int textWidth = 400;
 
 //boosted modes
 boolean canBoost;
 
 void setup() {
-  size(1000, 1000);
+  size(1400, 1400);
   background(0);
   population = new Person[ROWS][COLS];
   for (int i = 0; i < population.length; i++) {
@@ -55,8 +55,8 @@ void setup() {
     }
   }
 
-  pixelH = height / ROWS;
-  pixelW = width / COLS;
+  pixelH = screenHeight / ROWS;
+  pixelW = screenWidth / COLS;
 
   Random rng = new Random();
 
@@ -70,9 +70,13 @@ void setup() {
 }
 
 void draw() {
-  text("Press the a key for Vax mode. Do not press it for Pre-Vax mode",20,20);
-  text("Press the b key 1 time for Pfizer, 2 times for Johnson+Johnson, 3 times for Moderna, or 4 for All",20,40);
-  text("Press the c key for Boost mode. Do not press it for no Booster doses",20,60);
+  text("Press the a key for Vax mode.",screenWidth+20,20);
+  text("Do not press a for Pre-Vax mode",screenWidth+20,40);
+  text("Press the b key 1 time for Pfizer",screenWidth+20,60);
+  text("Press the b key 2 times for Johnson+Johnson",screenWidth+20,80);
+  text("Press the b key 3 times for Moderna",screenWidth+20,100);
+  text("Press the b key 4 times for All",screenWidth+20,120);
+  text("Press the c key for Boost mode.",screenWidth+20,140);
  if(key == 'd'){
     ticks();
   }
