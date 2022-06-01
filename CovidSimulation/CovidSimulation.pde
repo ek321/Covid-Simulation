@@ -7,11 +7,11 @@ final int PRE_VAX = 0;
 final int VAX = 1;
 int VAX_MODE = 0;
 // different vax types
-final int PFIZER = 0;
-final int JOHNSON = 1;
-final int MODERNA = 2;
-final int ALL = 3;
-int VAX_TYPE = 1;
+final int PFIZER = 1;
+final int JOHNSON = 2;
+final int MODERNA = 3;
+final int ALL = 4;
+int VAX_TYPE = 0;
 // array to keep track of people on the board
 Person[][] population;
 // for time
@@ -76,12 +76,12 @@ void draw() {
   fill(247,183,227);
   text("Press the a key for Vax mode.",screenWidth+20,20);
   text("Do not press a for Pre-Vax mode",screenWidth+20,60);
-  text("Press the b key 1 time for Pfizer",screenWidth+20,100);
-  text("Press the b key 2 times for Johnson+Johnson",screenWidth+20,140);
-  text("Press the b key 3 times for Moderna",screenWidth+20,180);
-  text("Press the b key 4 times for All",screenWidth+20,220);
-  text("Press the c key for Boost mode.",screenWidth+20,260);
-  text("Press the d key to start.",screenWidth+20,300);
+  text("Press the b key 1 time for Pfizer",screenWidth+20,160);
+  text("Press the b key 2 times for Johnson+Johnson",screenWidth+20,200);
+  text("Press the b key 3 times for Moderna",screenWidth+20,240);
+  text("Press the b key 4 times for All",screenWidth+20,280);
+  text("Press the c key for Boost mode.",screenWidth+20,380);
+  text("Press the d key to start.",screenWidth+20,480);
  if(key == 'd'){
     ticks();
   }
@@ -138,7 +138,7 @@ public Vaccine vaxTypePerson() {
   } else if (VAX_TYPE == JOHNSON) {
     ans = new Vaccine("Johnson");
   } else if (VAX_TYPE == MODERNA) {
-    ans = new Vaccine("MODERNA");
+    ans = new Vaccine("Moderna");
   }
 
   if (temp) {
@@ -150,20 +150,22 @@ public Vaccine vaxTypePerson() {
 
 void keyPressed () {
   // circle through vax mode with key 'a'
-  if (key == 'a') {
-    if (VAX_MODE < VAX) {
-      VAX_MODE ++;
-    } else {
-      VAX_MODE = PRE_VAX;
-    }
+  if(key == 'a'){
+    VAX_MODE = VAX;
+    text("vax", 20,20);
   }
 
   // cycle through vax types with key 'b'
-  if (key == 'b') {
-    if (VAX_TYPE < ALL) {
-      VAX_TYPE ++;
-    } else {
-      VAX_TYPE = PFIZER;
+  if(key == 'b'){
+    VAX_TYPE++;
+    if(VAX_TYPE == PFIZER){
+      text("pfizer", 20,60);
+    }
+    if(VAX_TYPE == MODERNA){
+      text("moderna", 20,60);
+    }
+    if(VAX_TYPE == JOHNSON){
+      text("johnson", 20, 60);
     }
   }
 
@@ -173,9 +175,6 @@ void keyPressed () {
       canBoost = true;
     }
   }
- /* if(key == 'd'){
-    ticks();
-  }*/
 }
 
 public int neighInfect(Person pep) {
