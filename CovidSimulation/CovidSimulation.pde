@@ -102,6 +102,8 @@ public color colPer(Person pep) {
     return color(252, 158, 69);
   } else if (pep.getCovidStatus().equals("negative")) {
     return color(69, 119, 252);
+  } else if (pep.getCovidStatus().equals("recovery")) {
+    return color(135, 245, 89);
   }
   return color(0, 0, 0);
 }

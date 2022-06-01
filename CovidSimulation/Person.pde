@@ -77,7 +77,7 @@ public class Person{
      if (covidDuration != 0) {
        covidDuration --;
      } else if (covidDuration == 0) {
-       covidDuration = 5;
+       covidDuration = 3;
        covidStatus = "recovery";
      }
    } else if (covidStatus.equals("recovery")) {
@@ -85,7 +85,7 @@ public class Person{
        recoveryDuration --;
      } else if (recoveryDuration == 0) {
        recoveryDuration = 5;
-       catchCovid();
+       covidStatus = "negative";
      }
    }
  }
