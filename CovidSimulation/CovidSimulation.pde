@@ -29,10 +29,7 @@ boolean canBoost;
 void setup() {
   size(1000, 1000);
   background(0);
-  text("instructions",20,20);
-}
-
-void runSim(){
+  population = new Person[ROWS][COLS];
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
       int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
@@ -68,7 +65,9 @@ void runSim(){
 }
 
 void draw() {
-  ticks();
+  text("Press the a key for Vax mode. Do not press it for Pre-Vax mode",20,20);
+  text("Press the b key 1 time for Pfizer, 2 times for Johnson+Johnson, 3 times for Moderna, or 4 for All",20,40);
+ // ticks();
 }
 
 public void spread () {
@@ -156,6 +155,9 @@ void keyPressed () {
     if (VAX_MODE == VAX) {
       canBoost = true;
     }
+  }
+  if(key == 'd'){
+    ticks();
   }
 }
 
