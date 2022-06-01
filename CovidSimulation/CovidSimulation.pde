@@ -236,3 +236,8 @@ public float vaxStatusPop() {
   counter = counter / (population.length * population[0].length);
   return Math.round(counter * 100.0) / 100.0;
 }
+
+public void mouseClicked() {
+  //will display attributes of person that mouse clicked on
+  
+}
