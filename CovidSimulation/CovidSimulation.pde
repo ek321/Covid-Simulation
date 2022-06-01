@@ -25,7 +25,7 @@ int pixelW;
 //new dimensions
 int screenHeight = 1000;
 int screenWidth = 1000;
-int textHeight = 600;
+int textHeight = 1600;
 int textWidth = 600;
 
 //boosted modes
@@ -70,7 +70,10 @@ void setup() {
 }
 
 void draw() {
+  fill(89,44,138);
+  rect(screenWidth, 0, textWidth, textHeight);
   textSize(18);
+  fill(247,183,227);
   text("Press the a key for Vax mode.",screenWidth+20,20);
   text("Do not press a for Pre-Vax mode",screenWidth+20,60);
   text("Press the b key 1 time for Pfizer",screenWidth+20,100);
@@ -78,6 +81,7 @@ void draw() {
   text("Press the b key 3 times for Moderna",screenWidth+20,180);
   text("Press the b key 4 times for All",screenWidth+20,220);
   text("Press the c key for Boost mode.",screenWidth+20,260);
+  text("Press the d key to start.",screenWidth+20,300);
  if(key == 'd'){
     ticks();
   }
