@@ -67,7 +67,7 @@ void setup() {
 void draw() {
   text("Press the a key for Vax mode. Do not press it for Pre-Vax mode",20,20);
   text("Press the b key 1 time for Pfizer, 2 times for Johnson+Johnson, 3 times for Moderna, or 4 for All",20,40);
- // ticks();
+  text("Press the c key for Boost mode. Do not press it for no Booster doses",20,60);
  if(key == 'd'){
     ticks();
   }
