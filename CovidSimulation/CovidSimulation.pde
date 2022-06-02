@@ -282,9 +282,6 @@ public void ticks() {
     spread();
     time++;
     fill(255);
-    text(time, 20, 20);
-    text("Total # of Covid Cases: " + covidCasesPop(), 20, 40);
-    text("Percentage of People Vaccinated: " + vaxStatusPop(), 20, 60);
     setNext();
   }
 }

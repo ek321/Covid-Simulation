@@ -34,13 +34,13 @@ public class Vaccine{
 
   void setEfficacy(){
     if(getType().equals("Pfizer")){
-      efficacy -= 0.00131037;
+      efficacy -= 0.00131037 * 100;
     }
     else if(getType().equals("Johnson")){
-      efficacy -= 0.00073268;
+      efficacy -= 0.00073268 * 100;
     }
     else if(getType().equals("Moderna")){
-      efficacy -= 0.0010126;
+      efficacy -= 0.0010126 * 100;
     }
   }
   
