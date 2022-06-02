@@ -31,6 +31,9 @@ int textWidth = 600;
 //boosted modes
 boolean canBoost;
 
+//mask mode
+boolean mask = false;
+
 void setup() {
   size(1600, 1600);
   background(0);
@@ -51,7 +54,7 @@ void setup() {
       if (canBoost) {
         booster = true;
       }
-      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster, true);
+      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster, mask);
     }
   }
 
@@ -74,6 +77,7 @@ void draw() {
   rect(screenWidth, 0, textWidth, textHeight);
   textSize(18);
   fill(247,183,227);
+  //user key so that they can input their choices
   text("Press the a key for Vax mode.",screenWidth+20,20);
   text("Do not press a for Pre-Vax mode",screenWidth+20,60);
   text("Press the b key 1 time for Pfizer",screenWidth+20,160);
@@ -81,8 +85,34 @@ void draw() {
   text("Press the b key 3 times for Moderna",screenWidth+20,240);
   text("Press the b key 4 times for All",screenWidth+20,280);
   text("Press the c key for Boost mode.",screenWidth+20,380);
-  text("Press the d key to start.",screenWidth+20,480);
- if(key == 'd'){
+  text("Press the d key for mask mode.",screenWidth+20,480);
+  text("Press the e key to start.",screenWidth+20,580);
+  fill(142,216,245);
+  if(VAX_MODE == VAX){
+    text("Vax mode on", screenWidth+20,100);
+  }
+  else {
+    text("Vax mode off", screenWidth+20,100);
+  }
+  if(VAX_TYPE == PFIZER){
+    text("Vaccine mode chosen: Pfizer", screenWidth+20,320);
+  }
+  if(VAX_TYPE == MODERNA){
+    text("Vaccine mode chosen: Moderna", screenWidth+20,320);
+  }
+  if(VAX_TYPE == JOHNSON){
+    text("Vaccine mode chosen: Johnson", screenWidth+20, 320);
+  }
+  if(VAX_TYPE == ALL){
+    text("Vaccine mode chosen: All", screenWidth+20, 320);
+  }
+  if(canBoost){
+    text("Boost mode on",screenWidth+20,420);
+  }
+  if(mask){
+    text("Mask mode on", screenWidth+20, 520);
+  }
+ if(key == 'e'){
     ticks();
   }
 }
@@ -152,28 +182,21 @@ void keyPressed () {
   // circle through vax mode with key 'a'
   if(key == 'a'){
     VAX_MODE = VAX;
-    text("vax", 20,20);
   }
-
   // cycle through vax types with key 'b'
   if(key == 'b'){
-    VAX_TYPE++;
-    if(VAX_TYPE == PFIZER){
-      text("pfizer", 20,60);
-    }
-    if(VAX_TYPE == MODERNA){
-      text("moderna", 20,60);
-    }
-    if(VAX_TYPE == JOHNSON){
-      text("johnson", 20, 60);
+    if(VAX_MODE == VAX){
+       VAX_TYPE++;
     }
   }
-
   //adds booster shot in after a while
   if (key == 'c') {
     if (VAX_MODE == VAX) {
       canBoost = true;
     }
+  }
+  if(key == 'd'){
+    mask = true;
   }
 }
 
