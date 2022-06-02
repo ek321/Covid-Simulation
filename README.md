@@ -25,3 +25,4 @@ Esther's Work Log:
 5/26/22--I fixed the broken timer in draw so that we can slow it down and speed it up. I also added the random element in the person class for catching covid.
 5/30/22--I fixed the covid counter in the corner so that I stops going ahead of what is on the screen.
 5/31/22--I worked on incorporating a recovery period in the setCovidStatus method. There will be a set amount of time for being infected (and contagious) and recovery (not contagious?) where being infected again will not affect the recovery period.
+6/1/22--I worked on fixing errors with the recovery period (in terms of the duration of covid and recovery periods). I also added in the population density factor so that the whole board is not filled with people. I plan to make this adjustable by the user, but for now, it is a fixed number at the start.
