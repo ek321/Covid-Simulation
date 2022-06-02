@@ -7,11 +7,11 @@ final int PRE_VAX = 0;
 final int VAX = 1;
 int VAX_MODE = 0;
 // different vax types
-final int PFIZER = 0;
-final int JOHNSON = 1;
-final int MODERNA = 2;
-final int ALL = 3;
-int VAX_TYPE = 1;
+final int PFIZER = 1;
+final int JOHNSON = 2;
+final int MODERNA = 3;
+final int ALL = 4;
+int VAX_TYPE = 0;
 // array to keep track of people on the board
 Person[][] population;
 // for time
@@ -22,12 +22,21 @@ int pixelH;
 int pixelW;
 // for testing purposes
 //int tick;
+//new dimensions
+int screenHeight = 1000;
+int screenWidth = 1000;
+int textHeight = 1600;
+int textWidth = 600;
 
 //boosted modes
 boolean canBoost;
 
+//mask mode
+boolean mask = false;
+
 void setup() {
-  size(1000, 1000);
+  size(1600, 1600);
+  background(0);
   population = new Person[ROWS][COLS];
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
@@ -45,12 +54,12 @@ void setup() {
       if (canBoost) {
         booster = true;
       }
-      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster, true);
+      population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster, mask);
     }
   }
 
-  pixelH = height / ROWS;
-  pixelW = width / COLS;
+  pixelH = screenHeight / ROWS;
+  pixelW = screenWidth / COLS;
 
   Random rng = new Random();
 
@@ -64,7 +73,48 @@ void setup() {
 }
 
 void draw() {
-  ticks();
+  fill(89,44,138);
+  rect(screenWidth, 0, textWidth, textHeight);
+  textSize(18);
+  fill(247,183,227);
+  //user key so that they can input their choices
+  text("Press the a key for Vax mode.",screenWidth+20,20);
+  text("Do not press a for Pre-Vax mode",screenWidth+20,60);
+  text("Press the b key 1 time for Pfizer",screenWidth+20,160);
+  text("Press the b key 2 times for Johnson+Johnson",screenWidth+20,200);
+  text("Press the b key 3 times for Moderna",screenWidth+20,240);
+  text("Press the b key 4 times for All",screenWidth+20,280);
+  text("Press the c key for Boost mode.",screenWidth+20,380);
+  text("Press the d key for mask mode.",screenWidth+20,480);
+  text("Press the e key to start.",screenWidth+20,580);
+  fill(142,216,245);
+  if(VAX_MODE == VAX){
+    text("Vax mode on", screenWidth+20,100);
+  }
+  else {
+    text("Vax mode off", screenWidth+20,100);
+  }
+  if(VAX_TYPE == PFIZER){
+    text("Vaccine mode chosen: Pfizer", screenWidth+20,320);
+  }
+  if(VAX_TYPE == MODERNA){
+    text("Vaccine mode chosen: Moderna", screenWidth+20,320);
+  }
+  if(VAX_TYPE == JOHNSON){
+    text("Vaccine mode chosen: Johnson", screenWidth+20, 320);
+  }
+  if(VAX_TYPE == ALL){
+    text("Vaccine mode chosen: All", screenWidth+20, 320);
+  }
+  if(canBoost){
+    text("Boost mode on",screenWidth+20,420);
+  }
+  if(mask){
+    text("Mask mode on", screenWidth+20, 520);
+  }
+ if(key == 'e'){
+    ticks();
+  }
 }
 
 public void spread () {
@@ -76,23 +126,25 @@ public void spread () {
       rect(j * pixelH, i * pixelW, pixelH, pixelW);
     }
   }
+}
 
-    for (int i = 0; i < population[0].length; i++) {
-      for (int j = 0; j < population.length; j++) {
-        // use pixelH and pixelW
-        population[j][i].catchCovid();
-        if(i == population.length / 2){
-          if(population[j][i].isBoosted()){
-            population[j][i].getVaxType().boost();
-          }
+public void setNext() {
+  for (int i = 0; i < population[0].length; i++) {
+    for (int j = 0; j < population.length; j++) {
+      // use pixelH and pixelW
+      population[j][i].catchCovid();
+      if (i == population.length / 2) {
+        if (population[j][i].isBoosted()) {
+          population[j][i].getVaxType().boost();
         }
-        if(population[j][i].getVaxStatus()){
-          population[j][i].getVaxType().setEfficacy();
-        }
+      }
+      if (population[j][i].getVaxStatus()) {
+        population[j][i].getVaxType().setEfficacy();
       }
     }
   }
 }
+
 
 
 public color colPer(Person pep) {
@@ -116,7 +168,7 @@ public Vaccine vaxTypePerson() {
   } else if (VAX_TYPE == JOHNSON) {
     ans = new Vaccine("Johnson");
   } else if (VAX_TYPE == MODERNA) {
-    ans = new Vaccine("MODERNA");
+    ans = new Vaccine("Moderna");
   }
 
   if (temp) {
@@ -128,28 +180,23 @@ public Vaccine vaxTypePerson() {
 
 void keyPressed () {
   // circle through vax mode with key 'a'
-  if (key == 'a') {
-    if (VAX_MODE < VAX) {
-      VAX_MODE ++;
-    } else {
-      VAX_MODE = PRE_VAX;
-    }
+  if(key == 'a'){
+    VAX_MODE = VAX;
   }
-
   // cycle through vax types with key 'b'
-  if (key == 'b') {
-    if (VAX_TYPE < ALL) {
-      VAX_TYPE ++;
-    } else {
-      VAX_TYPE = PFIZER;
+  if(key == 'b'){
+    if(VAX_MODE == VAX){
+       VAX_TYPE++;
     }
   }
-
   //adds booster shot in after a while
   if (key == 'c') {
     if (VAX_MODE == VAX) {
       canBoost = true;
     }
+  }
+  if(key == 'd'){
+    mask = true;
   }
 }
 
@@ -204,10 +251,11 @@ public void ticks() {
     text(time, 20, 20);
     text("Total # of Covid Cases: " + covidCasesPop(), 20, 40);
     text("Percentage of People Vaccinated: " + vaxStatusPop(), 20, 60);
+    setNext();
   }
 }
 
-public int covidCasesPop(){
+public int covidCasesPop() {
   int counter = 0;
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
