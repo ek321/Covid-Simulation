@@ -46,13 +46,15 @@ void setup() {
       if (temp < popDen) {
 
         int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
-        boolean vax;
-        Random rand = new Random();
-        int chance = rand.nextInt(10);
-        if (chance > 6) {
-          vax = false;
-        } else {
-          vax = true;
+        boolean vax = false;
+        if(VAX_MODE != 0){
+          Random rand = new Random();
+          int chance = rand.nextInt(10);
+          if (chance > 6) {
+            vax = false;
+          } else {
+            vax = true;
+          }
         }
         //boolean vax = (VAX_MODE == VAX);
         boolean booster = false;
@@ -130,7 +132,7 @@ void draw() {
   if (key == 'e') {
     ticks();
   }
-  //need to fix maks mode
+  //need to fix mask mode
   text("time:"+time, screenWidth+20, 620);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 660);
   text("Percentage of People Vaccinated: " + vaxStatusPop(), screenWidth+20, 700);
