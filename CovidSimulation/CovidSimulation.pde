@@ -59,6 +59,14 @@ void setup() {
         if (canBoost) {
           booster = true;
         }
+        Random rng = new Random();
+        int masked = rng.nextInt(2);
+        boolean temp2 = false;
+        if(mask){
+          if(masked == 0){
+            mask = temp2;
+          }
+        }
         population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster, mask);
       } else {
         population[i][j] = null;
@@ -122,6 +130,10 @@ void draw() {
   if (key == 'e') {
     ticks();
   }
+  //need to fix maks mode
+  text("time:"+time, screenWidth+20, 620);
+  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 660);
+  text("Percentage of People Vaccinated: " + vaxStatusPop(), screenWidth+20, 700);
 }
 
 public void spread () {
