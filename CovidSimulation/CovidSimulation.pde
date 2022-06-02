@@ -15,6 +15,7 @@ int VAX_TYPE = 0;
 // array to keep track of people on the board
 Person[][] population;
 double popDen = 0.8;
+boolean pressed = false;
 // for time
 int time;
 int countdown;
@@ -121,6 +122,13 @@ void draw() {
   }
   if (key == 'e') {
     ticks();
+  }
+
+  //for person attribute, relocate later
+  if (pressed) {
+    int x = mouseX;
+    int y = mouseY;
+    perView(x, y);
   }
 }
 
@@ -304,28 +312,34 @@ public float vaxStatusPop() {
   return Math.round(counter * 100.0) / 100.0;
 }
 
-//public void mouseClicked() {
-//  //will display attributes of person that mouse clicked on
-//  int x = mouseX;
-//  int y = mouseY;
-//  for (int i = 0; i < population.length; i ++) {
-//    for (int j = 0; j < population[0].length; j++) {
-//      Person temp = population[i][j];
-//      if (temp != null) {
-//        if (clickPer(temp, x, y)) {
-//          fill(255);
-//          text("covidDuration: " + temp.covidDuration, temp.getXCor(), temp.getYCor());
-//        }
-//      }
-//    }
-//  }
-//}
+public void mousePressed() {
+  pressed = true;
+}
 
-//public boolean clickPer(Person pep, int x, int y){
-//  if ((y < pep.getYCor() + pixelH) && (y > pep.getYCor() - pixelH)) {
-//    if ((x < pep.getXCor() + pixelW) && (x > pep.getXCor() - pixelW)) {
-//      return true;
-//    }
-//  }
-//  return false;
-//}
+public void mouseReleased() {
+  pressed = false;
+}
+
+public void perView(int x, int y) {
+  // will display attributes of person that mouse clicked on
+  for (int i = 0; i < population.length; i ++) {
+    for (int j = 0; j < population[0].length; j++) {
+      Person temp = population[i][j];
+      if (temp != null) {
+        if (clickPer(temp, x, y)) {
+          fill(255);
+          text("covidDuration: " + temp.covidDuration, 20, 80);
+        }
+      }
+    }
+  }
+}
+
+public boolean clickPer(Person pep, int x, int y) {
+  if ((y < pep.getYCor() + (pixelH/2.0)) && (y > pep.getYCor() - (pixelW/2.0))) {
+    if ((x < pep.getXCor() + (pixelW/2.0)) && (x > pep.getXCor() - (pixelH/2.0))) {
+      return true;
+    }
+  }
+  return false;
+}
