@@ -47,7 +47,8 @@ void setup() {
 
         int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
         boolean vax = false;
-        if(VAX_MODE != 0){
+        boolean booster = false;
+        if(VAX_MODE == 1){
           Random rand = new Random();
           int chance = rand.nextInt(10);
           if (chance > 6) {
@@ -55,11 +56,9 @@ void setup() {
           } else {
             vax = true;
           }
-        }
-        //boolean vax = (VAX_MODE == VAX);
-        boolean booster = false;
-        if (canBoost) {
-          booster = true;
+          if (canBoost) {
+            booster = true;
+          }
         }
         Random rng = new Random();
         int masked = rng.nextInt(2);
@@ -135,7 +134,8 @@ void draw() {
   //need to fix mask mode
   text("time:"+time, screenWidth+20, 620);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 660);
-  text("Percentage of People Vaccinated: " + vaxStatusPop(), screenWidth+20, 700);
+  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 700);
+  text("Percentage of People Vaccinated: " + vaxStatusPop(), screenWidth+20, 740);
 }
 
 public void spread () {
@@ -200,11 +200,6 @@ public Vaccine vaxTypePerson() {
   } else if (VAX_TYPE == MODERNA) {
     ans = new Vaccine("Moderna");
   }
-
-  if (temp) {
-    VAX_TYPE = ALL;
-  }
-
   return ans;
 }
 
