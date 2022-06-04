@@ -21,6 +21,7 @@ Marie's Work Log:
 05/31/22--I started the setup page.
 06/01/22--I designed the setup page and had it display the modes that the user chose. I also fixed the keyPressed method.
 06/02/22--I added more to the setup page and also fixed the way that the vaccine modes were triggered.
+06/03/22--I fixed the counter for percent infected of the population, and tried to fix the percent vaccinated, but it didn't work.
 
 Esther's Work Log:
 5/24/22--I worked on set up, color, key pressed, and vaxType to create the array of Person. This will visualize the data that is being processed and allow the user to change settings. This will set the color for each person and fill in the corresponding pixel box based on the covid status. vaxType is used to set the vaccination status for each person in the 2D array.
