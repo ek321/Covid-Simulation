@@ -36,6 +36,8 @@ boolean canBoost;
 //mask mode
 boolean mask = false;
 
+int popVaxxed = 0;
+
 void setup() {
   size(1600, 1600);
   background(0);
@@ -54,6 +56,7 @@ void setup() {
           if (chance > 6) {
             vax = false;
           } else {
+            popVaxxed++;
             vax = true;
           }
           if (canBoost) {
@@ -79,7 +82,6 @@ void setup() {
   pixelW = screenWidth / COLS;
 
   Random rng = new Random();
-
   for (int i = 0; i < ROWS; i++) {
     int b = rng.nextInt(30);
     // change later when covidstatus method is done
@@ -88,14 +90,13 @@ void setup() {
     }
   }
 }
-
+    
 void draw() {
   fill(89, 44, 138);
   rect(screenWidth, 0, textWidth, textHeight);
   textSize(18);
   fill(247, 183, 227);
   //user key so that they can input their choices
-  text("Press the a key for Vax mode.", screenWidth+20, 20);
   text("Do not press a for Pre-Vax mode", screenWidth+20, 60);
   text("Press the b key 1 time for Pfizer", screenWidth+20, 160);
   text("Press the b key 2 times for Johnson+Johnson", screenWidth+20, 200);
@@ -131,11 +132,10 @@ void draw() {
   if (key == 'e') {
     ticks();
   }
-  //need to fix mask mode
+  //need to fix percent vaccinated
   text("time:"+time, screenWidth+20, 620);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 660);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 700);
-  text("Percentage of People Vaccinated: " + vaxStatusPop(), screenWidth+20, 740);
 }
 
 public void spread () {
@@ -182,6 +182,9 @@ public color colPer(Person pep) {
     return color(69, 119, 252);
   } else if (pep.getCovidStatus().equals("recovery")) {
     return color(135, 245, 89);
+  }
+  else if(pep.getCovidStatus().equals("dead")){
+    return color(255);
   }
   return color(255);
 }
@@ -301,7 +304,7 @@ public float vaxStatusPop() {
     for (int j = 0; j < population[0].length; j++) {
       if (population[i][j] != null) {
         if (population[i][j].getVaxStatus()) {
-          counter ++;
+          counter++;
         }
       }
     }
