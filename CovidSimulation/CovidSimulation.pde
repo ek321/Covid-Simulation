@@ -70,7 +70,8 @@ void setup() {
  void makePop(){
    for(int i = 0; i < population.length; i++){
      for(int j = 0; j < population[0].length; j++){
-       boolean vaxxed = false;
+       if(population[i][j] != null){
+         boolean vaxxed = false;
        boolean booster = false;
        if(VAX_MODE == 1){
          Random rand = new Random();
@@ -88,6 +89,7 @@ void setup() {
        }
        population[i][j].setVaxStatus(vaxxed);
        population[i][j].boosterShot(booster);
+       }
      }
    }
  }
@@ -130,6 +132,7 @@ void draw() {
     text("Mask mode on", screenWidth+20, 520);
   }
   if (key == 'e') {
+    makePop();
     ticks();
   }
   //need to fix percent vaccinated
@@ -161,7 +164,7 @@ public void setNext() {
         // use pixelH and pixelW
         population[i][j].catchCovid();
         if (i == population.length / 2) {
-          if (population[i][j].isBoosted()) {
+          if (population[i][j].isBoosted() && population[i][j].getVaxType() != null) {
             population[i][j].getVaxType().boost();
           }
         }
