@@ -77,6 +77,7 @@ void setup() {
          Random rand = new Random();
          int vaxChance = rand.nextInt(9);
           if(vaxChance < 6){
+            popVaxxed++;
             vaxxed = true;
          }
          population[i][j].setVaxType(vaxTypePerson());
@@ -138,7 +139,7 @@ void draw() {
   //need to fix percent vaccinated
   text("time:"+time, screenWidth+20, 620);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 660);
-  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 700);
+  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 700); 
 }
 
 public void spread () {
