@@ -11,15 +11,15 @@ public class Person {
   int recoveryDuration = 5;
 
   //basic constructor for pre-vax, vax modes
-  public Person(int age_, int xCor_, int yCor_, boolean vax_, Vaccine vaxType, String status_, boolean boosted_, boolean mask_) {
+  public Person(int age_, int xCor_, int yCor_, String status_) {
     age = age_;
     xCor = xCor_;
     yCor = yCor_;
-    vax = vax_;
-    vax_type = vaxType;
+    vax = false;
+    vax_type = null;
     covidStatus = status_;
-    booster = boosted_;
-    mask = mask_;
+    booster = false;
+    mask = false;
     covidDuration = 5;
   }
 
@@ -27,12 +27,19 @@ public class Person {
   public boolean getVaxStatus() {
     return vax;
   }
+  
+  public void setVaxStatus(boolean temp){
+    vax = temp;
+  }
 
   //returns whether or not a Person is wearing a mask
   public boolean getMaskStatus() {
     return mask;
   }
-
+  
+  public void setMaskStatus(boolean temp){
+    mask = temp;
+  }
   //if a person is vaccinated, this will return a string containing the vaccine that they received
   //Possible returns:
   //"Pfizer"
@@ -47,6 +54,10 @@ public class Person {
       return null;
     }
     return res;
+  }
+
+  public void setVaxType(Vaccine res){
+    vax_type = res;
   }
 
   boolean isElderly() {

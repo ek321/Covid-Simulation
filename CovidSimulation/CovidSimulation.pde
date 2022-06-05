@@ -46,32 +46,8 @@ void setup() {
     for (int j = 0; j < population[0].length; j++) {
       double temp = Math.random();
       if (temp < popDen) {
-
         int age = (int) (Math.random() * (100 - 18 + 1)) + 18;
-        boolean vax = false;
-        boolean booster = false;
-        if(VAX_MODE == 1){
-          Random rand = new Random();
-          int chance = rand.nextInt(10);
-          if (chance > 6) {
-            vax = false;
-          } else {
-            popVaxxed++;
-            vax = true;
-          }
-          if (canBoost) {
-            booster = true;
-          }
-        }
-        Random rng = new Random();
-        int masked = rng.nextInt(2);
-        boolean temp2 = false;
-        if(mask){
-          if(masked == 0){
-            mask = temp2;
-          }
-        }
-        population[i][j] = new Person(age, i, j, vax, vaxTypePerson(), "negative", booster, mask);
+        population[i][j] = new Person(age, i, j, "negative");
       } else {
         population[i][j] = null;
       }
@@ -90,7 +66,16 @@ void setup() {
     }
   }
 }
-    
+ 
+ void makePop(){
+   for(int i = 0; i < population.length; i++){
+     for(int j = 0; j < population[0].length; j++){
+       if(VAX_MODE == 1){
+         
+       }
+     }
+   }
+ }
 void draw() {
   fill(89, 44, 138);
   rect(screenWidth, 0, textWidth, textHeight);
@@ -172,8 +157,6 @@ public void setNext() {
     }
   }
 }
-
-
 
 public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
