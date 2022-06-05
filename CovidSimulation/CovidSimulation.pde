@@ -70,9 +70,24 @@ void setup() {
  void makePop(){
    for(int i = 0; i < population.length; i++){
      for(int j = 0; j < population[0].length; j++){
+       boolean vaxxed = false;
+       boolean booster = false;
        if(VAX_MODE == 1){
-         
+         Random rand = new Random();
+         int vaxChance = rand.nextInt(9);
+          if(vaxChance < 6){
+            vaxxed = true;
+         }
+         population[i][j].setVaxType(vaxTypePerson());
+         if(canBoost){
+           booster = true;
+         }
        }
+       if(mask){
+         population[i][j].setMaskStatus(true);
+       }
+       population[i][j].setVaxStatus(vaxxed);
+       population[i][j].boosterShot(booster);
      }
    }
  }

@@ -110,6 +110,10 @@ public class Person {
     return booster;
   }
 
+  public void boosterShot(boolean res){
+    booster = res;
+  }
+  
   /*returns true if the chance of catching covid is >50%
    returns false if it is <=50%
    */
