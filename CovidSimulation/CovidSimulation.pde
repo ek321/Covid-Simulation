@@ -97,7 +97,9 @@ void setup() {
  }
 void draw() {
   fill(89, 44, 138);
-  rect(screenWidth, 0, textWidth, textHeight);
+  rect(screenWidth, 0, textWidth, 445);
+  fill(71, 79, 237);
+  rect(screenWidth, 445, textWidth, textHeight-445);
   fill(242,240,94);
   textSize(20);
   text("Pre-Simulation Selections:", screenWidth+20, 25);
@@ -149,11 +151,15 @@ void draw() {
     int y = mouseY;
     perView(x, y);
   }
-
-  //need to fix percent vaccinated
-  text("time:"+time, screenWidth+20, 620);
-  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 660);
-  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 700);
+  
+  fill(242,240,94);
+  textSize(20);
+  text("Simulation Statistics:", screenWidth+20, 470);
+  textSize(18);
+  fill(94,242,232);
+  text("time:"+time, screenWidth+20, 500);
+  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 530);
+  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 560);
 
 }
 
