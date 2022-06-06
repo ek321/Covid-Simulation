@@ -11,34 +11,41 @@ public class Person {
   int recoveryDuration = 5;
 
   //basic constructor for pre-vax, vax modes
-  public Person(int age_, int xCor_, int yCor_, boolean vax_, Vaccine vaxType, String status_, boolean boosted_, boolean mask_) {
+  public Person(int age_, int xCor_, int yCor_, String status_) {
     age = age_;
     xCor = xCor_;
     yCor = yCor_;
-    vax = vax_;
-    vax_type = vaxType;
+    vax = false;
+    vax_type = null;
     covidStatus = status_;
-    booster = boosted_;
-    mask = mask_;
+    booster = false;
+    mask = false;
     covidDuration = 5;
   }
 
   //returns whether or not a person has been vaccinated against COVID-19
-  boolean getVaxStatus() {
+  public boolean getVaxStatus() {
     return vax;
+  }
+  
+  public void setVaxStatus(boolean temp){
+    vax = temp;
   }
 
   //returns whether or not a Person is wearing a mask
-  boolean getMaskStatus() {
+  public boolean getMaskStatus() {
     return mask;
   }
-
+  
+  public void setMaskStatus(boolean temp){
+    mask = temp;
+  }
   //if a person is vaccinated, this will return a string containing the vaccine that they received
   //Possible returns:
   //"Pfizer"
   //"Moderna"
   //"Johnson"
-  Vaccine getVaxType() {
+  public Vaccine getVaxType() {
     Vaccine res = vax_type;
     boolean possible = getVaxStatus();
     if (possible) {
@@ -47,6 +54,10 @@ public class Person {
       return null;
     }
     return res;
+  }
+
+  public void setVaxType(Vaccine res){
+    vax_type = res;
   }
 
   boolean isElderly() {
@@ -62,11 +73,11 @@ public class Person {
   /*Note: we would like to add a feature where someone is recovered after a certain number of days
    in that case, another return string, "recovered" would be added.
    */
-  String getCovidStatus() {
+  public String getCovidStatus() {
     return covidStatus;
   }
 
-  void setCovidStatus(String stat) {
+  public void setCovidStatus(String stat) {
     //String prev = covidStatus;
     //covidStatus = prev;
     if (covidStatus.equals("negative")) {
@@ -83,16 +94,26 @@ public class Person {
       if (recoveryDuration != 1) {
         recoveryDuration --;
       } else if (recoveryDuration == 1) {
+        Random rng = new Random();
+        int chance = rng.nextInt(5);
+        if(chance != 0){
+          recoveryDuration = 0;
+          covidStatus = "dead";
+        }
         recoveryDuration = 5;
         covidStatus = "negative";
       }
     }
   }
 
-  boolean isBoosted() {
+  public boolean isBoosted() {
     return booster;
   }
 
+  public void boosterShot(boolean res){
+    booster = res;
+  }
+  
   /*returns true if the chance of catching covid is >50%
    returns false if it is <=50%
    */
@@ -112,7 +133,7 @@ public class Person {
   //helper method for catchCovid
   //returns the chance of catching covid for one Person
   //takes into account vaccine status, type, and number of infected neighbors
-  float calcCovid() {
+  public float calcCovid() {
 
     float result = 1.0;
     if (getVaxType() != null) {
@@ -130,10 +151,10 @@ public class Person {
 
   //returns the x and y coordinates of a Person
   //will be used to count the number of infected neighbors
-  int getYCor() {
+  public int getYCor() {
     return yCor;
   }
-  int getXCor() {
+  public int getXCor() {
     return xCor;
   }
 }
