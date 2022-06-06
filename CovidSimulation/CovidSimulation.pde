@@ -345,17 +345,11 @@ public Person checkPer(int x, int y) {
 }
 
 public boolean clickPer(Person pep, int x, int y) {
-  if ((y < ((pep.getYCor() + 1) * pixelH)) && (y > (pep.getYCor() * pixelH))) {
-    if ((x < ((pep.getXCor() + 1) * pixelW)) && (x > (pep.getXCor() * pixelH))) {
+  if ((y < ((pep.getXCor() + 1) * pixelH)) && (y > (pep.getXCor() * pixelH))) {
+    if ((x < ((pep.getYCor() + 1) * pixelW)) && (x > (pep.getYCor() * pixelH))) {
       return true;
     }
   }
   return false;
-  
-  //if (y == pep.getYCor() && x == pep.getXCor()) {
-  //  return true;
-  //} else {
-  //  return false;
-  //}
   
 }
