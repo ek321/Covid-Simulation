@@ -98,40 +98,45 @@ void setup() {
 void draw() {
   fill(89, 44, 138);
   rect(screenWidth, 0, textWidth, textHeight);
-  textSize(18);
+  fill(242,240,94);
+  textSize(20);
+  text("Pre-Simulation Selections:", screenWidth+20, 25);
+  textSize(16);
   fill(247, 183, 227);
   //user key so that they can input their choices
-  text("Do not press a for Pre-Vax mode", screenWidth+20, 60);
-  text("Press the b key 1 time for Pfizer", screenWidth+20, 160);
-  text("Press the b key 2 times for Johnson+Johnson", screenWidth+20, 200);
-  text("Press the b key 3 times for Moderna", screenWidth+20, 240);
-  text("Press the b key 4 times for All", screenWidth+20, 280);
-  text("Press the c key for Boost mode.", screenWidth+20, 380);
-  text("Press the d key for mask mode.", screenWidth+20, 480);
-  text("Press the e key to start.", screenWidth+20, 580);
+  text("Press a for Vax mode", screenWidth+20, 60);
+  text("Press the b key 1 time for Pfizer", screenWidth+20, 130);
+  text("Press the b key 2 times for Johnson+Johnson", screenWidth+20, 160);
+  text("Press the b key 3 times for Moderna", screenWidth+20, 190);
+  text("Press the b key 4 times for All", screenWidth+20, 220);
+  text("Press the c key for Boost mode.", screenWidth+20, 290);
+  text("Press the d key for mask mode.", screenWidth+20, 360);
+  textSize(21);
+  fill(242,176,94);
+  text("Press the e key to start.", screenWidth+20, 430);
   fill(142, 216, 245);
   if (VAX_MODE == VAX) {
-    text("Vax mode on", screenWidth+20, 100);
+    text("Vax mode on", screenWidth+20, 90);
   } else {
-    text("Vax mode off", screenWidth+20, 100);
+    text("Vax mode off", screenWidth+20, 90);
   }
   if (VAX_TYPE == PFIZER) {
-    text("Vaccine mode chosen: Pfizer", screenWidth+20, 320);
+    text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
   }
   if (VAX_TYPE == MODERNA) {
-    text("Vaccine mode chosen: Moderna", screenWidth+20, 320);
+    text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
   }
   if (VAX_TYPE == JOHNSON) {
-    text("Vaccine mode chosen: Johnson", screenWidth+20, 320);
+    text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
   }
   if (VAX_TYPE == ALL) {
-    text("Vaccine mode chosen: All", screenWidth+20, 320);
+    text("Vaccine mode chosen: All", screenWidth+20, 250);
   }
   if (canBoost) {
-    text("Boost mode on", screenWidth+20, 420);
+    text("Boost mode on", screenWidth+20, 320);
   }
   if (mask) {
-    text("Mask mode on", screenWidth+20, 520);
+    text("Mask mode on", screenWidth+20, 390);
   }
   if (key == 'e') {
     makePop();
