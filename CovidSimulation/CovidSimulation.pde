@@ -322,24 +322,40 @@ public void mouseReleased() {
 
 public void perView(int x, int y) {
   // will display attributes of person that mouse clicked on
+  Person temp = checkPer(x, y);
+  if (temp != null) {
+  fill(255);
+          text("covidDuration: " + temp.covidDuration, 20, 80);
+  }
+  
+}
+
+public Person checkPer(int x, int y) {
   for (int i = 0; i < population.length; i ++) {
     for (int j = 0; j < population[0].length; j++) {
       Person temp = population[i][j];
       if (temp != null) {
         if (clickPer(temp, x, y)) {
-          fill(255);
-          text("covidDuration: " + temp.covidDuration, 20, 80);
+          return temp;
         }
       }
     }
   }
+  return null;
 }
 
 public boolean clickPer(Person pep, int x, int y) {
-  if ((y < pep.getYCor() + (pixelH/2.0)) && (y > pep.getYCor() - (pixelW/2.0))) {
-    if ((x < pep.getXCor() + (pixelW/2.0)) && (x > pep.getXCor() - (pixelH/2.0))) {
+  if ((y < ((pep.getYCor() + 1) * pixelH)) && (y > (pep.getYCor() * pixelH))) {
+    if ((x < ((pep.getXCor() + 1) * pixelW)) && (x > (pep.getXCor() * pixelH))) {
       return true;
     }
   }
   return false;
+  
+  //if (y == pep.getYCor() && x == pep.getXCor()) {
+  //  return true;
+  //} else {
+  //  return false;
+  //}
+  
 }
