@@ -15,6 +15,7 @@ int VAX_TYPE = 0;
 // array to keep track of people on the board
 Person[][] population;
 double popDen = 0.8;
+boolean pressed = false;
 // for time
 int time;
 int countdown;
@@ -66,7 +67,7 @@ void setup() {
     }
   }
 }
- 
+
  void makePop(){
    for(int i = 0; i < population.length; i++){
      for(int j = 0; j < population[0].length; j++){
@@ -136,10 +137,19 @@ void draw() {
     makePop();
     ticks();
   }
+  
+  //for person attribute, relocate later
+  if (pressed) {
+    int x = mouseX;
+    int y = mouseY;
+    perView(x, y);
+  }
+
   //need to fix percent vaccinated
   text("time:"+time, screenWidth+20, 620);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 660);
-  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 700); 
+  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 700);
+
 }
 
 public void spread () {
@@ -315,6 +325,44 @@ public float vaxStatusPop() {
   return Math.round(counter * 100.0) / 100.0;
 }
 
-public void mouseClicked() {
-  //will display attributes of person that mouse clicked on
+public void mousePressed() {
+  pressed = true;
+}
+
+public void mouseReleased() {
+  pressed = false;
+}
+
+public void perView(int x, int y) {
+  // will display attributes of person that mouse clicked on
+  Person temp = checkPer(x, y);
+  if (temp != null) {
+  fill(255);
+          text("covidDuration: " + temp.covidDuration, 20, 80);
+  }
+
+}
+
+public Person checkPer(int x, int y) {
+  for (int i = 0; i < population.length; i ++) {
+    for (int j = 0; j < population[0].length; j++) {
+      Person temp = population[i][j];
+      if (temp != null) {
+        if (clickPer(temp, x, y)) {
+          return temp;
+        }
+      }
+    }
+  }
+  return null;
+}
+
+public boolean clickPer(Person pep, int x, int y) {
+  if ((y < ((pep.getXCor() + 1) * pixelH)) && (y > (pep.getXCor() * pixelH))) {
+    if ((x < ((pep.getYCor() + 1) * pixelW)) && (x > (pep.getYCor() * pixelH))) {
+      return true;
+    }
+  }
+  return false;
+
 }
