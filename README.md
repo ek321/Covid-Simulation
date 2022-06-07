@@ -24,6 +24,7 @@ Marie's Work Log:
 06/03/22--I fixed the counter for percent infected of the population, and tried to fix the percent vaccinated, but it didn't work.
 06/04/22--I added a makePop method which sets the vaccination status, type, booster status, or mask status of the population after the user has made their inputs. I also implemented deaths.
 06/06/22--I updated the side panel to be more user-friendly and included all of the simulation information in it so that the user can see the stats of the simulation update.
+06/07/22--I implemented death as a factor so that a Person has a 20% chance of death if they are elderly and a 10% chance if they are not. I also fixed an error with the way Boost mode was implemented.
 
 Esther's Work Log:
 5/24/22--I worked on set up, color, key pressed, and vaxType to create the array of Person. This will visualize the data that is being processed and allow the user to change settings. This will set the color for each person and fill in the corresponding pixel box based on the covid status. vaxType is used to set the vaccination status for each person in the 2D array.
