@@ -68,33 +68,33 @@ void setup() {
   }
 }
 
- void makePop(){
-   for(int i = 0; i < population.length; i++){
-     for(int j = 0; j < population[0].length; j++){
-       if(population[i][j] != null){
-         boolean vaxxed = false;
-       boolean booster = false;
-       if(VAX_MODE == 1){
-         Random rand = new Random();
-         int vaxChance = rand.nextInt(9);
-          if(vaxChance < 6){
+void makePop() {
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      if (population[i][j] != null) {
+        boolean vaxxed = false;
+        boolean booster = false;
+        if (VAX_MODE == 1) {
+          Random rand = new Random();
+          int vaxChance = rand.nextInt(9);
+          if (vaxChance < 6) {
             popVaxxed++;
             vaxxed = true;
-         }
-         population[i][j].setVaxType(vaxTypePerson());
-         if(canBoost){
-           booster = true;
-         }
-       }
-       if(mask){
-         population[i][j].setMaskStatus(true);
-       }
-       population[i][j].setVaxStatus(vaxxed);
-       population[i][j].boosterShot(booster);
-       }
-     }
-   }
- }
+          }
+          population[i][j].setVaxType(vaxTypePerson());
+          if (canBoost) {
+            booster = true;
+          }
+        }
+        if (mask) {
+          population[i][j].setMaskStatus(true);
+        }
+        population[i][j].setVaxStatus(vaxxed);
+        population[i][j].boosterShot(booster);
+      }
+    }
+  }
+}
 void draw() {
   fill(89, 44, 138);
   rect(screenWidth, 0, textWidth, textHeight);
@@ -135,9 +135,11 @@ void draw() {
   }
   if (key == 'e') {
     makePop();
-    ticks();
+    if (time < 50) {
+      ticks();
+    }
   }
-  
+
   //for person attribute, relocate later
   if (pressed) {
     int x = mouseX;
@@ -149,7 +151,6 @@ void draw() {
   text("time:"+time, screenWidth+20, 620);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 660);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 700);
-
 }
 
 public void spread () {
@@ -194,8 +195,7 @@ public color colPer(Person pep) {
     return color(69, 119, 252);
   } else if (pep.getCovidStatus().equals("recovery")) {
     return color(135, 245, 89);
-  }
-  else if(pep.getCovidStatus().equals("dead")){
+  } else if (pep.getCovidStatus().equals("dead")) {
     return color(255);
   }
   return color(255);
@@ -337,10 +337,19 @@ public void perView(int x, int y) {
   // will display attributes of person that mouse clicked on
   Person temp = checkPer(x, y);
   if (temp != null) {
-  fill(255);
-          text("covidDuration: " + temp.covidDuration, 20, 80);
+    fill(255);
+    text("Personal Status -", screenWidth + 20, 740);
+    text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 760);
+    text("Age: " + temp.getAge(), screenWidth + 20, 780);
+    if (temp.getVaxStatus()) {
+      text("Vaccination Status: Vaccinated (" + temp.getVaxType() + ")", screenWidth + 20, 800);
+    } else {
+      text("Vaccination Status: Unvaccinated", screenWidth + 20, 800);
+    }
+    text("Is Boosted: " + temp.isBoosted(), screenWidth + 20, 820);
+    text("Covid Status: " + temp.getCovidStatus(), screenWidth + 20, 840);
+    text("Wears a Mask: " + temp.getMaskStatus(), screenWidth + 20, 860);
   }
-
 }
 
 public Person checkPer(int x, int y) {
@@ -364,5 +373,4 @@ public boolean clickPer(Person pep, int x, int y) {
     }
   }
   return false;
-
 }

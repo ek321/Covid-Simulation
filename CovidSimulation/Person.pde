@@ -157,4 +157,8 @@ public class Person {
   public int getXCor() {
     return xCor;
   }
+  
+  public int getAge() {
+    return age;
+  }
 }
