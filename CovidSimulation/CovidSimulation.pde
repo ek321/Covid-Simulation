@@ -134,7 +134,9 @@ void draw() {
     text("Mask mode on", screenWidth+20, 520);
   }
   if (key == 'e') {
-    makePop();
+    if (time <= 0) {
+      makePop();
+    }
     if (time < 50) {
       ticks();
     }
@@ -342,7 +344,7 @@ public void perView(int x, int y) {
     text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 760);
     text("Age: " + temp.getAge(), screenWidth + 20, 780);
     if (temp.getVaxStatus()) {
-      text("Vaccination Status: Vaccinated (" + temp.getVaxType() + ")", screenWidth + 20, 800);
+      text("Vaccination Status: Vaccinated (" + temp.getVaxType().toString() + ")", screenWidth + 20, 800);
     } else {
       text("Vaccination Status: Unvaccinated", screenWidth + 20, 800);
     }

@@ -55,4 +55,8 @@ public class Vaccine{
       efficacy = 0.748;
     }
   }
+  
+  String toString() {
+    return type;
+  }
 }
