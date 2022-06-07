@@ -84,11 +84,11 @@ void makePop() {
           if (vaxChance < 6) {
             popVaxxed++;
             vaxxed = true;
+             if (canBoost){
+              booster = true;
+            }
           }
           population[i][j].setVaxType(vaxTypePerson());
-          if (canBoost) {
-            booster = true;
-          }
         }
         if (mask) {
           population[i][j].setMaskStatus(true);
@@ -168,7 +168,7 @@ void draw() {
   text("time:"+time, screenWidth+20, 500);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 530);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 560);
-
+   text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
 }
 
 public void spread () {
@@ -214,7 +214,7 @@ public color colPer(Person pep) {
   } else if (pep.getCovidStatus().equals("recovery")) {
     return color(135, 245, 89);
   } else if (pep.getCovidStatus().equals("dead")) {
-    return color(255);
+    return color(108,112,109);
   }
   return color(255);
 }
@@ -371,17 +371,18 @@ public void perView(int x, int y) {
   Person temp = checkPer(x, y);
   if (temp != null) {
     fill(255);
-    text("Personal Status -", screenWidth + 20, 740);
-    text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 760);
-    text("Age: " + temp.getAge(), screenWidth + 20, 780);
+    textSize(16);
+    text("Personal Status -", screenWidth + 20, 630);
+    text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 645);
+    text("Age: " + temp.getAge(), screenWidth + 20, 660);
     if (temp.getVaxStatus()) {
-      text("Vaccination Status: Vaccinated (" + temp.getVaxType().toString() + ")", screenWidth + 20, 800);
+      text("Vaccination Status: Vaccinated (" + temp.getVaxType().toString() + ")", screenWidth + 20, 675);
     } else {
-      text("Vaccination Status: Unvaccinated", screenWidth + 20, 800);
+      text("Vaccination Status: Unvaccinated", screenWidth + 20, 675);
     }
-    text("Is Boosted: " + temp.isBoosted(), screenWidth + 20, 820);
-    text("Covid Status: " + temp.getCovidStatus(), screenWidth + 20, 840);
-    text("Wears a Mask: " + temp.getMaskStatus(), screenWidth + 20, 860);
+    text("Is Boosted: " + temp.isBoosted(), screenWidth + 20, 690);
+    text("Covid Status: " + temp.getCovidStatus(), screenWidth + 20, 705);
+    text("Wears a Mask: " + temp.getMaskStatus(), screenWidth + 20, 720);
   }
 }
 
