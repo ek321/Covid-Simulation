@@ -84,11 +84,11 @@ void makePop() {
           if (vaxChance < 6) {
             popVaxxed++;
             vaxxed = true;
+             if (canBoost){
+              booster = true;
+            }
           }
           population[i][j].setVaxType(vaxTypePerson());
-          if ((canBoost) && (population[i][j].getVaxStatus())){
-            booster = true;
-          }
         }
         if (mask) {
           population[i][j].setMaskStatus(true);

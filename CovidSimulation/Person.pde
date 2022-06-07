@@ -88,9 +88,13 @@ public class Person {
         covidDuration --;
       } else if (covidDuration == 1) {
         Random rand = new Random();
-        int chance = rand.nextInt(5);
-        if(chance < 1){
+        int chance = rand.nextInt(10);
+        if(chance < 2&& isElderly()){
           covidStatus = "dead";
+          recoveryDuration = 0;
+        }
+        else if(chance < 1){
+           covidStatus = "dead";
           recoveryDuration = 0;
         }
         else {
