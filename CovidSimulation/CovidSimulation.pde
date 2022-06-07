@@ -338,7 +338,7 @@ public void perView(int x, int y) {
   Person temp = checkPer(x, y);
   if (temp != null) {
     fill(255);
-    text("Personal Status", screenWidth + 20, 740);
+    text("Personal Status -", screenWidth + 20, 740);
     text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 760);
     text("Age: " + temp.getAge(), screenWidth + 20, 780);
     if (temp.getVaxStatus()) {
