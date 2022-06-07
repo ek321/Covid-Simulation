@@ -42,6 +42,13 @@ int popVaxxed = 0;
 void setup() {
   size(1600, 1600);
   background(0);
+  setPop();
+
+  pixelH = screenHeight / ROWS;
+  pixelW = screenWidth / COLS;
+}
+
+public void setPop() {
   population = new Person[ROWS][COLS];
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
@@ -54,9 +61,6 @@ void setup() {
       }
     }
   }
-
-  pixelH = screenHeight / ROWS;
-  pixelW = screenWidth / COLS;
 
   Random rng = new Random();
   for (int i = 0; i < ROWS; i++) {
@@ -134,7 +138,9 @@ void draw() {
     text("Mask mode on", screenWidth+20, 520);
   }
   if (key == 'e') {
-    makePop();
+    if (time == 0) {
+      makePop();
+    }
     if (time < 50) {
       ticks();
     }
@@ -226,7 +232,11 @@ void keyPressed () {
   // cycle through vax types with key 'b'
   if (key == 'b') {
     if (VAX_MODE == VAX) {
-      VAX_TYPE++;
+      if (VAX_TYPE == ALL) {
+        VAX_TYPE = PFIZER;
+      } else {
+        VAX_TYPE++;
+      }
     }
   }
   //adds booster shot in after a while
@@ -238,6 +248,17 @@ void keyPressed () {
   if (key == 'd') {
     mask = true;
   }
+
+  if (key == 'r') {
+    reset();
+  }
+}
+
+public void reset() {
+  time = 0;
+  background(0);
+  population = new Person[ROWS][COLS];
+  setPop();
 }
 
 public int neighInfect(Person pep) {
@@ -342,7 +363,7 @@ public void perView(int x, int y) {
     text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 760);
     text("Age: " + temp.getAge(), screenWidth + 20, 780);
     if (temp.getVaxStatus()) {
-      text("Vaccination Status: Vaccinated (" + temp.getVaxType() + ")", screenWidth + 20, 800);
+      text("Vaccination Status: Vaccinated (" + temp.getVaxType().toString() + ")", screenWidth + 20, 800);
     } else {
       text("Vaccination Status: Unvaccinated", screenWidth + 20, 800);
     }
