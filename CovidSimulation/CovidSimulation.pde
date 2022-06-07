@@ -214,7 +214,7 @@ public color colPer(Person pep) {
   } else if (pep.getCovidStatus().equals("recovery")) {
     return color(135, 245, 89);
   } else if (pep.getCovidStatus().equals("dead")) {
-    return color(255);
+    return color(108,112,109);
   }
   return color(255);
 }

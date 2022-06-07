@@ -87,19 +87,21 @@ public class Person {
       if (covidDuration != 1) {
         covidDuration --;
       } else if (covidDuration == 1) {
-        covidDuration = 5;
-        covidStatus = "recovery";
+        Random rand = new Random();
+        int chance = rand.nextInt(5);
+        if(chance < 1){
+          covidStatus = "dead";
+          recoveryDuration = 0;
+        }
+        else {
+          covidDuration = 5;
+          covidStatus = "recovery";
+        }
       }
     } else if (covidStatus.equals("recovery")) {
       if (recoveryDuration != 1) {
         recoveryDuration --;
       } else if (recoveryDuration == 1) {
-        Random rng = new Random();
-        int chance = rng.nextInt(5);
-        if(chance != 0){
-          recoveryDuration = 0;
-          covidStatus = "dead";
-        }
         recoveryDuration = 5;
         covidStatus = "negative";
       }
