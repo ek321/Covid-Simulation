@@ -18,6 +18,7 @@ double popDen = 0.8;
 boolean pressed = false;
 // for time
 int time;
+int timeEnd = 50;
 int countdown;
 // for coloring pixels
 int pixelH;
@@ -148,7 +149,7 @@ void draw() {
     if (time == 0) {
       makePop();
     }
-    if (time < 50) {
+    if (time < timeEnd) {
       ticks();
     }
   }
@@ -165,7 +166,8 @@ void draw() {
   text("Simulation Statistics:", screenWidth+20, 470);
   textSize(18);
   fill(94,242,232);
-  text("time:"+time, screenWidth+20, 500);
+  text("time: " + time, screenWidth+20, 500);
+  text("Simulation Stop Time: " + timeEnd, screenWidth + 250, 500);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 530);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 560);
    text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
@@ -263,6 +265,15 @@ void keyPressed () {
 
   if (key == 'r') {
     reset();
+  }
+  
+  if (key == '2') {
+    timeEnd = timeEnd + 5;
+  }
+  if (key == '1') {
+    if (timeEnd > 0) {
+      timeEnd = timeEnd - 5;
+    }
   }
 }
 
