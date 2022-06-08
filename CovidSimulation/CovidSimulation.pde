@@ -124,39 +124,25 @@ void draw() {
   fill(142, 216, 245);
   if (VAX_MODE % 2 == 1) {
     text("Vax mode on", screenWidth+20, 90);
-    if (VAX_TYPE == PFIZER) {
-    text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == MODERNA) {
-    text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == JOHNSON) {
-    text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == ALL) {
-    text("Vaccine mode chosen: All", screenWidth+20, 250);
-  }
-  if (canBoost) {
-    text("Boost mode on", screenWidth+20, 320);
-  }
+      if (VAX_TYPE == PFIZER) {
+        text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
+      }
+      if (VAX_TYPE == MODERNA) {
+        text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
+      }
+      if (VAX_TYPE == JOHNSON) {
+        text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
+      }
+      if (VAX_TYPE == ALL) {
+        text("Vaccine mode chosen: All", screenWidth+20, 250);
+      }
+      if (canBoost) {
+        text("Boost mode on", screenWidth+20, 320);
+      }
   } else {
+    VAX_TYPE = 0;
     text("Vax mode off", screenWidth+20, 90);
   }
-  /*if (VAX_TYPE == PFIZER) {
-    text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == MODERNA) {
-    text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == JOHNSON) {
-    text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == ALL) {
-    text("Vaccine mode chosen: All", screenWidth+20, 250);
-  }
-  if (canBoost) {
-    text("Boost mode on", screenWidth+20, 320);
-  }*/
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
   }
