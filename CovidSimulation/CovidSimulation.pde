@@ -36,8 +36,9 @@ boolean canBoost;
 
 //mask mode
 boolean mask = false;
-
 int popVaxxed = 0;
+
+//
 
 void setup() {
   size(1600, 1600);
@@ -121,12 +122,9 @@ void draw() {
   fill(242,176,94);
   text("Press the e key to start.", screenWidth+20, 430);
   fill(142, 216, 245);
-  if (VAX_MODE == VAX) {
+  if (VAX_MODE % 2 == 1) {
     text("Vax mode on", screenWidth+20, 90);
-  } else {
-    text("Vax mode off", screenWidth+20, 90);
-  }
-  if (VAX_TYPE == PFIZER) {
+    if (VAX_TYPE == PFIZER) {
     text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
   }
   if (VAX_TYPE == MODERNA) {
@@ -141,6 +139,24 @@ void draw() {
   if (canBoost) {
     text("Boost mode on", screenWidth+20, 320);
   }
+  } else {
+    text("Vax mode off", screenWidth+20, 90);
+  }
+  /*if (VAX_TYPE == PFIZER) {
+    text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
+  }
+  if (VAX_TYPE == MODERNA) {
+    text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
+  }
+  if (VAX_TYPE == JOHNSON) {
+    text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
+  }
+  if (VAX_TYPE == ALL) {
+    text("Vaccine mode chosen: All", screenWidth+20, 250);
+  }
+  if (canBoost) {
+    text("Boost mode on", screenWidth+20, 320);
+  }*/
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
   }
@@ -239,11 +255,17 @@ public Vaccine vaxTypePerson() {
 void keyPressed () {
   // circle through vax mode with key 'a'
   if (key == 'a') {
+    VAX_MODE++;
+    if(VAX_MODE % 2 == 0){
+      VAX_MODE = PRE_VAX;
+    }
+    else {
     VAX_MODE = VAX;
+    }
   }
   // cycle through vax types with key 'b'
   if (key == 'b') {
-    if (VAX_MODE == VAX) {
+    if (VAX_MODE % 2 == 1) {
       if (VAX_TYPE == ALL) {
         VAX_TYPE = PFIZER;
       } else {
