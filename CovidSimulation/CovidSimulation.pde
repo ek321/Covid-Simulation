@@ -38,7 +38,10 @@ boolean canBoost;
 boolean mask = false;
 int popVaxxed = 0;
 
-//
+//color vs sign representations
+int COLOR_MODE = 0;
+int SIGN_MODE = 1;
+int DISPLAY_MODE = 0;
 
 void setup() {
   size(1600, 1600);
@@ -173,7 +176,8 @@ void draw() {
    text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
 }
 
-public void spread () {
+//speadColor
+public void spreadColor () {
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
       if (population[i][j] != null) {
@@ -327,10 +331,11 @@ public void ticks() {
   if (countdown > 0) {
     countdown --;
   }
-
+//spreadColor
   if (countdown == 0) {
     countdown = 60;
-    spread();
+   
+    spreadColor();
     time++;
     fill(255);
     setNext();
