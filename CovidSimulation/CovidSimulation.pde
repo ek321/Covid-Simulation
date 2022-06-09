@@ -36,8 +36,12 @@ boolean canBoost;
 
 //mask mode
 boolean mask = false;
-
 int popVaxxed = 0;
+
+//color vs sign representations
+int COLOR_MODE = 0;
+int SIGN_MODE = 1;
+int DISPLAY_MODE = 1;
 
 void setup() {
   size(1600, 1600);
@@ -121,25 +125,26 @@ void draw() {
   fill(242,176,94);
   text("Press the e key to start.", screenWidth+20, 430);
   fill(142, 216, 245);
-  if (VAX_MODE == VAX) {
+  if (VAX_MODE % 2 == 1) {
     text("Vax mode on", screenWidth+20, 90);
+      if (VAX_TYPE == PFIZER) {
+        text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
+      }
+      if (VAX_TYPE == MODERNA) {
+        text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
+      }
+      if (VAX_TYPE == JOHNSON) {
+        text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
+      }
+      if (VAX_TYPE == ALL) {
+        text("Vaccine mode chosen: All", screenWidth+20, 250);
+      }
+      if (canBoost) {
+        text("Boost mode on", screenWidth+20, 320);
+      }
   } else {
+    VAX_TYPE = 0;
     text("Vax mode off", screenWidth+20, 90);
-  }
-  if (VAX_TYPE == PFIZER) {
-    text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == MODERNA) {
-    text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == JOHNSON) {
-    text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
-  }
-  if (VAX_TYPE == ALL) {
-    text("Vaccine mode chosen: All", screenWidth+20, 250);
-  }
-  if (canBoost) {
-    text("Boost mode on", screenWidth+20, 320);
   }
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
@@ -168,10 +173,11 @@ void draw() {
   text("time:"+time, screenWidth+20, 500);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 530);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 560);
-   text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
+  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
 }
 
-public void spread () {
+//speadColor
+public void spreadColor () {
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
       if (population[i][j] != null) {
@@ -186,6 +192,25 @@ public void spread () {
     }
   }
 }
+
+//spreadSign
+public void spreadSign () {
+  for (int i = 0; i < population.length; i++) {
+    for (int j = 0; j < population[0].length; j++) {
+      if (population[i][j] != null) {
+        String temp = signPer(population[i][j]);
+        // use pixelH and pixelW
+        fill(255);
+        textSize(25);
+        text(temp, pixelH*j, pixelW*i);
+      } else {
+        fill(color(0));
+        text(" ", pixelH*j, pixelW*i);
+      }
+    }
+  }
+}
+
 
 public void setNext() {
   for (int i = 0; i < population[0].length; i++) {
@@ -219,6 +244,22 @@ public color colPer(Person pep) {
   return color(255);
 }
 
+public String signPer(Person pep){
+  if(pep.getCovidStatus().equals("infected")){
+    return "+";
+  }
+  else if(pep.getCovidStatus().equals("negative")){
+    return "-";
+  }
+  else if(pep.getCovidStatus().equals("recovery")){
+    return ",            ";
+  }
+  else if(pep.getCovidStatus().equals("dead")){
+    return ".             ";
+  }
+  return "-";
+}
+
 public Vaccine vaxTypePerson() {
   boolean temp = (VAX_TYPE == ALL);
   Vaccine ans = new Vaccine("Pfizer");
@@ -239,11 +280,17 @@ public Vaccine vaxTypePerson() {
 void keyPressed () {
   // circle through vax mode with key 'a'
   if (key == 'a') {
+    VAX_MODE++;
+    if(VAX_MODE % 2 == 0){
+      VAX_MODE = PRE_VAX;
+    }
+    else {
     VAX_MODE = VAX;
+    }
   }
   // cycle through vax types with key 'b'
   if (key == 'b') {
-    if (VAX_MODE == VAX) {
+    if (VAX_MODE % 2 == 1) {
       if (VAX_TYPE == ALL) {
         VAX_TYPE = PFIZER;
       } else {
@@ -319,10 +366,17 @@ public void ticks() {
   if (countdown > 0) {
     countdown --;
   }
-
+//spreadColor
   if (countdown == 0) {
     countdown = 60;
-    spread();
+   if(DISPLAY_MODE % 2 == 0){
+     DISPLAY_MODE = COLOR_MODE;
+     spreadColor();
+   }
+   else if(DISPLAY_MODE % 2 == 1){
+     DISPLAY_MODE = SIGN_MODE;
+     spreadSign();
+   }
     time++;
     fill(255);
     setNext();
