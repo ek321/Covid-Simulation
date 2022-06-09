@@ -4,7 +4,7 @@ public class Button {
   int yCor;
   int xLR = 80;
   int yLR = 40;
-  boolean press;
+  //boolean press;
   int textSize;
   
   //constructor for button
@@ -13,6 +13,7 @@ public class Button {
     xCor = xCor_;
     yCor = yCor_;
     textSize = textSize_;
+    // press = false;
   }
   
   public void drawButton() {
@@ -20,5 +21,17 @@ public class Button {
     rect(xCor, yCor, xLR, yLR);
     fill(0);
     text(name, xCor + 4, yCor + 4, xLR, yLR);
+    
   }
+  
+  public boolean pressButton(int x, int y) {
+    if (x > xCor && x < (xCor + (xLR * 2))) {
+      if (y > yCor && y < (yCor + (yLR * 2))) {
+        
+        return true;
+      }
+    }
+    return false;
+  }
+  
 }

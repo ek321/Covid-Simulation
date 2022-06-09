@@ -23,8 +23,8 @@ int countdown;
 // for coloring pixels
 int pixelH;
 int pixelW;
-// for testing purposes
-//int tick;
+// buttons
+ArrayList<Button> buttonList = new ArrayList<Button>();
 
 //new dimensions
 int screenHeight = 1000;
@@ -164,6 +164,7 @@ void draw() {
     int x = mouseX;
     int y = mouseY;
     perView(x, y);
+    checkButton(x, y);
   }
 
   fill(242,240,94);
@@ -380,6 +381,18 @@ public void mousePressed() {
 
 public void mouseReleased() {
   pressed = false;
+}
+
+public Button checkButton(int x, int y) {
+  // go through arraylist of buttons and check if they are pressed
+  Button temp;
+  for (int i = 0; i < buttonList.size(); i++) {
+    temp = buttonList.get(i);
+    if (temp.pressButton(x, y)) {
+      return temp;
+    }
+  }
+  return null;
 }
 
 public void perView(int x, int y) {
