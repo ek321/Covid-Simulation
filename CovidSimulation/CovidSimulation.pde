@@ -145,6 +145,11 @@ void draw() {
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
   }
+  
+  //buttons
+  Button preVax = new Button ("preVax", screenWidth+170, 65, 14);
+  preVax.drawButton();
+  
   if (key == 'e') {
     if (time == 0) {
       makePop();
