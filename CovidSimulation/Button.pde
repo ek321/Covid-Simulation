@@ -34,4 +34,8 @@ public class Button {
     return false;
   }
   
+  public String getName() {
+    return name;
+  }
+  
 }

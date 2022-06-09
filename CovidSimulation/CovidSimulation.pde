@@ -149,6 +149,8 @@ void draw() {
   //buttons
   Button preVax = new Button ("preVax", screenWidth+170, 65, 14);
   preVax.drawButton();
+  Button vax = new Button ("Vax", screenWidth+260, 65, 14);
+  vax.drawButton();
   
   if (key == 'e') {
     if (time == 0) {
@@ -164,7 +166,7 @@ void draw() {
     int x = mouseX;
     int y = mouseY;
     perView(x, y);
-    checkButton(x, y);
+    pButton(x, y);
   }
 
   fill(242,240,94);
@@ -381,6 +383,18 @@ public void mousePressed() {
 
 public void mouseReleased() {
   pressed = false;
+}
+
+public void pButton(int x, int y) {
+  Button temp = checkButton(x, y);
+  if (temp != null) {
+    String s = temp.getName();
+    if (s.equals("preVax")) {
+      VAX_MODE = PRE_VAX;
+    } else if (s.equals("vax")) {
+      VAX_MODE = VAX;
+    }
+  }
 }
 
 public Button checkButton(int x, int y) {
