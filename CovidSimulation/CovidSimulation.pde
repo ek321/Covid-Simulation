@@ -173,7 +173,7 @@ void draw() {
   text("time:"+time, screenWidth+20, 500);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 530);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 560);
-   text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
+  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
 }
 
 //speadColor
@@ -201,6 +201,7 @@ public void spreadSign () {
         String temp = signPer(population[i][j]);
         // use pixelH and pixelW
         fill(255);
+        textSize(25);
         text(temp, pixelH*j, pixelW*i);
       } else {
         fill(color(0));
@@ -251,10 +252,10 @@ public String signPer(Person pep){
     return "-";
   }
   else if(pep.getCovidStatus().equals("recovery")){
-    return ",";
+    return ",            ";
   }
   else if(pep.getCovidStatus().equals("dead")){
-    return ".";
+    return ".             ";
   }
   return "-";
 }
