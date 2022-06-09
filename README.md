@@ -35,3 +35,8 @@ Esther's Work Log:
 5/31/22--I worked on incorporating a recovery period in the setCovidStatus method. There will be a set amount of time for being infected (and contagious) and recovery (not contagious?) where being infected again will not affect the recovery period.
 6/1/22--I worked on fixing errors with the recovery period (in terms of the duration of covid and recovery periods). I also added in the population density factor so that the whole board is not filled with people. I plan to make this adjustable by the user, but for now, it is a fixed number at the start.
 6/2/22--I worked on the display person attribute portion in the main tab, so that we can see the attributes of the person that is clicked on, but the helper method needs to be fixed.
+6/3/22--I worked on the helper method so that clicking on a person will show their attributes.
+6/6/22--I fixed errors in the personal attribute display method and then added the text needed for that method. I also set an end time for the simulation.
+6/7/22--I fixed an error where the vaccine type of the person would not show when vax mode was on. I also made a reset function so that pressing r would reset the simulation based on the new settings chosen by the user.
+6/8/22--I added a way for the user to adjust the ending time of the simulation and tested the person attribute display method.
+6/9/22--I worked on adding a button class so that the user can click buttons rather than keys on the keyboard to change modes/settings.
