@@ -437,17 +437,17 @@ public void perView(int x, int y) {
   if (temp != null) {
     fill(255);
     textSize(16);
-    text("Personal Status -", screenWidth + 20, 630);
-    text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 645);
-    text("Age: " + temp.getAge(), screenWidth + 20, 660);
+    text("Personal Status -", screenWidth + 20, 670);
+    text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 685);
+    text("Age: " + temp.getAge(), screenWidth + 20, 700);
     if (temp.getVaxStatus()) {
-      text("Vaccination Status: Vaccinated (" + temp.getVaxType().toString() + ")", screenWidth + 20, 675);
+      text("Vaccination Status: Vaccinated (" + temp.getVaxType().toString() + ")", screenWidth + 20, 715);
     } else {
-      text("Vaccination Status: Unvaccinated", screenWidth + 20, 675);
+      text("Vaccination Status: Unvaccinated", screenWidth + 20, 715);
     }
-    text("Is Boosted: " + temp.isBoosted(), screenWidth + 20, 690);
-    text("Covid Status: " + temp.getCovidStatus(), screenWidth + 20, 705);
-    text("Wears a Mask: " + temp.getMaskStatus(), screenWidth + 20, 720);
+    text("Is Boosted: " + temp.isBoosted(), screenWidth + 20, 730);
+    text("Covid Status: " + temp.getCovidStatus(), screenWidth + 20, 745);
+    text("Wears a Mask: " + temp.getMaskStatus(), screenWidth + 20, 760);
   }
 }
 
