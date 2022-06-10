@@ -146,13 +146,16 @@ void draw() {
     text("Mask mode on", screenWidth+20, 390);
   }
   
-  //buttons
+  //buttons (move to setup)
   Button preVax = new Button ("preVax", screenWidth+170, 65, 14);
   preVax.drawButton();
   buttonList.add(preVax);
   Button vax = new Button ("vax", screenWidth+260, 65, 14);
   vax.drawButton();
   buttonList.add(vax);
+  Button Pfizer = new Button ("Pfizer", screenWidth+20, 230, 14);
+  Pfizer.drawButton();
+  buttonList.add(Pfizer);
   
   if (key == 'e') {
     if (time == 0) {
