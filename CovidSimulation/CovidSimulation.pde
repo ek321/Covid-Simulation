@@ -200,12 +200,14 @@ public void spreadSign () {
       if (population[i][j] != null) {
         String temp = signPer(population[i][j]);
         // use pixelH and pixelW
+        fill(109,130,201);
+        rect(j * pixelH, i * pixelW, pixelH, pixelW);
         fill(255);
         textSize(25);
-        text(temp, pixelH*j, pixelW*i);
+        text(temp, pixelH*j+(pixelH/2), pixelW*i+(pixelW/2));
       } else {
         fill(color(0));
-        text(" ", pixelH*j, pixelW*i);
+        text(" ", pixelH*j+(pixelH/2), pixelW*i+(pixelW/2));
       }
     }
   }
@@ -252,10 +254,10 @@ public String signPer(Person pep){
     return "-";
   }
   else if(pep.getCovidStatus().equals("recovery")){
-    return ",            ";
+    return ",";
   }
   else if(pep.getCovidStatus().equals("dead")){
-    return ".             ";
+    return ".";
   }
   return "-";
 }
