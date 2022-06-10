@@ -36,7 +36,6 @@ boolean canBoost;
 
 //mask mode
 boolean mask = false;
-int popVaxxed = 0;
 
 //color vs sign representations
  final int COLOR_MODE = 1;
