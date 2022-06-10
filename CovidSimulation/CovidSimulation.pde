@@ -121,9 +121,11 @@ void draw() {
   text("Press the b key 4 times for All", screenWidth+20, 220);
   text("Press the c key for Boost mode.", screenWidth+20, 290);
   text("Press the d key for mask mode.", screenWidth+20, 360);
+  text("Press the e key 1 time for color mode", screenWidth+20, 410);
+  text("Press the e key 2 times for sign mode.", screenWidth+20, 440);
   textSize(21);
   fill(242,176,94);
-  text("Press the e key to start.", screenWidth+20, 430);
+  text("Press the f key to start.", screenWidth+20, 470);
   fill(142, 216, 245);
   if (VAX_MODE % 2 == 1) {
     text("Vax mode on", screenWidth+20, 90);
@@ -149,7 +151,7 @@ void draw() {
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
   }
-  if (key == 'e') {
+  if (key == 'f') {
     if (time == 0) {
       makePop();
     }
@@ -167,13 +169,13 @@ void draw() {
 
   fill(242,240,94);
   textSize(20);
-  text("Simulation Statistics:", screenWidth+20, 470);
+  text("Simulation Statistics:", screenWidth+20, 500);
   textSize(18);
   fill(94,242,232);
-  text("time:"+time, screenWidth+20, 500);
-  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 530);
-  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 560);
-  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
+  text("time:"+time, screenWidth+20, 530);
+  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 560);
+  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 590);
+  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 620);
 }
 
 //speadColor
