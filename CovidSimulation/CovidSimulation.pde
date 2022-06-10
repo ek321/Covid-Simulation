@@ -149,8 +149,10 @@ void draw() {
   //buttons
   Button preVax = new Button ("preVax", screenWidth+170, 65, 14);
   preVax.drawButton();
-  Button vax = new Button ("Vax", screenWidth+260, 65, 14);
+  buttonList.add(preVax);
+  Button vax = new Button ("vax", screenWidth+260, 65, 14);
   vax.drawButton();
+  buttonList.add(vax);
   
   if (key == 'e') {
     if (time == 0) {
@@ -247,29 +249,29 @@ public Vaccine vaxTypePerson() {
 }
 
 void keyPressed () {
-  // circle through vax mode with key 'a'
-  if (key == 'a') {
-    VAX_MODE = VAX;
-  }
-  // cycle through vax types with key 'b'
-  if (key == 'b') {
-    if (VAX_MODE == VAX) {
-      if (VAX_TYPE == ALL) {
-        VAX_TYPE = PFIZER;
-      } else {
-        VAX_TYPE++;
-      }
-    }
-  }
-  //adds booster shot in after a while
-  if (key == 'c') {
-    if (VAX_MODE == VAX) {
-      canBoost = true;
-    }
-  }
-  if (key == 'd') {
-    mask = true;
-  }
+  //// circle through vax mode with key 'a'
+  //if (key == 'a') {
+  //  VAX_MODE = VAX;
+  //}
+  //// cycle through vax types with key 'b'
+  //if (key == 'b') {
+  //  if (VAX_MODE == VAX) {
+  //    if (VAX_TYPE == ALL) {
+  //      VAX_TYPE = PFIZER;
+  //    } else {
+  //      VAX_TYPE++;
+  //    }
+  //  }
+  //}
+  ////adds booster shot in after a while
+  //if (key == 'c') {
+  //  if (VAX_MODE == VAX) {
+  //    canBoost = true;
+  //  }
+  //}
+  //if (key == 'd') {
+  //  mask = true;
+  //}
 
   if (key == 'r') {
     reset();

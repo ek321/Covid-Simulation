@@ -20,13 +20,14 @@ public class Button {
     fill(255);
     rect(xCor, yCor, xLR, yLR);
     fill(0);
-    text(name, xCor + 4, yCor + 4, xLR, yLR);
-    
+    textAlign(CENTER, CENTER);
+    text(name, xCor, yCor, xLR, yLR);
+    textAlign(LEFT);
   }
   
   public boolean pressButton(int x, int y) {
-    if (x > xCor && x < (xCor + (xLR * 2))) {
-      if (y > yCor && y < (yCor + (yLR * 2))) {
+    if (x > xCor && x < (xCor + (xLR))) {
+      if (y > yCor && y < (yCor + (yLR))) {
         
         return true;
       }
