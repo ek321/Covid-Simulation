@@ -40,7 +40,7 @@ boolean mask = false;
 //color vs sign representations
  final int COLOR_MODE = 1;
  final int SIGN_MODE = 2;
-static int DISPLAY_MODE = 0;
+ static int DISPLAY_MODE = 0;
 
 void setup() {
   size(1600, 1600);
@@ -51,6 +51,9 @@ void setup() {
   pixelW = screenWidth / COLS;
 }
 
+/* Preliminary selections for the population NOT depending on user input
+  Factors set by user input are either false or null
+*/
 public void setPop() {
   population = new Person[ROWS][COLS];
   for (int i = 0; i < population.length; i++) {
@@ -75,6 +78,8 @@ public void setPop() {
   }
 }
 
+/*Takes the user input and cycles through the population again to make needed changes
+*/
 void makePop() {
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
@@ -85,7 +90,6 @@ void makePop() {
           Random rand = new Random();
           int vaxChance = rand.nextInt(9);
           if (vaxChance < 6) {
-            popVaxxed++;
             vaxxed = true;
              if (canBoost){
               booster = true;
@@ -102,6 +106,7 @@ void makePop() {
     }
   }
 }
+
 void draw() {
   fill(89, 44, 138);
   rect(screenWidth, 0, textWidth, 550);
@@ -183,7 +188,12 @@ void draw() {
   text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 650);
 }
 
-//speadColor
+/* Visualizes the simulation as blocks of color
+blue = not infected
+orange = positive
+green = recovered
+gray = dead
+*/
 public void spreadColor () {
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
@@ -200,7 +210,12 @@ public void spreadColor () {
   }
 }
 
-//spreadSign
+/*Visualizes the simulation using signs 
+"+" = positive
+"-" = negative
+"," = recovered
+"." = dead
+*/
 public void spreadSign () {
   for (int i = 0; i < population.length; i++) {
     for (int j = 0; j < population[0].length; j++) {
@@ -220,7 +235,7 @@ public void spreadSign () {
   }
 }
 
-
+//advances the simulation
 public void setNext() {
   for (int i = 0; i < population[0].length; i++) {
     for (int j = 0; j < population.length; j++) {
@@ -240,6 +255,7 @@ public void setNext() {
   }
 }
 
+//returns which color a Person will be represnted as based on their covid status
 public color colPer(Person pep) {
   if (pep.getCovidStatus().equals("infected")) {
     return color(252, 158, 69);
@@ -253,6 +269,7 @@ public color colPer(Person pep) {
   return color(255);
 }
 
+//returns what symbol a Person will be represented as based on their covid status
 public String signPer(Person pep){
   if(pep.getCovidStatus().equals("infected")){
     return "+";
@@ -269,6 +286,7 @@ public String signPer(Person pep){
   return "-";
 }
 
+// sets the Vaccine type that someone will receive based on user input
 public Vaccine vaxTypePerson() {
   boolean temp = (VAX_TYPE == ALL);
   Vaccine ans = new Vaccine("Pfizer");
@@ -286,6 +304,7 @@ public Vaccine vaxTypePerson() {
   return ans;
 }
 
+//user input
 void keyPressed () {
   // circle through vax mode with key 'a'
   if (key == 'a') {
@@ -325,6 +344,7 @@ void keyPressed () {
   }
 }
 
+//resets the simulation page, so someone can make their selections and run the simulation again
 public void reset() {
   time = 0;
   background(0);
@@ -332,6 +352,7 @@ public void reset() {
   setPop();
 }
 
+//counts the number of infected neighbors that a Person has
 public int neighInfect(Person pep) {
   if (pep != null) {
     int counter = 0;
@@ -374,6 +395,7 @@ public int neighInfect(Person pep) {
   }
 }
 
+//advances the simulation
 public void ticks() {
   if (countdown > 0) {
     countdown --;
@@ -393,6 +415,7 @@ public void ticks() {
   }
 }
 
+//counts the number of covid cases in the population
 public int covidCasesPop() {
   int counter = 0;
   for (int i = 0; i < population.length; i++) {
@@ -430,6 +453,8 @@ public void mouseReleased() {
   pressed = false;
 }
 
+/*When someone presses over a Person, their attributes will appear under "Simulation Stats" in the side panel
+*/
 public void perView(int x, int y) {
   // will display attributes of person that mouse clicked on
   Person temp = checkPer(x, y);
@@ -450,6 +475,7 @@ public void perView(int x, int y) {
   }
 }
 
+//returns the Person at a given location
 public Person checkPer(int x, int y) {
   for (int i = 0; i < population.length; i ++) {
     for (int j = 0; j < population[0].length; j++) {
