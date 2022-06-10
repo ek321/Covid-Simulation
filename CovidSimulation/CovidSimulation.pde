@@ -39,9 +39,9 @@ boolean mask = false;
 int popVaxxed = 0;
 
 //color vs sign representations
-int COLOR_MODE = 0;
-int SIGN_MODE = 1;
-int DISPLAY_MODE = 1;
+ final int COLOR_MODE = 1;
+ final int SIGN_MODE = 2;
+static int DISPLAY_MODE = 0;
 
 void setup() {
   size(1600, 1600);
@@ -105,9 +105,9 @@ void makePop() {
 }
 void draw() {
   fill(89, 44, 138);
-  rect(screenWidth, 0, textWidth, 445);
+  rect(screenWidth, 0, textWidth, 550);
   fill(71, 79, 237);
-  rect(screenWidth, 445, textWidth, textHeight-445);
+  rect(screenWidth, 510, textWidth, textHeight-510);
   fill(242,240,94);
   textSize(20);
   text("Pre-Simulation Selections:", screenWidth+20, 25);
@@ -121,9 +121,11 @@ void draw() {
   text("Press the b key 4 times for All", screenWidth+20, 220);
   text("Press the c key for Boost mode.", screenWidth+20, 290);
   text("Press the d key for mask mode.", screenWidth+20, 360);
+  text("Press the e key 1 time for color mode", screenWidth+20, 410);
+  text("Press the e key 2 times for sign mode.", screenWidth+20, 440);
   textSize(21);
   fill(242,176,94);
-  text("Press the e key to start.", screenWidth+20, 430);
+  text("Press the f key to start.", screenWidth+20, 490);
   fill(142, 216, 245);
   if (VAX_MODE % 2 == 1) {
     text("Vax mode on", screenWidth+20, 90);
@@ -149,7 +151,13 @@ void draw() {
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
   }
-  if (key == 'e') {
+  if(DISPLAY_MODE == COLOR_MODE){
+    text("Color mode on", screenWidth+20,460);
+  }
+  else if(DISPLAY_MODE == SIGN_MODE){
+    text("Sign mode on", screenWidth+20,460);
+  }
+  if (key == 'f') {
     if (time == 0) {
       makePop();
     }
@@ -167,13 +175,13 @@ void draw() {
 
   fill(242,240,94);
   textSize(20);
-  text("Simulation Statistics:", screenWidth+20, 470);
+  text("Simulation Statistics:", screenWidth+20, 530);
   textSize(18);
   fill(94,242,232);
-  text("time:"+time, screenWidth+20, 500);
-  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 530);
-  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 560);
-  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 590);
+  text("time:"+time, screenWidth+20, 560);
+  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 590);
+  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 620);
+  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 650);
 }
 
 //speadColor
@@ -200,12 +208,14 @@ public void spreadSign () {
       if (population[i][j] != null) {
         String temp = signPer(population[i][j]);
         // use pixelH and pixelW
+        fill(109,130,201);
+        rect(j * pixelH, i * pixelW, pixelH, pixelW);
         fill(255);
         textSize(25);
-        text(temp, pixelH*j, pixelW*i);
+        text(temp, pixelH*j+(pixelH/2), pixelW*i+(pixelW/2));
       } else {
         fill(color(0));
-        text(" ", pixelH*j, pixelW*i);
+        text(" ", pixelH*j+(pixelH/2), pixelW*i+(pixelW/2));
       }
     }
   }
@@ -252,10 +262,10 @@ public String signPer(Person pep){
     return "-";
   }
   else if(pep.getCovidStatus().equals("recovery")){
-    return ",            ";
+    return ",";
   }
   else if(pep.getCovidStatus().equals("dead")){
-    return ".             ";
+    return ".";
   }
   return "-";
 }
@@ -310,6 +320,9 @@ void keyPressed () {
 
   if (key == 'r') {
     reset();
+  }
+  if(key == 'e'){
+    DISPLAY_MODE++;
   }
 }
 
@@ -370,11 +383,9 @@ public void ticks() {
   if (countdown == 0) {
     countdown = 60;
    if(DISPLAY_MODE % 2 == 0){
-     DISPLAY_MODE = COLOR_MODE;
      spreadColor();
    }
    else if(DISPLAY_MODE % 2 == 1){
-     DISPLAY_MODE = SIGN_MODE;
      spreadSign();
    }
     time++;
@@ -426,17 +437,17 @@ public void perView(int x, int y) {
   if (temp != null) {
     fill(255);
     textSize(16);
-    text("Personal Status -", screenWidth + 20, 630);
-    text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 645);
-    text("Age: " + temp.getAge(), screenWidth + 20, 660);
+    text("Personal Status -", screenWidth + 20, 670);
+    text("Position: (" + (temp.getYCor() + 1) + ", " + (temp.getXCor() + 1) + ")", screenWidth + 20, 685);
+    text("Age: " + temp.getAge(), screenWidth + 20, 700);
     if (temp.getVaxStatus()) {
-      text("Vaccination Status: Vaccinated (" + temp.getVaxType().toString() + ")", screenWidth + 20, 675);
+      text("Vaccination Status: Vaccinated (" + temp.getVaxType().toString() + ")", screenWidth + 20, 715);
     } else {
-      text("Vaccination Status: Unvaccinated", screenWidth + 20, 675);
+      text("Vaccination Status: Unvaccinated", screenWidth + 20, 715);
     }
-    text("Is Boosted: " + temp.isBoosted(), screenWidth + 20, 690);
-    text("Covid Status: " + temp.getCovidStatus(), screenWidth + 20, 705);
-    text("Wears a Mask: " + temp.getMaskStatus(), screenWidth + 20, 720);
+    text("Is Boosted: " + temp.isBoosted(), screenWidth + 20, 730);
+    text("Covid Status: " + temp.getCovidStatus(), screenWidth + 20, 745);
+    text("Wears a Mask: " + temp.getMaskStatus(), screenWidth + 20, 760);
   }
 }
 
