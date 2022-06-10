@@ -39,9 +39,9 @@ boolean mask = false;
 int popVaxxed = 0;
 
 //color vs sign representations
-int COLOR_MODE = 0;
-int SIGN_MODE = 1;
-int DISPLAY_MODE = 1;
+ final int COLOR_MODE = 1;
+ final int SIGN_MODE = 2;
+static int DISPLAY_MODE = 0;
 
 void setup() {
   size(1600, 1600);
@@ -105,9 +105,9 @@ void makePop() {
 }
 void draw() {
   fill(89, 44, 138);
-  rect(screenWidth, 0, textWidth, 445);
+  rect(screenWidth, 0, textWidth, 550);
   fill(71, 79, 237);
-  rect(screenWidth, 445, textWidth, textHeight-445);
+  rect(screenWidth, 550, textWidth, textHeight-550);
   fill(242,240,94);
   textSize(20);
   text("Pre-Simulation Selections:", screenWidth+20, 25);
@@ -125,7 +125,7 @@ void draw() {
   text("Press the e key 2 times for sign mode.", screenWidth+20, 440);
   textSize(21);
   fill(242,176,94);
-  text("Press the f key to start.", screenWidth+20, 470);
+  text("Press the f key to start.", screenWidth+20, 490);
   fill(142, 216, 245);
   if (VAX_MODE % 2 == 1) {
     text("Vax mode on", screenWidth+20, 90);
@@ -151,6 +151,12 @@ void draw() {
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
   }
+  if(DISPLAY_MODE == COLOR_MODE){
+    text("Color mode on", screenWidth+20,460);
+  }
+  else if(DISPLAY_MODE == SIGN_MODE){
+    text("Sign mode on", screenWidth+20,460);
+  }
   if (key == 'f') {
     if (time == 0) {
       makePop();
@@ -169,13 +175,13 @@ void draw() {
 
   fill(242,240,94);
   textSize(20);
-  text("Simulation Statistics:", screenWidth+20, 500);
+  text("Simulation Statistics:", screenWidth+20, 530);
   textSize(18);
   fill(94,242,232);
-  text("time:"+time, screenWidth+20, 530);
-  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 560);
-  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 590);
-  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 620);
+  text("time:"+time, screenWidth+20, 560);
+  text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 590);
+  text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 620);
+  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 650);
 }
 
 //speadColor
@@ -314,6 +320,9 @@ void keyPressed () {
 
   if (key == 'r') {
     reset();
+  }
+  if(key == 'e'){
+    DISPLAY_MODE++;
   }
 }
 
