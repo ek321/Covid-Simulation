@@ -107,7 +107,7 @@ void draw() {
   fill(89, 44, 138);
   rect(screenWidth, 0, textWidth, 550);
   fill(71, 79, 237);
-  rect(screenWidth, 550, textWidth, textHeight-550);
+  rect(screenWidth, 510, textWidth, textHeight-510);
   fill(242,240,94);
   textSize(20);
   text("Pre-Simulation Selections:", screenWidth+20, 25);
@@ -383,11 +383,9 @@ public void ticks() {
   if (countdown == 0) {
     countdown = 60;
    if(DISPLAY_MODE % 2 == 0){
-     DISPLAY_MODE = COLOR_MODE;
      spreadColor();
    }
    else if(DISPLAY_MODE % 2 == 1){
-     DISPLAY_MODE = SIGN_MODE;
      spreadSign();
    }
     time++;
