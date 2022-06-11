@@ -16,10 +16,11 @@ int VAX_TYPE = 0;
 Person[][] population;
 double popDen = 0.8;
 boolean pressed = false;
-// for time
+// for time/start
 int time;
 int timeEnd = 50;
 int countdown;
+boolean play = false;
 // for coloring pixels
 int pixelH;
 int pixelW;
@@ -111,30 +112,38 @@ void makePop() {
 
 void setButtons() {
   //buttons setup
-  Button preVax = new Button ("preVax", screenWidth+170, 65, 20);
+  Button preVax = new Button ("preVax", screenWidth+20, 65, 20);
   buttonList.add(preVax);
-  Button vax = new Button ("vax", screenWidth+260, 65, 20);
+  Button vax = new Button ("vax", screenWidth+110, 65, 20);
   buttonList.add(vax);
-  Button Pfizer = new Button ("Pfizer", screenWidth+20, 230, 20);
+  Button Pfizer = new Button ("Pfizer", screenWidth+20, 135, 20);
   buttonList.add(Pfizer);
-  Button Johnson = new Button ("Johnson", screenWidth+110, 230, 16);
+  Button Johnson = new Button ("Johnson", screenWidth+110, 135, 16);
   buttonList.add(Johnson);
-  Button Moderna = new Button ("Moderna", screenWidth+200, 230, 16);
+  Button Moderna = new Button ("Moderna", screenWidth+200, 135, 16);
   buttonList.add(Moderna);
-  Button All = new Button ("All", screenWidth+290, 230, 20);
+  Button All = new Button ("All", screenWidth+290, 135, 20);
   buttonList.add(All);
-  Button Boost = new Button ("Boost", screenWidth+20, 300, 20);
+  Button Boost = new Button ("Boost", screenWidth+20, 235, 20);
   buttonList.add(Boost);
-  Button Mask = new Button ("Mask", screenWidth+110, 300, 20);
+  Button noBoost = new Button ("No\nBoost", screenWidth+110, 235, 14);
+  buttonList.add(noBoost);
+  Button Mask = new Button ("Mask", screenWidth+20, 305, 20);
   buttonList.add(Mask);
-  Button Reset = new Button ("Reset", screenWidth+20, 370, 20);
-  buttonList.add(Reset);
-  Button Display = new Button ("Display", screenWidth+110, 370, 20);
-  buttonList.add(Display);
-  Button AddTime = new Button ("Add Time", screenWidth+200, 370, 20);
+  Button noMask = new Button ("No\nMask", screenWidth+110, 305, 14);
+  buttonList.add(noMask);
+  Button Color = new Button ("Color", screenWidth+20, 370, 20);
+  buttonList.add(Color);
+  Button Sign = new Button ("Sign", screenWidth+110, 370, 20);
+  buttonList.add(Sign);
+  Button Start = new Button ("Start/Pause", screenWidth+20, 435, 12);
+  buttonList.add(Start);
+  Button AddTime = new Button ("Add\nTime", screenWidth+110, 435, 14);
   buttonList.add(AddTime);
-  Button RemoveTime = new Button ("Remove Time", screenWidth+290, 370, 16);
+  Button RemoveTime = new Button ("Remove\nTime", screenWidth+200, 435, 14);
   buttonList.add(RemoveTime);
+  Button Reset = new Button ("Reset", screenWidth+290, 435, 20);
+  buttonList.add(Reset);
 }
 
 void draw() {
@@ -147,7 +156,7 @@ void draw() {
 
   disText();
 
-  if (key == 'f') {
+  if (play) {
     if (time == 0) {
       makePop();
     }
@@ -176,49 +185,52 @@ public void disText() {
   textSize(16);
   fill(247, 183, 227);
   //user key so that they can input their choices
-  text("Press a for Vax mode", screenWidth+20, 60);
-  text("Press the b key 1 time for Pfizer", screenWidth+20, 130);
-  text("Press the b key 2 times for Johnson+Johnson", screenWidth+20, 160);
-  text("Press the b key 3 times for Moderna", screenWidth+20, 190);
-  text("Press the b key 4 times for All", screenWidth+20, 220);
-  text("Press the c key for Boost mode.", screenWidth+20, 290);
-  text("Press the d key for mask mode.", screenWidth+20, 360);
-  text("Press the e key 1 time for color mode", screenWidth+20, 410);
-  text("Press the e key 2 times for sign mode.", screenWidth+20, 440);
+  text("Vax Mode: ", screenWidth+20, 60);
+  text("Vax Type: ", screenWidth+20, 130);
+  text("Booster Shot: ", screenWidth+20, 230);
+  text("Mask Available: ", screenWidth+20, 300);
+  text("Display Mode: ", screenWidth+20, 365);
+  text("System Settings: ", screenWidth+20, 430);
+
   textSize(21);
   fill(242, 176, 94);
-  text("Press the f key to start.", screenWidth+20, 490);
+  text("Press the f key to start.", screenWidth+20, 500);
   fill(142, 216, 245);
   if (VAX_MODE % 2 == 1) {
-    text("Vax mode on", screenWidth+20, 90);
+    text("Vax mode on", screenWidth+210, 90);
     if (VAX_TYPE == PFIZER) {
-      text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
+      text("Vaccine mode chosen: Pfizer", screenWidth+20, 200);
     }
     if (VAX_TYPE == MODERNA) {
-      text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
+      text("Vaccine mode chosen: Moderna", screenWidth+20, 200);
     }
     if (VAX_TYPE == JOHNSON) {
-      text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
+      text("Vaccine mode chosen: Johnson", screenWidth+20, 200);
     }
     if (VAX_TYPE == ALL) {
-      text("Vaccine mode chosen: All", screenWidth+20, 250);
+      text("Vaccine mode chosen: All", screenWidth+20, 200);
     }
     if (canBoost) {
-      text("Boost mode on", screenWidth+20, 320);
+      text("Boost mode on", screenWidth+200, 260);
+    }
+    if (!canBoost) {
+      text("Boost mode off", screenWidth+200, 260);
     }
   } else {
     VAX_TYPE = 0;
-    text("Vax mode off", screenWidth+20, 90);
+    text("Vax mode off", screenWidth+210, 90);
   }
   if (mask) {
-    text("Mask mode on", screenWidth+20, 390);
+    text("Mask mode on", screenWidth+200, 335);
+  } else if (!mask) {
+    text("Mask mode off", screenWidth+200, 335);
   }
 
   fill(142, 216, 245);
   if (DISPLAY_MODE == COLOR_MODE) {
-    text("Color mode on", screenWidth+20, 460);
+    text("Color mode on", screenWidth+200, 398);
   } else if (DISPLAY_MODE == SIGN_MODE) {
-    text("Sign mode on", screenWidth+20, 460);
+    text("Sign mode on", screenWidth+200, 398);
   }
 
   fill(242, 240, 94);
@@ -227,7 +239,7 @@ public void disText() {
   textSize(18);
   fill(94, 242, 232);
   text("time:"+time, screenWidth+20, 560);
-  text("Simulation Stop Time: " + timeEnd, screenWidth + 250, 560);
+  text("Simulation Stop Time: " + timeEnd, screenWidth + 130, 560);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 590);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 620);
   text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 650);
@@ -478,21 +490,17 @@ public void pButton(int x, int y) {
         VAX_TYPE = ALL;
       } else if (s.equals("Boost")) {
         //adds booster shot in after a while
-        if (!canBoost) {
-          canBoost = true;
-        } else if (canBoost) {
-          canBoost = false;
-        }
+        canBoost = true;
+      } else if (s.equals("No\nBoost")) {
+        canBoost = false;
       }
     }
 
     //changing mask mode
     if (s.equals("Mask")) {
-      if (mask) {
-        mask = false;
-      } else if (!mask) {
-        mask = true;
-      }
+      mask = false;
+    } else if (s.equals("No\nMask")) {
+      mask = true;
     }
 
     //resetting the simulation
@@ -502,20 +510,27 @@ public void pButton(int x, int y) {
     }
 
     //changing display mode
-    if (s.equals("Display")) {
-      if (DISPLAY_MODE == COLOR_MODE) {
-        DISPLAY_MODE = SIGN_MODE;
-      } else if (DISPLAY_MODE == SIGN_MODE) {
-        DISPLAY_MODE = COLOR_MODE;
+    if (s.equals("Color")) {
+      DISPLAY_MODE = COLOR_MODE;
+    } else if (s.equals("Sign")) {
+      DISPLAY_MODE = SIGN_MODE;
+    }
+
+    //changing time max (need to 
+    if (s.equals("Add\nTime")) {
+      timeEnd = timeEnd + 5;
+    } else if (s.equals("Remove\nTime")) {
+      if (timeEnd > 0) {
+        timeEnd = timeEnd - 5;
       }
     }
 
-    //changing time max
-    if (s.equals("Add Time")) {
-      timeEnd = timeEnd + 5;
-    } else if (s.equals("Remove Time")) {
-      if (timeEnd > 0) {
-        timeEnd = timeEnd - 5;
+    //start simulation
+    if (s.equals("Start/Pause")) {
+      if (!play) {
+        play = true;
+      } else if (play) {
+        play = false;
       }
     }
   }
