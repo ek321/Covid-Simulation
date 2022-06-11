@@ -158,15 +158,24 @@ void draw() {
   }
 
   //buttons (move to setup)
-  Button preVax = new Button ("preVax", screenWidth+170, 65, 14);
+  Button preVax = new Button ("preVax", screenWidth+170, 65, 20);
   preVax.drawButton();
   buttonList.add(preVax);
-  Button vax = new Button ("vax", screenWidth+260, 65, 14);
+  Button vax = new Button ("vax", screenWidth+260, 65, 20);
   vax.drawButton();
   buttonList.add(vax);
-  Button Pfizer = new Button ("Pfizer", screenWidth+20, 230, 14);
+  Button Pfizer = new Button ("Pfizer", screenWidth+20, 230, 20);
   Pfizer.drawButton();
   buttonList.add(Pfizer);
+  Button Johnson = new Button ("Johnson", screenWidth+110, 230, 16);
+  Johnson.drawButton();
+  buttonList.add(Johnson);
+  Button Moderna = new Button ("Moderna", screenWidth+200, 230, 16);
+  Moderna.drawButton();
+  buttonList.add(Moderna);
+  Button All = new Button ("All", screenWidth+290, 230, 20);
+  All.drawButton();
+  buttonList.add(All);
 
   if(DISPLAY_MODE == COLOR_MODE){
     text("Color mode on", screenWidth+20,460);
@@ -322,15 +331,15 @@ public Vaccine vaxTypePerson() {
 //user input
 void keyPressed () {
   // circle through vax mode with key 'a'
-  if (key == 'a') {
-    VAX_MODE++;
-    if(VAX_MODE % 2 == 0){
-      VAX_MODE = PRE_VAX;
-    }
-    else {
-    VAX_MODE = VAX;
-    }
-  }
+  //if (key == 'a') {
+  //  VAX_MODE++;
+  //  if(VAX_MODE % 2 == 0){
+  //    VAX_MODE = PRE_VAX;
+  //  }
+  //  else {
+  //  VAX_MODE = VAX;
+  //  }
+  //}
   // cycle through vax types with key 'b'
   if (key == 'b') {
     if (VAX_MODE % 2 == 1) {
@@ -358,6 +367,7 @@ void keyPressed () {
     if (timeEnd > 0) {
       timeEnd = timeEnd - 5;
     }
+  }
 
   if (key == 'r') {
     reset();
@@ -479,11 +489,25 @@ public void mouseReleased() {
 public void pButton(int x, int y) {
   Button temp = checkButton(x, y);
   if (temp != null) {
+    //changing vax mode
     String s = temp.getName();
     if (s.equals("preVax")) {
       VAX_MODE = PRE_VAX;
     } else if (s.equals("vax")) {
       VAX_MODE = VAX;
+    }
+    
+    //changing vax type
+    if (VAX_MODE == VAX) {
+      if (s.equals("Pfizer")) {
+        VAX_TYPE = PFIZER;
+      } else if (s.equals("Johnson")) {
+        VAX_TYPE = JOHNSON;
+      } else if (s.equals("Moderna")) {
+        VAX_TYPE = MODERNA;
+      } else if (s.equals("All")) {
+        VAX_TYPE = ALL;
+      }
     }
   }
 }

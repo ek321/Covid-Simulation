@@ -20,6 +20,7 @@ public class Button {
     fill(255);
     rect(xCor, yCor, xLR, yLR);
     fill(0);
+    textSize(textSize);
     textAlign(CENTER, CENTER);
     text(name, xCor, yCor, xLR, yLR);
     textAlign(LEFT);
