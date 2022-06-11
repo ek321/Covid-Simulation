@@ -10,7 +10,9 @@ public class Person {
   int covidDuration = 5;
   int recoveryDuration = 5;
 
-  //basic constructor for pre-vax, vax modes
+  /* Section 1 *********************************
+    *basic constructor for pre-vax, vax modes
+  */
   public Person(int age_, int xCor_, int yCor_, String status_) {
     age = age_;
     xCor = xCor_;
@@ -23,63 +25,22 @@ public class Person {
     covidDuration = 5;
   }
 
-  //returns whether or not a person has been vaccinated against COVID-19
-  public boolean getVaxStatus() {
-    return vax;
-  }
   
-  public void setVaxStatus(boolean temp){
-    vax = temp;
-  }
-
-  //returns whether or not a Person is wearing a mask
-  public boolean getMaskStatus() {
-    return mask;
-  }
+  /* Section 2 *********************************
+    *calculating/setting covid status of a person
+  */
   
-  public void setMaskStatus(boolean temp){
-    mask = temp;
-  }
-  //if a person is vaccinated, this will return a string containing the vaccine that they received
-  //Possible returns:
-  //"Pfizer"
-  //"Moderna"
-  //"Johnson"
-  public Vaccine getVaxType() {
-    Vaccine res = vax_type;
-    boolean possible = getVaxStatus();
-    if (possible) {
-      res = vax_type;
-    } else {
-      return null;
-    }
-    return res;
-  }
-
-  public void setVaxType(Vaccine res){
-    vax_type = res;
-  }
-
-  boolean isElderly() {
-    if (age >= 65) {
-      return true;
-    }
-    return false;
-  }
-
-  //returns:
-  //"negative"
-  //"infected"
-  /*Note: we would like to add a feature where someone is recovered after a certain number of days
-   in that case, another return string, "recovered" would be added.
-   */
+  /* returns:
+    "negative"
+    "infected"
+    "recovered"
+  */
   public String getCovidStatus() {
     return covidStatus;
   }
 
+  // sets the covid status of the person
   public void setCovidStatus(String stat) {
-    //String prev = covidStatus;
-    //covidStatus = prev;
     if (covidStatus.equals("negative")) {
       covidStatus = stat;
       covidDuration = 5;
@@ -111,18 +72,10 @@ public class Person {
       }
     }
   }
-
-  public boolean isBoosted() {
-    return booster;
-  }
-
-  public void boosterShot(boolean res){
-    booster = res;
-  }
   
-  /*returns true if the chance of catching covid is >50%
-   returns false if it is <=50%
-   */
+  /* returns true if the chance of catching covid is >50%
+    returns false if it is <=50%
+  */
   boolean catchCovid() {
     double temp = calcCovid();
     Random rng = new Random();
@@ -136,9 +89,10 @@ public class Person {
     }
   }
 
-  //helper method for catchCovid
-  //returns the chance of catching covid for one Person
-  //takes into account vaccine status, type, and number of infected neighbors
+  /* helper method for catchCovid
+    returns the chance of catching covid for one Person
+    takes into account vaccine status, type, and number of infected neighbors
+  */
   public float calcCovid() {
 
     float result = 1.0;
@@ -154,9 +108,72 @@ public class Person {
     }
     return result;
   }
+  
+  
+  /* Section 3 *********************************
+    *get/set methods for person attributes
+  */
+  
+  /*if a person is vaccinated, this will return a string containing the vaccine that they received
+    Possible returns:
+    - "Pfizer"
+    - "Moderna"
+    - "Johnson"
+  */
+  public Vaccine getVaxType() {
+    Vaccine res = vax_type;
+    boolean possible = getVaxStatus();
+    if (possible) {
+      res = vax_type;
+    } else {
+      return null;
+    }
+    return res;
+  }
 
-  //returns the x and y coordinates of a Person
-  //will be used to count the number of infected neighbors
+  public void setVaxType(Vaccine res){
+    vax_type = res;
+  }
+
+  // returns whether the person is considered elderly
+  public boolean isElderly() {
+    if (age >= 65) {
+      return true;
+    }
+    return false;
+  }
+  
+  // returns whether or not a person has been vaccinated against COVID-19
+  public boolean getVaxStatus() {
+    return vax;
+  }
+  
+  // sets the vax status of the person
+  public void setVaxStatus(boolean temp){
+    vax = temp;
+  }
+  
+  // returns whether the person is boosted or not
+  public boolean isBoosted() {
+    return booster;
+  }
+  
+  public void boosterShot(boolean res){
+    booster = res;
+  }
+
+  // returns whether or not a Person is wearing a mask
+  public boolean getMaskStatus() {
+    return mask;
+  }
+  
+  // sets the mask status of the person
+  public void setMaskStatus(boolean temp){
+    mask = temp;
+  }
+
+  // returns the x and y coordinates of a Person
+  // will be used to count the number of infected neighbors
   public int getYCor() {
     return yCor;
   }
@@ -164,6 +181,7 @@ public class Person {
     return xCor;
   }
   
+  // returns the age of the person
   public int getAge() {
     return age;
   }
