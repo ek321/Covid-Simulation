@@ -2,8 +2,7 @@ public class Vaccine{
   String type;
   float efficacy;
 
-  /* Constructor for the Vaccine class
-  */
+  // Constructor for the Vaccine class
   public Vaccine(String type_){
     type = type_;
     if(type.equals("Pfizer")){
@@ -18,20 +17,20 @@ public class Vaccine{
   }
 
   /* returns a string of the vaccine name
+    - "Pfizer"
+    - "Moderna"
+    - "Johnson"
   */
-  //"Pfizer"
-  //"Moderna"
-  //"Johnson"
   String getType(){
     return type;
   }
 
-  /* returns a decimal value of the efficacy that a given vaccine has against COVID-19
-  */
+  // returns a decimal value of the efficacy that a given vaccine has against COVID-19
   float getEfficacy(){
     return efficacy;
   }
-
+  
+  // sets the efficacy of the vaccine based on the type
   void setEfficacy(){
     if(getType().equals("Pfizer")){
       efficacy -= 0.00131037 * 100;
@@ -44,6 +43,7 @@ public class Vaccine{
     }
   }
   
+  // increases efficacy of vaccines based on type
   void boost(){
     if(type.equals("Pfizer")){
       efficacy = 0.945;
@@ -56,6 +56,7 @@ public class Vaccine{
     }
   }
   
+  // returns the type of vaccine
   String toString() {
     return type;
   }
