@@ -25,6 +25,9 @@ Marie's Work Log:
 06/04/22--I added a makePop method which sets the vaccination status, type, booster status, or mask status of the population after the user has made their inputs. I also implemented deaths.
 06/06/22--I updated the side panel to be more user-friendly and included all of the simulation information in it so that the user can see the stats of the simulation update.
 06/07/22--I implemented death as a factor so that a Person has a 20% chance of death if they are elderly and a 10% chance if they are not. I also fixed an error with the way Boost mode was implemented.
+06/08/22--I made it so that we can cycle between the modes in the user selection panel. I also started differentiating sign mode and color mode.
+06/09/22--I started sign mode, but had trouble erasing and replacing new signs.
+06/10/22--I finished sign mode and color mode by updating the key pressed to take new user input.
 
 Esther's Work Log:
 5/24/22--I worked on set up, color, key pressed, and vaxType to create the array of Person. This will visualize the data that is being processed and allow the user to change settings. This will set the color for each person and fill in the corresponding pixel box based on the covid status. vaxType is used to set the vaccination status for each person in the 2D array.
@@ -34,3 +37,8 @@ Esther's Work Log:
 5/31/22--I worked on incorporating a recovery period in the setCovidStatus method. There will be a set amount of time for being infected (and contagious) and recovery (not contagious?) where being infected again will not affect the recovery period.
 6/1/22--I worked on fixing errors with the recovery period (in terms of the duration of covid and recovery periods). I also added in the population density factor so that the whole board is not filled with people. I plan to make this adjustable by the user, but for now, it is a fixed number at the start.
 6/2/22--I worked on the display person attribute portion in the main tab, so that we can see the attributes of the person that is clicked on, but the helper method needs to be fixed.
+6/3/22--I worked on the helper method so that clicking on a person will show their attributes.
+6/6/22--I fixed errors in the personal attribute display method and then added the text needed for that method. I also set an end time for the simulation.
+6/7/22--I fixed an error where the vaccine type of the person would not show when vax mode was on. I also made a reset function so that pressing r would reset the simulation based on the new settings chosen by the user.
+6/8/22--I added a way for the user to adjust the ending time of the simulation and tested the person attribute display method.
+6/9/22--I worked on adding a button class so that the user can click buttons rather than keys on the keyboard to change modes/settings.
