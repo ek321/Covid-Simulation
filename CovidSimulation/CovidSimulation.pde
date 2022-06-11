@@ -47,6 +47,7 @@ void setup() {
   size(1600, 1600);
   background(0);
   setPop();
+  setButtons();
 
   pixelH = screenHeight / ROWS;
   pixelW = screenWidth / COLS;
@@ -108,6 +109,22 @@ void makePop() {
   }
 }
 
+void setButtons() {
+  //buttons setup
+  Button preVax = new Button ("preVax", screenWidth+170, 65, 20);
+  buttonList.add(preVax);
+  Button vax = new Button ("vax", screenWidth+260, 65, 20);
+  buttonList.add(vax);
+  Button Pfizer = new Button ("Pfizer", screenWidth+20, 230, 20);
+  buttonList.add(Pfizer);
+  Button Johnson = new Button ("Johnson", screenWidth+110, 230, 16);
+  buttonList.add(Johnson);
+  Button Moderna = new Button ("Moderna", screenWidth+200, 230, 16);
+  buttonList.add(Moderna);
+  Button All = new Button ("All", screenWidth+290, 230, 20);
+  buttonList.add(All);
+}
+
 void draw() {
   fill(89, 44, 138);
   rect(screenWidth, 0, textWidth, 550);
@@ -157,26 +174,6 @@ void draw() {
     text("Mask mode on", screenWidth+20, 390);
   }
 
-  //buttons (move to setup)
-  Button preVax = new Button ("preVax", screenWidth+170, 65, 20);
-  preVax.drawButton();
-  buttonList.add(preVax);
-  Button vax = new Button ("vax", screenWidth+260, 65, 20);
-  vax.drawButton();
-  buttonList.add(vax);
-  Button Pfizer = new Button ("Pfizer", screenWidth+20, 230, 20);
-  Pfizer.drawButton();
-  buttonList.add(Pfizer);
-  Button Johnson = new Button ("Johnson", screenWidth+110, 230, 16);
-  Johnson.drawButton();
-  buttonList.add(Johnson);
-  Button Moderna = new Button ("Moderna", screenWidth+200, 230, 16);
-  Moderna.drawButton();
-  buttonList.add(Moderna);
-  Button All = new Button ("All", screenWidth+290, 230, 20);
-  All.drawButton();
-  buttonList.add(All);
-
   if(DISPLAY_MODE == COLOR_MODE){
     text("Color mode on", screenWidth+20,460);
   }
@@ -190,6 +187,10 @@ void draw() {
     if (time < timeEnd) {
       ticks();
     }
+  }
+  
+  for (int i = 0; i < buttonList.size(); i++) {
+    buttonList.get(i).drawButton();
   }
 
   //for person attribute, relocate later
@@ -330,26 +331,6 @@ public Vaccine vaxTypePerson() {
 
 //user input
 void keyPressed () {
-  // circle through vax mode with key 'a'
-  //if (key == 'a') {
-  //  VAX_MODE++;
-  //  if(VAX_MODE % 2 == 0){
-  //    VAX_MODE = PRE_VAX;
-  //  }
-  //  else {
-  //  VAX_MODE = VAX;
-  //  }
-  //}
-  // cycle through vax types with key 'b'
-  if (key == 'b') {
-    if (VAX_MODE % 2 == 1) {
-      if (VAX_TYPE == ALL) {
-        VAX_TYPE = PFIZER;
-      } else {
-        VAX_TYPE++;
-      }
-    }
-  }
   //adds booster shot in after a while
   if (key == 'c') {
     if (VAX_MODE == VAX) {
