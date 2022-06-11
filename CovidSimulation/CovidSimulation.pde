@@ -41,7 +41,7 @@ boolean mask = false;
 //color vs sign representations
  final int COLOR_MODE = 1;
  final int SIGN_MODE = 2;
- static int DISPLAY_MODE = 0;
+ int DISPLAY_MODE = 0;
 
 void setup() {
   size(1600, 1600);
@@ -176,7 +176,7 @@ void draw() {
   Button All = new Button ("All", screenWidth+290, 230, 20);
   All.drawButton();
   buttonList.add(All);
-
+  fill(142, 216, 245);
   if(DISPLAY_MODE == COLOR_MODE){
     text("Color mode on", screenWidth+20,460);
   }
@@ -436,10 +436,10 @@ public void ticks() {
 //spreadColor
   if (countdown == 0) {
     countdown = 60;
-   if(DISPLAY_MODE % 2 == 0){
+   if(DISPLAY_MODE == COLOR_MODE){
      spreadColor();
    }
-   else if(DISPLAY_MODE % 2 == 1){
+   else if(DISPLAY_MODE == SIGN_MODE){
      spreadSign();
    }
     time++;
