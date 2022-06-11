@@ -18,12 +18,13 @@ double popDen = 0.8;
 boolean pressed = false;
 // for time
 int time;
+int timeEnd = 50;
 int countdown;
 // for coloring pixels
 int pixelH;
 int pixelW;
-// for testing purposes
-//int tick;
+// buttons
+ArrayList<Button> buttonList = new ArrayList<Button>();
 
 //new dimensions
 int screenHeight = 1000;
@@ -155,6 +156,27 @@ void draw() {
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
   }
+
+  //buttons (move to setup)
+  Button preVax = new Button ("preVax", screenWidth+170, 65, 20);
+  preVax.drawButton();
+  buttonList.add(preVax);
+  Button vax = new Button ("vax", screenWidth+260, 65, 20);
+  vax.drawButton();
+  buttonList.add(vax);
+  Button Pfizer = new Button ("Pfizer", screenWidth+20, 230, 20);
+  Pfizer.drawButton();
+  buttonList.add(Pfizer);
+  Button Johnson = new Button ("Johnson", screenWidth+110, 230, 16);
+  Johnson.drawButton();
+  buttonList.add(Johnson);
+  Button Moderna = new Button ("Moderna", screenWidth+200, 230, 16);
+  Moderna.drawButton();
+  buttonList.add(Moderna);
+  Button All = new Button ("All", screenWidth+290, 230, 20);
+  All.drawButton();
+  buttonList.add(All);
+
   if(DISPLAY_MODE == COLOR_MODE){
     text("Color mode on", screenWidth+20,460);
   }
@@ -165,7 +187,7 @@ void draw() {
     if (time == 0) {
       makePop();
     }
-    if (time < 50) {
+    if (time < timeEnd) {
       ticks();
     }
   }
@@ -175,6 +197,7 @@ void draw() {
     int x = mouseX;
     int y = mouseY;
     perView(x, y);
+    pButton(x, y);
   }
 
   fill(242,240,94);
@@ -183,6 +206,7 @@ void draw() {
   textSize(18);
   fill(94,242,232);
   text("time:"+time, screenWidth+20, 560);
+  text("Simulation Stop Time: " + timeEnd, screenWidth + 250, 560);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 590);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 620);
   text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 650);
@@ -210,7 +234,7 @@ public void spreadColor () {
   }
 }
 
-/*Visualizes the simulation using signs 
+/*Visualizes the simulation using signs
 "+" = positive
 "-" = negative
 "," = recovered
@@ -307,15 +331,15 @@ public Vaccine vaxTypePerson() {
 //user input
 void keyPressed () {
   // circle through vax mode with key 'a'
-  if (key == 'a') {
-    VAX_MODE++;
-    if(VAX_MODE % 2 == 0){
-      VAX_MODE = PRE_VAX;
-    }
-    else {
-    VAX_MODE = VAX;
-    }
-  }
+  //if (key == 'a') {
+  //  VAX_MODE++;
+  //  if(VAX_MODE % 2 == 0){
+  //    VAX_MODE = PRE_VAX;
+  //  }
+  //  else {
+  //  VAX_MODE = VAX;
+  //  }
+  //}
   // cycle through vax types with key 'b'
   if (key == 'b') {
     if (VAX_MODE % 2 == 1) {
@@ -334,6 +358,15 @@ void keyPressed () {
   }
   if (key == 'd') {
     mask = true;
+  }
+
+  if (key == '2') {
+    timeEnd = timeEnd + 5;
+  }
+  if (key == '1') {
+    if (timeEnd > 0) {
+      timeEnd = timeEnd - 5;
+    }
   }
 
   if (key == 'r') {
@@ -451,6 +484,44 @@ public void mousePressed() {
 
 public void mouseReleased() {
   pressed = false;
+}
+
+public void pButton(int x, int y) {
+  Button temp = checkButton(x, y);
+  if (temp != null) {
+    //changing vax mode
+    String s = temp.getName();
+    if (s.equals("preVax")) {
+      VAX_MODE = PRE_VAX;
+    } else if (s.equals("vax")) {
+      VAX_MODE = VAX;
+    }
+    
+    //changing vax type
+    if (VAX_MODE == VAX) {
+      if (s.equals("Pfizer")) {
+        VAX_TYPE = PFIZER;
+      } else if (s.equals("Johnson")) {
+        VAX_TYPE = JOHNSON;
+      } else if (s.equals("Moderna")) {
+        VAX_TYPE = MODERNA;
+      } else if (s.equals("All")) {
+        VAX_TYPE = ALL;
+      }
+    }
+  }
+}
+
+public Button checkButton(int x, int y) {
+  // go through arraylist of buttons and check if they are pressed
+  Button temp;
+  for (int i = 0; i < buttonList.size(); i++) {
+    temp = buttonList.get(i);
+    if (temp.pressButton(x, y)) {
+      return temp;
+    }
+  }
+  return null;
 }
 
 /*When someone presses over a Person, their attributes will appear under "Simulation Stats" in the side panel
