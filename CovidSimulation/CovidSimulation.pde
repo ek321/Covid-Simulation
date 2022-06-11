@@ -127,6 +127,8 @@ void setButtons() {
   buttonList.add(Boost);
   Button Mask = new Button ("Mask", screenWidth+110, 300, 20);
   buttonList.add(Mask);
+  Button Reset = new Button ("Reset", screenWidth+20, 370, 20);
+  buttonList.add(Reset);
 }
 
 void draw() {
@@ -346,9 +348,6 @@ void keyPressed () {
     }
   }
 
-  if (key == 'r') {
-    reset();
-  }
   if(key == 'e'){
     DISPLAY_MODE++;
   }
@@ -501,6 +500,12 @@ public void pButton(int x, int y) {
       } else if (!mask) {
         mask = true;
       }
+    }
+    
+    //resetting the simulation
+    if (s.equals("Reset")) {
+      //add pause function so that it doesn't immediately restart (probably)
+      reset();
     }
   }
 }
