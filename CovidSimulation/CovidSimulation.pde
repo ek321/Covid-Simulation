@@ -43,6 +43,7 @@ int pixelW;
 
 // buttons
 ArrayList<Button> buttonList = new ArrayList<Button>();
+int buttonCountdown = 30;
 
 
 /** Section 1 *********************************
@@ -84,11 +85,18 @@ void draw() {
   }
 
   // for person attribute, relocate later
+  
   if (pressed) {
     int x = mouseX;
     int y = mouseY;
     perView(x, y);
-    pButton(x, y);
+    if (buttonCountdown == 0) {
+      pButton(x, y);
+      buttonCountdown = 30;
+    }
+  }
+  if (buttonCountdown > 0) {
+    buttonCountdown --;
   }
 }
 
