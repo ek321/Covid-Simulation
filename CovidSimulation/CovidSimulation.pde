@@ -111,20 +111,22 @@ void makePop() {
 
 void setButtons() {
   //buttons setup
-  Button preVax = new Button ("preVax", screenWidth+170, 65, 20);
+  Button preVax = new Button ("preVax", screenWidth+20, 65, 20);
   buttonList.add(preVax);
-  Button vax = new Button ("vax", screenWidth+260, 65, 20);
+  Button vax = new Button ("vax", screenWidth+110, 65, 20);
   buttonList.add(vax);
-  Button Pfizer = new Button ("Pfizer", screenWidth+20, 230, 20);
+  Button Pfizer = new Button ("Pfizer", screenWidth+20, 135, 20);
   buttonList.add(Pfizer);
-  Button Johnson = new Button ("Johnson", screenWidth+110, 230, 16);
+  Button Johnson = new Button ("Johnson", screenWidth+110, 135, 16);
   buttonList.add(Johnson);
-  Button Moderna = new Button ("Moderna", screenWidth+200, 230, 16);
+  Button Moderna = new Button ("Moderna", screenWidth+200, 135, 16);
   buttonList.add(Moderna);
-  Button All = new Button ("All", screenWidth+290, 230, 20);
+  Button All = new Button ("All", screenWidth+290, 135, 20);
   buttonList.add(All);
-  Button Boost = new Button ("Boost", screenWidth+20, 300, 20);
+  Button Boost = new Button ("Boost", screenWidth+20, 235, 20);
   buttonList.add(Boost);
+  Button noBoost = new Button ("noBoost", screenWidth+110, 235, 18);
+  buttonList.add(noBoost);
   Button Mask = new Button ("Mask", screenWidth+110, 300, 20);
   buttonList.add(Mask);
   Button Reset = new Button ("Reset", screenWidth+20, 370, 20);
@@ -176,39 +178,42 @@ public void disText() {
   textSize(16);
   fill(247, 183, 227);
   //user key so that they can input their choices
-  text("Press a for Vax mode", screenWidth+20, 60);
-  text("Press the b key 1 time for Pfizer", screenWidth+20, 130);
-  text("Press the b key 2 times for Johnson+Johnson", screenWidth+20, 160);
-  text("Press the b key 3 times for Moderna", screenWidth+20, 190);
-  text("Press the b key 4 times for All", screenWidth+20, 220);
-  text("Press the c key for Boost mode.", screenWidth+20, 290);
-  text("Press the d key for mask mode.", screenWidth+20, 360);
-  text("Press the e key 1 time for color mode", screenWidth+20, 410);
-  text("Press the e key 2 times for sign mode.", screenWidth+20, 440);
+  text("Vax Mode: ", screenWidth+20, 60);
+  text("Vax Type: ", screenWidth+20, 130);
+  text("Boost: ", screenWidth+20, 230);
+  //text("Press the b key 3 times for Moderna", screenWidth+20, 190);
+  //text("Press the b key 4 times for All", screenWidth+20, 220);
+  //text("Press the c key for Boost mode.", screenWidth+20, 290);
+  //text("Press the d key for mask mode.", screenWidth+20, 360);
+  //text("Press the e key 1 time for color mode", screenWidth+20, 410);
+  //text("Press the e key 2 times for sign mode.", screenWidth+20, 440);
   textSize(21);
   fill(242, 176, 94);
   text("Press the f key to start.", screenWidth+20, 490);
   fill(142, 216, 245);
   if (VAX_MODE % 2 == 1) {
-    text("Vax mode on", screenWidth+20, 90);
+    text("Vax mode on", screenWidth+210, 90);
     if (VAX_TYPE == PFIZER) {
-      text("Vaccine mode chosen: Pfizer", screenWidth+20, 250);
+      text("Vaccine mode chosen: Pfizer", screenWidth+20, 200);
     }
     if (VAX_TYPE == MODERNA) {
-      text("Vaccine mode chosen: Moderna", screenWidth+20, 250);
+      text("Vaccine mode chosen: Moderna", screenWidth+20,200);
     }
     if (VAX_TYPE == JOHNSON) {
-      text("Vaccine mode chosen: Johnson", screenWidth+20, 250);
+      text("Vaccine mode chosen: Johnson", screenWidth+20, 200);
     }
     if (VAX_TYPE == ALL) {
-      text("Vaccine mode chosen: All", screenWidth+20, 250);
+      text("Vaccine mode chosen: All", screenWidth+20, 200);
     }
     if (canBoost) {
-      text("Boost mode on", screenWidth+20, 320);
+      text("Boost mode on", screenWidth+200, 260);
+    }
+    if (!canBoost) {
+      text("Boost mode off", screenWidth+200, 260);
     }
   } else {
     VAX_TYPE = 0;
-    text("Vax mode off", screenWidth+20, 90);
+    text("Vax mode off", screenWidth+210, 90);
   }
   if (mask) {
     text("Mask mode on", screenWidth+20, 390);
@@ -478,11 +483,9 @@ public void pButton(int x, int y) {
         VAX_TYPE = ALL;
       } else if (s.equals("Boost")) {
         //adds booster shot in after a while
-        if (!canBoost) {
           canBoost = true;
-        } else if (canBoost) {
-          canBoost = false;
-        }
+      } else if (s.equals("noBoost")) {
+        canBoost = false;
       }
     }
 
