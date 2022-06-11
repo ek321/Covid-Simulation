@@ -43,3 +43,4 @@ Esther's Work Log:
 6/8/22--I added a way for the user to adjust the ending time of the simulation and tested the person attribute display method.
 6/9/22--I worked on adding a button class so that the user can click buttons rather than keys on the keyboard to change modes/settings.
 6/10/22--I fixed the broken button class, so there is buttons for vax mode and vax type.
+6/11/22--I added all the buttons and reformatted the text/buttons on the side menu so that it is neat. There are now buttons for all modes and to start/pause the simulation.
