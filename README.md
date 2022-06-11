@@ -42,3 +42,4 @@ Esther's Work Log:
 6/7/22--I fixed an error where the vaccine type of the person would not show when vax mode was on. I also made a reset function so that pressing r would reset the simulation based on the new settings chosen by the user.
 6/8/22--I added a way for the user to adjust the ending time of the simulation and tested the person attribute display method.
 6/9/22--I worked on adding a button class so that the user can click buttons rather than keys on the keyboard to change modes/settings.
+6/10/22--I fixed the broken button class, so there is buttons for vax mode and vax type.
