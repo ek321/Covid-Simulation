@@ -39,8 +39,8 @@ boolean canBoost;
 boolean mask = false;
 
 //color vs sign representations
- final int COLOR_MODE = 1;
- final int SIGN_MODE = 2;
+ final int COLOR_MODE = 0;
+ final int SIGN_MODE = 1;
  int DISPLAY_MODE = 0;
 
 void setup() {
@@ -129,6 +129,8 @@ void setButtons() {
   buttonList.add(Mask);
   Button Reset = new Button ("Reset", screenWidth+20, 370, 20);
   buttonList.add(Reset);
+  Button Display = new Button ("Display", screenWidth+110, 370, 20);
+  buttonList.add(Display);
 }
 
 void draw() {
@@ -347,10 +349,6 @@ void keyPressed () {
       timeEnd = timeEnd - 5;
     }
   }
-
-  if(key == 'e'){
-    DISPLAY_MODE++;
-  }
 }
 
 //resets the simulation page, so someone can make their selections and run the simulation again
@@ -506,6 +504,15 @@ public void pButton(int x, int y) {
     if (s.equals("Reset")) {
       //add pause function so that it doesn't immediately restart (probably)
       reset();
+    }
+    
+    //changing display mode
+    if (s.equals("Display")) {
+      if (DISPLAY_MODE == COLOR_MODE) {
+        DISPLAY_MODE = SIGN_MODE;
+      } else if (DISPLAY_MODE == SIGN_MODE) {
+        DISPLAY_MODE = COLOR_MODE;
+      }
     }
   }
 }
