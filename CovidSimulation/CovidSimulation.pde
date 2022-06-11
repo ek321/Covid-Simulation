@@ -134,11 +134,40 @@ void setButtons() {
 }
 
 void draw() {
+  // draw the partition between simulation and side menu
   fill(89, 44, 138);
   rect(screenWidth, 0, textWidth, 550);
   fill(71, 79, 237);
   rect(screenWidth, 510, textWidth, textHeight-510);
   fill(242,240,94);
+  
+  disText();
+  
+  if (key == 'f') {
+    if (time == 0) {
+      makePop();
+    }
+    if (time < timeEnd) {
+      ticks();
+    }
+  }
+  
+  //displays the buttons on the side menu
+  for (int i = 0; i < buttonList.size(); i++) {
+    buttonList.get(i).drawButton();
+  }
+
+  //for person attribute, relocate later
+  if (pressed) {
+    int x = mouseX;
+    int y = mouseY;
+    perView(x, y);
+    pButton(x, y);
+  }
+
+}
+
+public void disText() {
   textSize(20);
   text("Pre-Simulation Selections:", screenWidth+20, 25);
   textSize(16);
@@ -189,28 +218,7 @@ void draw() {
   else if(DISPLAY_MODE == SIGN_MODE){
     text("Sign mode on", screenWidth+20,460);
   }
-  if (key == 'f') {
-    if (time == 0) {
-      makePop();
-    }
-    if (time < timeEnd) {
-      ticks();
-    }
-  }
   
-  //displays the buttons on the side menu
-  for (int i = 0; i < buttonList.size(); i++) {
-    buttonList.get(i).drawButton();
-  }
-
-  //for person attribute, relocate later
-  if (pressed) {
-    int x = mouseX;
-    int y = mouseY;
-    perView(x, y);
-    pButton(x, y);
-  }
-
   fill(242,240,94);
   textSize(20);
   text("Simulation Statistics:", screenWidth+20, 530);
