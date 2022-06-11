@@ -16,10 +16,11 @@ int VAX_TYPE = 0;
 Person[][] population;
 double popDen = 0.8;
 boolean pressed = false;
-// for time
+// for time/start
 int time;
 int timeEnd = 50;
 int countdown;
+boolean play = false;
 // for coloring pixels
 int pixelH;
 int pixelW;
@@ -135,11 +136,13 @@ void setButtons() {
   buttonList.add(Color);
   Button Sign = new Button ("Sign", screenWidth+110, 370, 20);
   buttonList.add(Sign);
-  Button AddTime = new Button ("Add\nTime", screenWidth+20, 435, 14);
+  Button Start = new Button ("Start/Pause", screenWidth+20, 435, 12);
+  buttonList.add(Start);
+  Button AddTime = new Button ("Add\nTime", screenWidth+110, 435, 14);
   buttonList.add(AddTime);
-  Button RemoveTime = new Button ("Remove\nTime", screenWidth+110, 435, 14);
+  Button RemoveTime = new Button ("Remove\nTime", screenWidth+200, 435, 14);
   buttonList.add(RemoveTime);
-  Button Reset = new Button ("Reset", screenWidth+200, 435, 20);
+  Button Reset = new Button ("Reset", screenWidth+290, 435, 20);
   buttonList.add(Reset);
 }
 
@@ -153,7 +156,7 @@ void draw() {
 
   disText();
 
-  if (key == 'f') {
+  if (play) {
     if (time == 0) {
       makePop();
     }
@@ -188,7 +191,7 @@ public void disText() {
   text("Mask Available: ", screenWidth+20, 300);
   text("Display Mode: ", screenWidth+20, 365);
   text("System Settings: ", screenWidth+20, 430);
- 
+
   textSize(21);
   fill(242, 176, 94);
   text("Press the f key to start.", screenWidth+20, 500);
@@ -236,7 +239,7 @@ public void disText() {
   textSize(18);
   fill(94, 242, 232);
   text("time:"+time, screenWidth+20, 560);
-  text("Simulation Stop Time: " + timeEnd, screenWidth + 250, 560);
+  text("Simulation Stop Time: " + timeEnd, screenWidth + 130, 560);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 590);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 620);
   text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 650);
@@ -513,12 +516,21 @@ public void pButton(int x, int y) {
       DISPLAY_MODE = SIGN_MODE;
     }
 
-    //changing time max
+    //changing time max (need to 
     if (s.equals("Add\nTime")) {
       timeEnd = timeEnd + 5;
     } else if (s.equals("Remove\nTime")) {
       if (timeEnd > 0) {
         timeEnd = timeEnd - 5;
+      }
+    }
+
+    //start simulation
+    if (s.equals("Start/Pause")) {
+      if (!play) {
+        play = true;
+      } else if (play) {
+        play = false;
       }
     }
   }
