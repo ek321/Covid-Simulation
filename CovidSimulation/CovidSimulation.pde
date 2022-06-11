@@ -123,6 +123,8 @@ void setButtons() {
   buttonList.add(Moderna);
   Button All = new Button ("All", screenWidth+290, 230, 20);
   buttonList.add(All);
+  Button Boost = new Button ("Boost", screenWidth+20, 300, 20);
+  buttonList.add(Boost);
 }
 
 void draw() {
@@ -488,6 +490,8 @@ public void pButton(int x, int y) {
         VAX_TYPE = MODERNA;
       } else if (s.equals("All")) {
         VAX_TYPE = ALL;
+      } else if (s.equals("Boost")) {
+        canBoost = true;
       }
     }
   }
