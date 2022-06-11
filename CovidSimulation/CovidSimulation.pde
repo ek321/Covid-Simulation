@@ -125,6 +125,8 @@ void setButtons() {
   buttonList.add(All);
   Button Boost = new Button ("Boost", screenWidth+20, 300, 20);
   buttonList.add(Boost);
+  Button Mask = new Button ("Mask", screenWidth+110, 300, 20);
+  buttonList.add(Mask);
 }
 
 void draw() {
@@ -191,7 +193,8 @@ void draw() {
       ticks();
     }
   }
-
+  
+  //displays the buttons on the side menu
   for (int i = 0; i < buttonList.size(); i++) {
     buttonList.get(i).drawButton();
   }
@@ -332,18 +335,8 @@ public Vaccine vaxTypePerson() {
   return ans;
 }
 
-//user input
+//user input (changing to buttons, will get rid of this soon)
 void keyPressed () {
-  //adds booster shot in after a while
-  if (key == 'c') {
-    if (VAX_MODE == VAX) {
-      canBoost = true;
-    }
-  }
-  if (key == 'd') {
-    mask = true;
-  }
-
   if (key == '2') {
     timeEnd = timeEnd + 5;
   }
@@ -481,7 +474,7 @@ public void pButton(int x, int y) {
       VAX_MODE = VAX;
     }
 
-    //changing vax type
+    //changing vax type/boost
     if (VAX_MODE == VAX) {
       if (s.equals("Pfizer")) {
         VAX_TYPE = PFIZER;
@@ -492,7 +485,21 @@ public void pButton(int x, int y) {
       } else if (s.equals("All")) {
         VAX_TYPE = ALL;
       } else if (s.equals("Boost")) {
-        canBoost = true;
+        //adds booster shot in after a while
+        if (!canBoost) {
+          canBoost = true;
+        } else if (canBoost) {
+          canBoost = false;
+        }
+      }
+    }
+    
+    //changing mask mode
+    if (s.equals("Mask")) {
+      if (mask) {
+        mask = false;
+      } else if (!mask) {
+        mask = true;
       }
     }
   }
