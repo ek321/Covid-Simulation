@@ -34,6 +34,7 @@ public class Person {
     "negative"
     "infected"
     "recovered"
+    "dead"
   */
   public String getCovidStatus() {
     return covidStatus;

@@ -43,6 +43,7 @@ int pixelW;
 
 // buttons
 ArrayList<Button> buttonList = new ArrayList<Button>();
+int buttonCountdown = 30;
 
 
 /** Section 1 *********************************
@@ -84,11 +85,18 @@ void draw() {
   }
 
   // for person attribute, relocate later
+  
   if (pressed) {
     int x = mouseX;
     int y = mouseY;
     perView(x, y);
-    pButton(x, y);
+    if (buttonCountdown == 0) {
+      pButton(x, y);
+      buttonCountdown = 30;
+    }
+  }
+  if (buttonCountdown > 0) {
+    buttonCountdown --;
   }
 }
 
@@ -113,15 +121,26 @@ public void setPop() {
       }
     }
   }
-
+  
   Random rng = new Random();
-  for (int i = 0; i < ROWS; i++) {
-    int b = rng.nextInt(30);
-    // change later when covidstatus method is done
-    if (b < 13 && population[i][0] != null) {
-      population[i][0].setCovidStatus("infected");
+  int infectNumMax = rng.nextInt((population.length * population[0].length) / 3) + 1;
+  for (int i = 0; i < infectNumMax; i++) {
+    int a = (int) (Math.random() * (ROWS));
+    int b = (int) (Math.random() * (COLS));
+    if (population[a][b] != null) {
+      population[a][b].setCovidStatus("infected");
     }
   }
+  
+  // Random number of people on leftmost column chosen
+  //Random rng = new Random();
+  //for (int i = 0; i < ROWS; i++) {
+  //  int b = rng.nextInt(30);
+  //  // change later when covidstatus method is done
+  //  if (b < 13 && population[i][0] != null) {
+  //    population[i][0].setCovidStatus("infected");
+  //  }
+  //}
 }
 
 /* Takes the user input and cycles through the population again to make necessary changes
@@ -340,14 +359,14 @@ public void disText() {
   // displays general information about the progress of the simulation
   fill(242, 240, 94);
   textSize(20);
-  text("Simulation Statistics:", screenWidth+20, 530);
+  text("Simulation Statistics: ", screenWidth+20, 530);
   textSize(18);
   fill(94, 242, 232);
   text("time:"+time, screenWidth+20, 560);
   text("Simulation Stop Time: " + timeEnd, screenWidth + 130, 560);
   text("Total # of Covid Cases: " + covidCasesPop(), screenWidth+20, 590);
   text("Percentage of Population Infected: " + (100 * (float)covidCasesPop() / (population.length * population[0].length)), screenWidth+20, 620);
-  text("Population density:"+Math.round(popDen * 100.0)/100.0, screenWidth+20, 650);
+  text("Population density: "+Math.round(popDen * 100.0)/100.0, screenWidth+20, 650);
 }
 
 /* counts the number of covid cases in the population
@@ -427,6 +446,10 @@ void setButtons() {
   buttonList.add(RemoveTime);
   Button Reset = new Button ("Reset", screenWidth+290, 435, 20);
   buttonList.add(Reset);
+  Button moreDense = new Button ("More\nDense", screenWidth+250, 625, 14);
+  buttonList.add(moreDense);
+  Button lessDense = new Button ("Less\nDense", screenWidth+250, 670, 14);
+  buttonList.add(lessDense);
 }
 
 /* checking if a button is pressed
@@ -509,6 +532,17 @@ public void pButton(int x, int y) {
         play = true;
       } else if (play) {
         play = false;
+      }
+    }
+    
+    //changing the density of the population
+    if (s.equals("More\nDense")) {
+      if (popDen <= 1.0) {
+        popDen = popDen + 0.05;
+      }
+    } else if (s.equals("Less\nDense")) {
+      if (popDen > 0) {
+        popDen = popDen - 0.05;
       }
     }
   }
