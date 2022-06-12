@@ -38,6 +38,10 @@ Compile/Run Instructions:
 5. Once the simulation ends, it can be restarted by the restart button under system settings.
 6. Simulation statistics will display general information about the simulation.
   - The density of the population can be changed by the buttons next to it.
+7. The Add Row/Col button will increment the rows and columns of people by 10. The Remove Row/Col button will decrement them by 10.
+  - They can only be used in color mode.
+  - The simulation should be paused while changing the rows/cols and should be reset before starting the simulation.
+  - Sign mode is fixed at 20 by 20 and can't be changed by the buttons.
 8. Pressing on a person in the simulation will display information about them under the simulation statistics.
 
 Marie's Work Log:
