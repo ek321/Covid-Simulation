@@ -450,6 +450,10 @@ void setButtons() {
   buttonList.add(moreDense);
   Button lessDense = new Button ("Less\nDense", screenWidth+250, 670, 14);
   buttonList.add(lessDense);
+  Button AddRows_Cols = new Button ("Add\nRows/Cols", screenWidth+250, 720, 14);
+  buttonList.add(AddRows_Cols);
+  Button RemoveRows_Cols = new Button ("Remove\nRows/Cols", screenWidth+250, 765, 14);
+  buttonList.add(RemoveRows_Cols);
 }
 
 /* checking if a button is pressed
@@ -543,6 +547,19 @@ public void pButton(int x, int y) {
     } else if (s.equals("Less\nDense")) {
       if (popDen > 0) {
         popDen = popDen - 0.05;
+      }
+    }
+    
+    //changing the rows/cols of the simulation
+    if (s.equals("Add\nRows/Cols")) {
+      if (ROWS <= 1000 && COLS <= 1000) {
+        ROWS = ROWS + 10;
+        COLS = COLS + 10;
+      }
+    } else if (s.equals("Remove\nRows/Cols")) {
+      if (ROWS > 0 && COLS > 0) {
+        ROWS = ROWS - 10;
+        COLS = COLS - 10;
       }
     }
   }
