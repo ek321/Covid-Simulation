@@ -1,7 +1,7 @@
 import java.util.*;
 // size of the simulation
-int ROWS = 20;
-int COLS = 20;
+int ROWS = 100;
+int COLS = 100;
 // new dimensions
 int screenHeight = 1000;
 int screenWidth = 1000;
@@ -499,9 +499,9 @@ public void pButton(int x, int y) {
 
     //changing mask mode
     if (s.equals("Mask")) {
-      mask = false;
-    } else if (s.equals("No\nMask")) {
       mask = true;
+    } else if (s.equals("No\nMask")) {
+      mask = false;
     }
 
     //resetting the simulation
