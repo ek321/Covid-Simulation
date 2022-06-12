@@ -31,6 +31,7 @@ Compile/Run Instructions:
       - "+" = has covid (can spread covid to others)
       - "," = recovery period (doesn't spread covid to others, is immune to catching covid)
       - "." = deceased
+  - Note that the adding and removing rows/cols buttons only work in Color Mode
 3. Once the desired modes are chosen, the simulation can be started by the start/pause button under settings.
   - The add time button will increase the amount of time the simulation runs for, while the remove time button will decrease it. The length of the simulation can be seen under simulation statistics, the simulation stop time.
 4. You may pause and continue the simulation with the start/pause button at any time.
