@@ -1,8 +1,8 @@
 import java.util.*;
-// size of the simulation
-int ROWS = 100;
-int COLS = 100;
-// new dimensions
+// size of the simulation (multiples of 10)
+int ROWS = 20;
+int COLS = 20;
+// new dimensions (multiples of 10)
 int screenHeight = 1000;
 int screenWidth = 1000;
 int textHeight = 1600;
@@ -518,6 +518,8 @@ public void pButton(int x, int y) {
     if (s.equals("Color")) {
       DISPLAY_MODE = COLOR_MODE;
     } else if (s.equals("Sign")) {
+      ROWS = 20;
+      COLS = 20;
       DISPLAY_MODE = SIGN_MODE;
     }
 
@@ -552,14 +554,18 @@ public void pButton(int x, int y) {
     
     //changing the rows/cols of the simulation
     if (s.equals("Add\nRows/Cols")) {
-      if (ROWS <= 1000 && COLS <= 1000) {
+      if (DISPLAY_MODE == COLOR_MODE && ROWS <= 1000 && COLS <= 1000) {
         ROWS = ROWS + 10;
         COLS = COLS + 10;
+        pixelH = screenHeight / ROWS;
+        pixelW = screenWidth / COLS;
       }
     } else if (s.equals("Remove\nRows/Cols")) {
-      if (ROWS > 0 && COLS > 0) {
+      if (DISPLAY_MODE == COLOR_MODE && ROWS > 0 && COLS > 0) {
         ROWS = ROWS - 10;
         COLS = COLS - 10;
+        pixelH = screenHeight / ROWS;
+        pixelW = screenWidth / COLS;
       }
     }
   }
