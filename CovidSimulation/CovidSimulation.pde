@@ -584,7 +584,7 @@ public void spreadSign () {
         fill(109, 130, 201);
         rect(j * pixelH, i * pixelW, pixelH, pixelW);
         fill(255);
-        textSize(8);
+        textSize(16);
         text(temp, (pixelH*j)+(pixelH/2), (pixelW*i)+(pixelW/2));
       } else {
         fill(color(0));
