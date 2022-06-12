@@ -13,6 +13,32 @@ Overview: We will start with a simple base simulation, such as tree burning, whe
 
 Link to Prototype and Documentation: https://docs.google.com/document/d/1wrRULuiaHOxXiVJBUzgqQ4qGiGo9hQJetHGIiOBobzc/edit?usp=sharing
 
+Compile/Run Instructions:
+1. Once the sketch from processing is running, there will be a side menu on the right of the screen. The black portion will display the simulation.
+2. Modes can be chosen on the side menu using the buttons. The blue letters will display which options have been chosen.
+  - Under vax mode, prevax will distribute no vaccines to the population, while vax mode will.
+  - Vax type determines the type of vaccine being distributed. The choice all will randomly choose the type of vaccines given to each person vaccinated. This can only be chosen when vax mode is on.
+  - Boost mode will determine whether a booster shot is available to the population. If yes, people will periodically be given a booster shot.
+  - Mask mode will determine whether or not masks are available to the public. This mode can be turned on regardless of whether vax mode is on or off.
+  - There is an option to visualize the spread of covid through color or sign.
+    * With color mode:
+      - Blue = doesn't have covid
+      - Orange = has covid (can spread covid to others)
+      - Green = recovery period (doesn't spread covid to others, is immune to catching covid)
+      - Gray = deceased
+    * With sign mode:
+      - "-" = doesn't have covid
+      - "+" = has covid (can spread covid to others)
+      - "," = recovery period (doesn't spread covid to others, is immune to catching covid)
+      - "." = deceased
+3. Once the desired modes are chosen, the simulation can be started by the start/pause button under settings.
+  - The add time button will increase the amount of time the simulation runs for, while the remove time button will decrease it. The length of the simulation can be seen under simulation statistics, the simulation stop time.
+4. You may pause and continue the simulation with the start/pause button at any time.
+5. Once the simulation ends, it can be restarted by the restart button under system settings.
+6. Simulation statistics will display general information about the simulation.
+  - The density of the population can be changed by the buttons next to it.
+8. Pressing on a person in the simulation will display information about them under the simulation statistics.
+
 Marie's Work Log:
 05/23/22--I worked on a skeleton of the Person class. I added all the instance vvraibles that we plan on using and just commented out the ones for future development phases.
 05/24/22--I worked on the catchCovid method and its helper method calcCovid. This calculates the chance of someone getting covid based on the number of positive neighbors that they have and their vaccine status (so far, more contingencies will be added later). I also added a parameter to it so that when it is called, I can incorporate the number of covid-posiitve neighbors.
